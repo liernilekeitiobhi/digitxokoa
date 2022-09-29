@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/ruffini.css">
+    <title>Ruffini</title>
+</head>
+<body>
+    
+        <div class="div_contenedor">
+            <div class="div_centrado">
+                <span>
+                    <table id="taula">
+                        <!--row1-->
+                        <tr id="lerroa1"> 
+                          <td style="border-right: 2px solid; padding-right: 20px;"> </td> <!--marra bertikalaren ezkerreko zuloa-->
+                          <!--koefizienteak-->
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                        </tr>
+                        <!--row2-->
+                        <tr id="lerroa2" style="border-bottom: 2px solid; padding-bottom: 20px;"> 
+                          <td style="border-right: 2px solid; padding-right: 20px; "><input type="text"></td> <!--zatitzailea-->
+                          <td style="padding-bottom: 20px;"> </td> <!--maila altueneko koefizientearen azpiko zuloa-->
+                          <!--erdiko zenbakiak-->
+                          <td style="padding-bottom: 20px;"><input type="text"></td>
+                          <td style="padding-bottom: 20px;"><input type="text"></td>
+                        </tr>
+                        <!--row3-->
+                        <tr id="lerroa3"> 
+                          <td style="border-right: 2px solid; padding-right: 20px;"> </td> <!--marra bertikalaren ezkerreko zuloa-->
+                          <!--azpiko zenbakiak-->
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                          <td><input type="text"></td>
+                        </tr>
+                    </table>
+                </span> 
+                
+                <div class="botoiak">
+                    <ul>
+                        <li><button class="btn"><i class="fa fa-plus" onclick=add()></i></button></li>
+                        <li><button class="btn"><i class="fa fa-refresh" onclick=refresh()></i></button></li>
+                        <li><button class="btn"><i class="fa fa-trash" onclick=trash()></i></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript" src="../js/ruffini.js"></script>
+
+    
+</body>
+
+</html>

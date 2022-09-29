@@ -1,0 +1,60 @@
+html,body{ margin: 0;}
+
+.div_contenedor{
+    background: rgb(255, 255, 255);
+    height: 100vh;       
+}
+
+.div_centrado{
+    background: rgb(255, 255, 255);
+    width: 800px;       
+    height: 700px;
+    position: absolute;
+    left: 50%;           
+    margin-top: 100px;
+    margin-left: -400px;
+}
+
+
+* {
+    box-sizing: border-box;
+  }
+  
+  /* Create three unequal columns that floats next to each other */
+  .column {
+    float: left;
+    padding: 10px;
+    height: 900px; /* Should be removed. Only for demonstration */
+  }
+  
+  .left, .right {
+    width: 45%;
+  }
+  
+  .middle {
+    width: 3%;
+    border-right: 6px solid green;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .right input{
+    width: 300px;
+    height: 90px;
+    text-align: left;
+    font-size: 50px;
+    margin-top: 10px;
+  }
+
+  .left input{
+    width: 300px;
+    height: 90px;
+    text-align: right;
+    font-size: 50px;
+    margin-top: 10px;
+  }

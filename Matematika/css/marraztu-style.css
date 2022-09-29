@@ -1,0 +1,178 @@
+body {
+    font-family: 'PT Sans', sans-serif;
+  }
+
+h1 {
+    color: white;
+    text-align: center;
+    }
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+    }
+
+/* ----------------------*/
+/*goiko irudie*/
+/* ----------------------*/
+
+.container {
+    position: relative;
+    text-align: center;
+    color: #ab576c;
+    height: 100px;
+    font-size: 70px;
+    font-family: verdana;
+}
+
+.centered {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ----------------------*/
+/*Bi zutabek*/
+/* ----------------------*/
+
+* {
+    box-sizing: border-box;
+  }
+
+.column {
+    float: left;
+    padding: 10px;
+    height: 100%; 
+    height: 1000px;
+  }
+  
+.left {
+width: 25%;
+text-align: center;
+}
+
+.center {
+width: 30%;
+}
+
+.right {
+    width: 45%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
+
+/* ----------------------*/
+/*Funtzio aukerak*/
+/* ----------------------*/
+
+
+#funtzio-mota input {
+position: absolute;
+left: -9999px;
+}
+
+#funtzio-mota label {
+    display: block;
+    height: 70px;
+    position: relative;
+    margin: 20px;
+    padding: 25px 30px 15px 62px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #6a8494;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+}
+
+#funtzio-mota label::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
+    width: 32px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
+}
+
+
+
+#funtzio-mota label:hover, input:focus + label {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+}
+
+#funtzio-mota input:checked + label {
+    background-color: #ab576c;
+}
+
+#funtzio-mota input:checked + label::before {
+    background-color: #fff;
+}
+
+/* ----------------------*/
+/*Puntuak*/
+/* ----------------------*/
+
+form ul { 
+    list-style-type: none;
+    display: flex;
+    align-items: center; 
+
+}
+
+form ul li { 
+    display: inline-block;
+    margin: 10px;
+}
+
+.puntuak input{
+    height: 60px;
+    font-size: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+.puntuak button{
+    padding: 30px 40px 30px 40px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #6a8494;
+    cursor: pointer;
+    border: 0px;
+}
+
+.puntuak button:hover{
+    padding: 30px 40px 30px 40px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #ab576c;
+}
+
+#marraztu{
+    padding: 40px 80px 40px 80px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #000000;
+    cursor: pointer;
+    border: 0px;
+    font-size: 40px;
+}
+
+#marraztu:hover{
+    padding: 40px 80px 40px 80px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #ab576c;
+}
+
+
