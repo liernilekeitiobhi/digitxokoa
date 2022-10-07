@@ -159,13 +159,13 @@ form ul li {
 }
 
 #marraztu{
-    padding: 40px 80px 40px 80px;
+    padding: 40px 60px 40px 60px;
     border-radius: 100px;
     color: #fff;
     background-color: #000000;
     cursor: pointer;
     border: 0px;
-    font-size: 40px;
+    font-size: 15px;
 }
 
 #marraztu:hover{
