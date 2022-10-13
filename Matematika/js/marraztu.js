@@ -265,7 +265,8 @@ function draw(){
 
 function kopiatu(){
     //Grafikoa dagoen div identifikatu
-    //div = document.getElementById("grafikoa")
+    //div = document.getElementById("grafikoa"
+    console.log("bai")
 
     var domNode = document.getElementById('grafikoa');
 	
@@ -283,7 +284,7 @@ function kopiatu(){
 				)
 			])
 				.then(function() {
-				alert("Kopiatu da!");
+				alert("Funtzioaren grafika kopiatu da!");
 			});
 		});
     })
