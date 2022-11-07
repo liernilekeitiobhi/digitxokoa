@@ -46,15 +46,21 @@ p {
     padding: 10px;
     height: 100%; 
     height: 1000px;
-  }
+}
   
 .left {
-width: 25%;
-text-align: center;
+    width: 25%;
+    text-align: center;
+
+    position: sticky;
+    width: fit-content;
 }
 
 .center {
-width: 30%;
+    width: 30%;
+
+    position: sticky;
+    width: fit-content;
 }
 
 .right {
@@ -63,9 +69,9 @@ width: 30%;
 
 /* Clear floats after the columns */
 .row:after {
-content: "";
-display: table;
-clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 /* ----------------------*/
@@ -74,8 +80,8 @@ clear: both;
 
 
 #funtzio-mota input {
-position: absolute;
-left: -9999px;
+    position: absolute;
+    left: -9999px;
 }
 
 #funtzio-mota label {
