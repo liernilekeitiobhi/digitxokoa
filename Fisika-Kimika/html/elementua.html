@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/taula-periodikoa-style.css">
+    <title>Elementuaren datuak</title>
+</head>
+<body>
+    <div class="lerro">
+        <div class="column-r">
+            <form>
+                <ul class="form-style">
+                    <li><label>ZENBAKI ATOMIKOA</label><input id="zenb_at" type="text" name="izena" placeholder="Zenbaki atomikoa" onchange=zenb_at_gehitu(value)></li>
+                    <li><label>MASA ATOMIKOA</label><input id="masa_at" type="text" name="telefonoa" placeholder="Masa atomikoa" onchange=masa_at_gehitu(value)></li>                    
+                    <li><label>SINBOLOA</label><input id="sinboloa" type="text" name="telefonoa" placeholder="Sinboloa" onchange=sinboloa_gehitu(value)></li>
+                    <li><label>IZENA</label><input id="izena" type="text" name="izena" placeholder="Izena" onchange=izena_gehitu(value)></li>
+                    <li><label>IZAERA</label>       
+                        <select name="izaera" id="izaera" onchange=izaera_gehitu(value)>
+                            <option value="hutsa"></option>
+                            <option disabled="disabled">───────────</option>
+                            <option value="metala">Metala</option>
+                            <option disabled="disabled">───────────</option>
+                            <option value="ez-metala">Ez-metala</option>
+                            <option disabled="disabled">───────────</option>
+                            <option value="erdimetala">Erdimetala</option>
+                            <option disabled="disabled">───────────</option>
+                            <option value="gas-geldoa">Gas geldoa</option>
+                            <option disabled="disabled">───────────</option>
+                        </select>
+                    </li>  
+                </ul>            
+            </form>
+        </div>
+        <div class="column">
+            <div class="periodic-datuak-sartu">
+                <div class="periodic-row">
+                    <div class="cell">
+                    <div class="element-datuak-sartu"  class="type-4 cat-3" id="cell">
+                        <div id="symbol-datuak-sartu" class="symbol-datuak-sartu">-</div>
+                        <div id="at_num-datuak-sartu" class="at_num-datuak-sartu">-</div>
+                        <div id="masa-datuak-sartu" class="masa-datuak-sartu">-</div>            
+                        <div id="at_details-datuak-sartu" class="at_details-datuak-sartu">-</div>
+                    </div>
+                  </div>
+                </div>
+            </div>            
+        </div>
+      </div>
+      <div class="btn-div">
+        <button type="button" onclick=elementua_gorde()>GORDE</button>
+      </div>
+      <script type="text/javascript" src="../js/elementua.js"></script>
+</body>
+</html>

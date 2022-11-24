@@ -1,0 +1,627 @@
+.periodic:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+  .empty:hover {
+    box-shadow: none;
+    transform: none;
+  }
+  
+  .type-1 {
+    background: #ffc78e;
+  }
+  
+  .type-2 {
+    background:rgb(141, 255, 244);
+  }
+  
+  .type-3 {
+    background: #fb93a4;
+  }
+  
+  .type-4 {
+    background: #8bffa2 ;
+  }
+  
+  
+  .legend {
+      position: absolute;
+      top: 3%;
+      left: 34%;
+      padding: 0px;
+      font-size: 13px;
+  }
+  
+  .legend:after {
+    content: "";
+    display: table;
+    clear: table;
+  }
+  li{
+     list-style: none;
+  }
+  .legend ul {
+    float: left;
+  }
+  
+  .legend .list-2 {
+    margin-left: 10px;
+    width: 200px;
+  }
+  .legend .list-3 {
+    margin-left: 0px;
+    width: 200px;
+    padding-left: 0;
+  }
+  
+  .legend .list-1 li {
+    margin: 7px 0;
+  }
+  
+  .legend .list-1 li:first-of-type {
+    margin-top: 2px;
+  }
+  
+  .legend .list-1 span {
+    border: 1px solid black;
+    display: inline-block;
+    padding: 3px;
+    width: 20px;
+    text-align: center;
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  .legend .list-2 li {
+    margin: 2px;
+    padding: 3px;
+    float: left;
+    width: 70%;
+  }
+  .legend .list-3 li {
+    margin: 2px;
+    padding: 3px;
+    float: left;
+    width: 70%;
+  }
+  body {
+    font-family: Arial;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    padding: 1%;
+  }
+  .periodic {
+    position: relative;
+    height: 200px;
+    margin-right: -1px;
+    text-shadow: none;
+  }
+  .periodic-row {
+    clear: both;
+    height: 10%;
+  }
+  .cell {
+    float: left;
+    position: relative;
+    width: 5.55%;
+    height: 100%;
+  }
+
+  .cell4 {
+    width: 5px;
+    height: 5px;
+  }
+
+  .cell:hover{
+    cursor: pointer;
+  }
+  .cell1 {
+      float: left;
+      position: relative;
+      width: 150%;
+      height: 150%;
+      zoom: 150%;
+  }
+  .cell2 {
+      float: left;
+      position: relative;
+      width: 330%;
+      height: 150%;
+      zoom: 150%;
+  }
+  .element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 1px;
+    right: 1px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    cursor: default;
+    -webkit-transition: all 200ms ease;
+    transition: all 200ms ease;
+    background-color: rgba(0, 128, 128, 0.6);
+  }
+
+  .element_disabled{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 1px;
+    right: 1px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    background-color: rgba(43, 43, 43, 0.6);
+
+  }
+
+  .element-datuak-sartu {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 1px;
+    right: 1px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    background-color: rgba(0, 128, 128, 0.6);
+    width: 700px;
+    height: 700px;
+  }
+
+  .element1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 1px;
+    right: 1px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    background-color: rgba(0, 128, 128, 0.6);
+  }
+
+  .cell:hover .element {
+    cursor: pointer;
+    border-color: rgba(0, 0, 0, 0.1);
+    -webkit-transform: scale(3, 3);
+    -ms-transform: scale(3, 3);
+    transform: scale(3, 3);
+    z-index: 1;
+    background-color: rgba(0, 128, 128, 0.9);
+  }
+
+  .element_disabled:hover {
+    cursor: auto;
+  }
+  .at_num,
+  .masa,
+  .ener,
+  .elec,
+  .estad {
+    position: absolute;
+    font-size: 4px;
+    color: #000;
+    opacity: 0;
+  }
+
+  .at_details {
+    position: absolute;
+    font-size: 500px;
+    color: #000;
+    opacity: 0;
+  }
+
+  .at_details-adibidea{
+    position: absolute;
+    font-size: 9px;
+    color: #000;
+  }
+
+  .at_num-adibidea,
+  .masa-adibidea{
+    position: absolute;
+    font-size: 5px;
+    color: #000;
+  }
+
+  .at_num-datuak-sartu,
+  .at_details-datuak-sartu, 
+  .masa-datuak-sartu,
+  .ener-datuak-sartu,
+  .elec-datuak-sartu,
+  .estad-datuak-sartu {
+    position: absolute;
+    font-size: 70px;
+    color: #000;
+  }
+
+  .at_num{
+    top: 4px;
+    left: 5px;
+  }
+  .at_num-datuak-sartu {
+    top: 10px;
+    left: 20px;
+  }
+  .at_num-adibidea{
+    top: 4px;
+    left: 5px;
+  }
+
+  .masa{
+    top: 4px;
+    right: 5px;
+  }
+  .masa-datuak-sartu {
+     top: 10px;
+     right: 20px;
+  }
+  .masa-adibidea{
+    top: 4px;
+    right: 5px;
+  }
+  .ener,
+  .ener-datuak-sartu{
+     top: 13px;
+     left: 5px;
+  }
+  .elec,
+  .elec-datuak-sartu{
+    top: 13px;
+    right: 12px;
+  }
+  .estad,
+  .estad-datuak-sartu { 
+   align-self: flex-end;
+    top: 20px;
+    right: 5px;
+  }
+  .estad li {
+   list-style: none; 
+  }
+  .symbol {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    right: 0px;
+    margin-top: -4px;
+    font-size: 9px;
+    line-height: 1;
+    height: 9px;
+    color: #000;
+  }
+
+  .symbol-datuak-sartu{
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    right: 0px;
+    margin-top: -300px;
+    font-size: 500px;
+    line-height: 1;
+    height: 9px;
+    color: #000;
+  }
+
+  .symbol-adibidea{
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    right: 0px;
+    margin-top: -6px;
+    font-size: 15px;
+    line-height: 1;
+    height: 9px;
+    color: #000;
+  }
+
+  .at_details,
+  .at_details-datuak-sartu {
+    bottom: 4px;
+    top: 73%;
+    left: 0px;
+    right: 0px;
+  }
+
+  .at_details-adibidea{
+    bottom: 4px;
+    top: 73%;
+    left: 0px;
+    right: 0px;
+  }
+
+  
+  .cell:nth-child(1) .element {
+    -webkit-transform-origin: 0 50%;
+    -ms-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+  }
+  .cell:nth-child(18) .element {
+    -webkit-transform-origin: 100% 50%;
+    -ms-transform-origin: 100% 50%;
+    transform-origin: 100% 50%;
+  }
+  .periodic-row:nth-child(10) .cell .element {
+    -webkit-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    transform-origin: 50% 100%;
+  }
+  .periodic-row:nth-child(1) .cell:nth-child(1) .element {
+    -webkit-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+  }
+  .periodic-row:nth-child(1) .cell:nth-child(18) .element {
+    -webkit-transform-origin: 100% 0;
+    -ms-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+  }
+  .periodic-row:nth-child(10) .cell:nth-child(18) .element {
+    -webkit-transform-origin: 100% 100%;
+    -ms-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+  }
+  @media (min-width: 600px) {
+    .cell2 {
+      float: left;
+      position: relative;
+      width: 460%;
+      height: 150%;
+  }
+    .periodic {
+      height: 460px;
+      margin-right: -2px;
+    }
+    .element {
+      right: 2px;
+      bottom: 2px;
+    }
+    .at_details, .ener,.elec{
+      font-size: 7px;
+      opacity: 1;
+    }
+    .estad {
+      top: 12px;
+      font-size: 2.5px;
+      opacity: 1;
+  }
+  .ener{
+     top: 13px;
+     left: 5px;
+  }
+  .elec{
+    top: 13px;
+    right: 12px;
+  }
+    .masa{
+      font-size: 5px;
+      opacity: 1;
+     }
+     .at_num, .at_num1{
+       font-size: 6px;
+      opacity: 1;
+     }
+    .symbol {
+      margin-top: -13px;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 30px;
+      height: 30px;
+      color: #000;
+      text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+    }
+    .legend {
+      position: absolute;
+      top: 1%;
+      left: 34%;
+      padding: 0px;
+      font-size: 8px;
+      width: 230px;
+  }
+  .legend .list-2 {
+      margin-left: 10px;
+      width: 106px;
+      padding-left: 0px;
+  }
+  .legend .list-3 {
+      margin-left: 0px;
+      width: 107px;
+      padding-left: 0;
+  }
+  }
+  @media (min-width: 800px) {
+    .periodic {
+      height: 540px;
+    }
+    .symbol {
+      font-size: 18px;
+    }
+  }
+  @media (min-width: 992px) {
+    .periodic {
+      height: 680px;
+    }
+    .at_details, .ener, .elec, .estad {
+      font-size: 8px;
+    }
+    .estad {
+      top: 20px;
+      opacity: 1;
+  }
+    .masa{
+      font-size: 6px;
+    }
+    .at_num, .at_num1{
+       font-size: 7px;
+     }
+    .symbol {
+      font-size: 20px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .periodic {
+      height: 800px;
+    }
+    .at_details, .ener, .elec, .estad {
+      font-size: 10px;
+    }
+    .masa{
+      font-size: 7px;
+    }
+    .at_num, .at_num1{
+       font-size: 10px;
+     }
+    .symbol {
+      font-size: 30px;
+    }
+  .legend {
+      position: absolute;
+      top: 3%;
+      left: 36%;
+      padding: 0px;
+      font-size: 13px;
+          width: 470px;
+  }
+  
+  .legend:after {
+    content: "";
+    display: table;
+    clear: table;
+  }
+  li{
+     list-style: none;
+  }
+  .legend ul {
+    float: left;
+  }
+  
+  .legend .list-2 {
+    margin-left: 10px;
+    width: 200px;
+  }
+  .legend .list-3 {
+    margin-left: 0px;
+    width: 200px;
+    padding-left: 0;
+  }
+  
+  .legend .list-1 li {
+    margin: 7px 0;
+  }
+  
+  .legend .list-1 li:first-of-type {
+    margin-top: 2px;
+  }
+  
+  .legend .list-1 span {
+    border: 1px solid black;
+    display: inline-block;
+    padding: 3px;
+    width: 20px;
+    text-align: center;
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  .legend .list-2 li {
+    margin: 2px;
+    padding: 3px;
+    float: left;
+    width: 70%;
+  }
+  .legend .list-3 li {
+    margin: 2px;
+    padding: 3px;
+    float: left;
+    width: 70%;
+  }
+  }
+  
+  .lerro{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: auto;
+  }
+
+  .column {
+    float: right;
+    width: 50%;
+    padding: 10px;
+    display: flex;
+  }
+  .column-r {
+    float: right;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Clear floats after the columns */
+  .lerro:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .lerro{
+        display: flex;
+        flex-direction: column;
+    }
+    .column {
+      width: 100%;
+    }
+  }
+
+.form-style{
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.form-style li{
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-left: 0;
+}
+
+.form-style label{
+  padding-right: 30px;
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}
+
+.form-style input,
+.form-style select{
+  height: 60px;
+  font-size: 30px;
+}
+
+.btn-div{
+  margin-left: 300px;
+}
+
+.btn-div button{
+  height: 60px;
+  width: 300px;
+  background-color: rgb(75, 75, 75);
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  color: white;
+}
+
+.btn-div:hover button{
+  cursor: pointer;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
