@@ -3,7 +3,7 @@ window.onload = function(){
     const urlParams = new URLSearchParams(queryString);
     const zenb_at = urlParams.get('id')
     console.log(zenb_at)
-    fetch('https://digitxokoa-back.herokuapp.com/api/elementu-kimikoak?filters[zenbaki_atomikoa][$eq]=' + zenb_at)
+    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?filters[zenbaki_atomikoa][$eq]=' + zenb_at)
       .then(response => response.json())
       .then(data => {
             if(data.data.length != 0){
@@ -25,23 +25,23 @@ window.onload = function(){
                 var izena = elementua.izena
                 var sinboloa = elementua.sinboloa
                 var mota = elementua.mota
-                if (zenb_at!=null){
+                if (zenb_at!=null & zenb_at!=-1){
                     zenb_at_div.innerHTML = zenb_at
                     zenb_at_input.value = zenb_at
                 }
-                if (masa_at!=null){
+                if (masa_at!=null & masa_at!=-1){
                     masa_at_div.innerHTML = masa_at
                     masa_at_input.value = masa_at
                 }
-                if (izena!=null){
+                if (izena!=null & izena!=" "){
                     izena_div.innerHTML = izena
                     izena_input.value = izena
                 }
-                if (sinboloa!=null){
+                if (sinboloa!=null & sinboloa!=" "){
                     sinboloa_div.innerHTML = sinboloa
                     sinboloa_input.value = sinboloa
                 }
-                if (mota!=null){
+                if (mota!=null & mota!="hutsa"){
                     izaera_input.value = mota
                     if (mota=="ez-metala"){
                         kolorea.style="background-color: #ffc78e;"
@@ -105,7 +105,10 @@ function izaera_gehitu(value){
     }
     else if (value=="gas-geldoa"){
         cell.style="background-color: #8bffa2;"
-    }    
+    }
+    else if (value=="hutsa"){
+        cell.style="background-color: rgba(0, 128, 128, 0.9);"
+    }   
 }
 
 function elementua_gorde(){
@@ -115,13 +118,25 @@ function elementua_gorde(){
     var sinboloa = document.getElementById("sinboloa").value
     var izaera = document.getElementById("izaera").value
 
+    if (masa_at=="" | masa_at==" "){
+        masa_at=-1
+    }
+    if (izena==""){
+        izena=" "
+    }
+    if (sinboloa==""){
+        sinboloa=" "
+    }
+    if (izaera==""){
+        izaera="hutsa"
+    }
 
-    fetch('https://digitxokoa-back.herokuapp.com/api/elementu-kimikoak?filters[zenbaki_atomikoa][$eq]=' + zenb_at)
+    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?filters[zenbaki_atomikoa][$eq]=' + zenb_at)
     .then(response => response.json())
     .then(data => {
           if(data.data.length != 0){
             var id = data.data[0].id
-                fetch('https://digitxokoa-back.herokuapp.com/api/elementu-kimikoak/' + id, {
+                fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak/' + id, {
                 method: 'PUT', 
                 headers: {
                     'Accept': 'application/json',
@@ -139,16 +154,16 @@ function elementua_gorde(){
                 })
                 .then((res)=>{
                     if(res.status===400){
-                        throw new Error('EZ DITUZU BEHARREZKO ATAL GUZTIAK BETE!');
+                        throw new Error('Atalen bat ez dator bat datu basearen formatuarekin');
                     }
                     return res.json();
                 })
-                .then(response => response.json())
-                .catch(error => {alert("ERROREA GERTATU DA")})
+                .then(response => window.location="./taula-periodikoa.html")
+                .catch(error => {alert("ATALEN BAT EZ DAGO ONDO BETETA!")})
           }
 
           else{
-                fetch('https://digitxokoa-back.herokuapp.com/api/elementu-kimikoak', {
+                fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak', {
                 method: 'POST', /*UPDATE!!!! bi gauzak izan daizke*/
                 headers: {
                     'Accept': 'application/json',
@@ -166,12 +181,12 @@ function elementua_gorde(){
                 })
                 .then((res)=>{
                     if(res.status===400){
-                        throw new Error('EZ DITUZU BEHARREZKO ATAL GUZTIAK BETE!');
+                        throw new Error('Atalen bat ez dator bat datu basearen formatuarekin');
                     }
                     return res.json();
                 })
-                .then(response => response.json())
-                .catch(error => {alert("ERROREA GERTATU DA")})
+                .then(response => window.location="./taula-periodikoa.html")
+                .catch(error => {alert("ATALEN BAT EZ DAGO ONDO BETETA!")})
 
             }})
         

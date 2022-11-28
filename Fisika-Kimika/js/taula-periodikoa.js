@@ -1,5 +1,5 @@
 window.onload=function(){
-    fetch('https://digitxokoa-back.herokuapp.com/api/elementu-kimikoak')
+    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak')
         .then(response => response.json())
         .then(data =>
         data.data.forEach(writeElementuak))
@@ -15,6 +15,11 @@ function writeElementuak(element){
     var izaera = elementua.mota
     var sinboloa = elementua.sinboloa
     var izena = elementua.izena
+    
+       
+    if (masa_at==-1){
+        masa_at=" "
+    }
 
     var div = document.getElementById(zenb_at)
     div.innerHTML = `
