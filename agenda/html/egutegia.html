@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Agenda</title>
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="./egutegia.html">EGUTEGIA</a>
+    <a href="./egitekoak.html">EGITEKOAK</a>
+  </div>
+
+<div id= "egutegia-container" class="egutegia-container">
+  <div class="egutegia">
+    <div class="month">      
+      <ul>
+        <li id="prev" class="prev"><button onclick='prevMonth()'>&#10094;</button></li>
+        <li id="next" class="next"><button onclick='nextMonth()'>&#10095;</button></li>
+        <li>
+          <p id="hilabetea"></p>
+          <p id="urtea" style="font-size:18px"><p>
+        </li>
+      </ul>
+    </div>
+    
+    <ul class="weekdays">
+      <li>Astelehena</li>
+      <li>Asteartea</li>
+      <li>Asteazkena</li>
+      <li>Osteguna</li>
+      <li>Ostirala</li>
+      <li>Larunbata</li>
+      <li>Igandea</li>
+    </ul>
+    
+    <ul id ="egunak" class="days">  
+    </ul>
+  
+  </div>
+  
+</div>
+
+<script type="text/javascript" src="../js/egutegia.js"></script>
+
+
+</body>
+</html>

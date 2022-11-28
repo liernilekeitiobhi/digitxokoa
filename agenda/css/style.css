@@ -1,0 +1,364 @@
+* {box-sizing: border-box;}
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 2em 2em;
+  text-decoration: none;
+  font-size: 26px;
+  width: 30%;
+  background-color: #8b4287;
+}
+
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #8b4287;
+  color: white;
+}
+
+.cont {
+  width: 100%;
+}
+
+.egutegia-container {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3em;
+}
+
+.month {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 100%;
+  background: #1abc9c;
+  text-align: center;
+}
+
+.month p{
+  font-size: 40px;
+}
+
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+button {
+  height: 7em;
+  width: 4em;
+  cursor: pointer;
+  border-style: none;
+}
+
+.month .prev {
+  float: left;
+  display: flex;
+  justify-content: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 7em;
+  align-items: center;
+}
+
+
+.month .next {
+  float: right;
+  display: flex;
+  justify-content: center;
+  padding-right: 20px;
+  padding-left: 20px;
+  height: 7em;
+  align-items: center;
+}
+
+
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #666;
+  text-align: center;
+}
+
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  font-size:3em;
+  color: #777;
+  height: 2em;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.days li a{
+  list-style-type: none;
+  display: inline-block;
+  width: 100%;
+  color: #777;
+  height: 2em;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+
+.days li a:hover {
+  width: 100%;
+  background: #144339;
+  color: white !important;
+  cursor: pointer
+}
+
+.hutsa span:hover {
+  background-color: #8b4287 !important;
+}
+
+
+
+.days li .active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+  .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+  .weekdays li, .days li {width: 12.5%;}
+  .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+  .weekdays li, .days li {width: 12.2%;}
+}
+
+
+/*FORMULARIOA*/
+.idatzi {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  text-align: center;
+  justify-content: space-evenly;
+  margin-top: 5px;
+}
+
+
+
+.formularioa {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+}
+
+.formularioa select {
+  font-size: 20px;
+  padding: 20px;
+  width: 10em;
+}
+
+.formularioa input {
+  font-size: 20px;
+  padding: 20px;
+  width: 55em;
+}
+
+.formularioa button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+  border-color: #8b4287;
+  background-color: #8b4287;
+  border-style: solid;
+  font-size: 80px;
+  color: #f2f2f2;
+}
+.formularioa button:hover {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+  border-color: #000000;
+  background-color: #000000;
+  border-style: solid;
+  font-size: 80px;
+  color: #f2f2f2;
+}
+
+.formularioa li {
+  text-decoration: none;
+  list-style: none;
+  margin: 10px;
+}
+
+select {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  outline: 0;
+  padding-bottom: 4px;
+  border-radius: 9px;
+}
+
+.ikusi {
+  background-color: #e4f3f0;
+  width: 70%;
+  margin-top: 40px;
+  padding-left: 100px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.center {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .formularioa {
+    flex-direction: column;
+  }
+
+  .formularioa input {
+    width: 100%;
+  }
+
+  .formularioa li {
+    width: 100%;
+  }
+
+  .formularioa select{
+    width: 100%;
+  }
+}
+
+/*TAULA*/
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+.styled-table thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #980000;
+}
+
+.check:hover {
+  cursor: pointer;
+}
+
+.lana{
+  width: 40em;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  padding: 10px;
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-template-rows: auto auto;
+}
+
+.grid-item {
+  background-color: rgba(99, 201, 164, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  text-align: center;
+}
+
+.grid-item h4{
+  font-size: 20px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+}
+
+.grid-item p {
+  margin: 3px;
+  font-size: 15px;
+}
+
+.grid-text {
+  max-width: 100%;
+}
+
+.azterketa-ezabatu{
+  padding-top: 30px;
+  cursor: pointer;
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+
+
+
+
