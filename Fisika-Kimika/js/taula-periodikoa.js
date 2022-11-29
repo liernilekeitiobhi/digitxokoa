@@ -1,5 +1,5 @@
 window.onload=function(){
-    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak')
+    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?pagination[pageSize]=500')
         .then(response => response.json())
         .then(data =>
         data.data.forEach(writeElementuak))
