@@ -1,0 +1,145 @@
+
+
+.lerro{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: auto;
+    /*height: 900px;*/
+}
+
+.column {
+    float: right;
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.column canvas {
+    margin-left: 25%;
+}
+
+.column-r {
+    float: right;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.column-r form{
+    width: 100%;
+}
+
+/* Clear floats after the columns */
+.lerro:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .lerro{
+        display: flex;
+        flex-direction: column;
+    }
+    .column {
+        width: 100%;
+    }
+    }
+
+.form-style{
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.form-style li{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 0;
+    list-style: none;
+}
+
+.form-style label{
+    padding-right: 30px;
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+}
+
+.form-style input,
+.form-style select{
+    height: 60px;
+    font-size: 30px;
+}
+
+.btn-div{
+    text-align: center;
+}
+  
+.btn-div button{
+    height: 80px;
+    width: 100%;
+    background-color: rgb(75, 75, 75);
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    color: white;
+}
+
+.btn-div:hover button{
+    cursor: pointer;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+#geruzak ul{
+    display: flex;
+    align-items: center;
+}
+
+#geruzak li{
+    padding-left: 10px;
+}
+
+#geruzak button{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;    
+    border-style: none;
+    background-color: grey;
+      
+}
+
+#geruzak:hover button{
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    border-style: none;
+}
+
+.titulua {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+}
+
+.zakarrontzia button{
+    height: 80px;
+    width: 300px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(186, 49, 49);
+    color: white;
+    font-size: 20px;
+}
+
+.zakarrontzia:hover button{
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    border-style: none;
+
+}
