@@ -7,7 +7,7 @@ window.onload = function(){
 function getLanak(eguna){
     var d = new Date(Date.now() - 12096e5).toISOString().slice(0, 10); //bi aste atzera
     // Filtroa: egin gabe dauden lan guztiak eta ginda daudenen artean azken 14 egunetakoak. Lehendabizi egin gabeak eta gero egindakoak dataren ordenean.
-    fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak?filters[$or][0][eginda][$eq]=false&filters[$or][1][data][$gte]=' + d + '&sort[1]=eginda&sort[2]=data')
+    fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak?filters[$or][0][eginda][$eq]=false&filters[$or][1][data][$gte]=' + d + '&sort[1]=eginda&sort[2]=data&pagination[pageSize]=500')
       .then(response => response.json())
       .then(data =>
       data.data.forEach(writeLanak))

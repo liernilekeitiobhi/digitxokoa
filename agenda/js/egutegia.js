@@ -25,7 +25,7 @@ window.onload = function() {
 }
 
 async function getAllExamDays() {
-    return await fetch('https://strapi-svi3.onrender.com/api/azterketak')
+    return await fetch('https://strapi-svi3.onrender.com/api/azterketak?pagination[pageSize]=500')
       .then(response => response.json())
       .then(data => {return data});    
 }
@@ -253,8 +253,11 @@ function egunaKargatu(eguna) {
             </form>
         </div>
         <div class="center">
-            <div id="zerrenda" class="ikusi">
+            <div class="ikusi">
                 <h3>EGUN HONETARAKO EGIN BEHARREKO LANAK</h3>
+                <table id="zerrenda">
+                    
+                </table>
                 
             </div>
         </div>
@@ -285,10 +288,29 @@ function getGaurLanak(eguna){
 function writeGaurLanak(element){
     var div = document.getElementById("zerrenda")
     var etxerako_lana = element.attributes
-    var irakasgaia = etxerako_lana.irakasgaia
-    var lana = etxerako_lana.lana
+    var ir = etxerako_lana.irakasgaia
+    var lan = etxerako_lana.lana
+    id = element.id
     div.innerHTML += `
-    <li><b>${irakasgaia}</b>: ${lana}</li><br>    `
+        <tr id=${id}>
+            <th class="lana-ezker"><p><b>${ir}:</b> ${lan}</p></th>
+            <th class="basura"><a onclick="ezabatuLana(${id})"><i class="fa-solid fa-trash"></i></a></th>
+        </tr>   `
+}
+
+function ezabatuL(id){
+    return fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak/' + id, {
+            method: 'DELETE'
+        }).then(res => res.text()) // or res.json()
+          .then(res => console.log(res))
+}
+
+
+function ezabatuLana(id){
+    ezabatuL(id).then(function(){
+        var gridDiv = document.getElementById(id)
+        gridDiv.remove()
+    })
 }
 
 function etxerakoLanaErregistratu(){
@@ -316,8 +338,13 @@ function etxerakoLanaErregistratu(){
 
     var div = document.getElementById("zerrenda")
     div.innerHTML += `
-    <li><b>${ir}</b>: ${lan}</li><br> `
+        <tr id=${id}>
+            <th class="lana-ezker"><b>${ir}</b>: ${lan}</th>
+            <th class="basura"><a onclick="azterketaEzabatu(${id})"><i class="fa-solid fa-trash"></i></a></th>
+        </tr>
+     `
 }
+
 
 /* ---------------------------- */
 /* --EGUN BATERAKO AZTERKETAK-- */
@@ -349,6 +376,13 @@ function azterketaErregistratu(){
     var ir = document.getElementById("irakasgaia-azterketa").value
     var ed = document.getElementById("edukia").value
     var eguna = document.getElementById("eguna").innerHTML
+    var div = document.getElementById("zerrenda-azterketak")
+    div.innerHTML += `
+        <div id=${id} class="grid-item">
+            <h4>${ir}</h4>
+            <div class="grid-text"><p>${ed}</p></div>
+            <div class="azterketa-ezabatu"><a onclick="azterketaEzabatu(${id})"><i class="fa-solid fa-trash"></i></a></div>
+        </div>`
     fetch('https://strapi-svi3.onrender.com/api/azterketak', {
         method: 'POST',
         headers: {
@@ -366,13 +400,7 @@ function azterketaErregistratu(){
     .then(response => response.json())
     .then(response => console.log(JSON.stringify(response)))
 
-    var div = document.getElementById("zerrenda-azterketak")
-    div.innerHTML += `
-        <div id=${id} class="grid-item">
-            <h4>${ir}</h4>
-            <div class="grid-text"><p>${ed}</p></div>
-            <div class="azterketa-ezabatu"><a onclick="azterketaEzabatu(${id})"><i class="fa-solid fa-trash"></i></a></div>
-        </div>`
+    
 }
 
 function ezabatu(id){

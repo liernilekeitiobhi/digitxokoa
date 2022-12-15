@@ -2,6 +2,10 @@
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 
+p {
+  font-family:Arial, Helvetica, sans-serif;
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
   background-color: #333;
@@ -363,7 +367,19 @@ select {
   margin-bottom: 10px;
 }
 
+.lana-ezker{
+  width: 85%;
+  text-align: left;
+  font-weight: lighter;
+}
 
+.basura{
+  width: 15%;
+}
+
+.basura:hover{
+  cursor: pointer;
+}
 
 
 
