@@ -32,12 +32,30 @@ async function getAllExamDays() {
 
 async function load_calendar(month_number, year_number) {
     getAllExamDays().then(function(a){
-        var examDays = []
+        var icons = {"Matematika": "<i class='fa-solid fa-square-root-variable' style='font-size: 20px; color: blue;'></i>",
+                     "Fisika-Kimika": "<i class='fa-solid fa-flask' style='font-size: 20px; color: rgb(255, 0, 217);'></i>",
+                     "Biologia": "<i class='fa-solid fa-seedling' style='font-size: 20px; color: green;'></i>",
+                     "Gaztelera": "<i class='fa-solid fa-circle'  style='font-size: 20px; color: orange;'></i>",
+                     "Ingelera": "<i class='fa-solid fa-earth-americas' style='font-size: 20px; color: red;'></i>",
+                     "Euskara": "<i class='fa-solid fa-bird'  style='font-size: 20px; color: green;'></i>",
+                     "Geografia-Historia": "<i class='fa-solid fa-landmark'  style='font-size: 20px; color: purple;'></i>",
+                     "Plastika": "<i class='fa-solid fa-paintbrush'  style='font-size: 20px; color: black;'></i>",
+                     "Gorputz Hezkuntza": "<i class='fa-solid fa-tennis-ball  style='font-size: 20px; color: yellow;'></i>",
+                     "Tutoretza": "<i class='fa-solid fa-person  style='font-size: 20px; color: black;'></i>"
+                    }
+        // Hiztegi bat sortuko dugu {"eguna1" : [irakasgaia1, irakasgaia2, ...], "eguna2": [irakasgaia], ...}
+        var examDays = {}        
         azterketak = a.data
         for (i=0; i<azterketak.length; i++){
-            examDays.push(azterketak[i].attributes.data)
+            d = azterketak[i].attributes.data
+            if (d in examDays) {
+                examDays[d].push(azterketak[i].attributes.irakasgaia)          
+            }
+            else{
+                examDays[d] = [azterketak[i].attributes.irakasgaia]     
+            }           
         }
-
+        
         // Hilabetea eta urtea sartu dagokien posizioan
         var hilabetea = document.getElementById("hilabetea")
         var month = months[month_number]  
@@ -81,21 +99,34 @@ async function load_calendar(month_number, year_number) {
                     k = '0' + k
                 }
                 eg = urt + '-' + hil + '-' + k.toString()
-                if (examDays.includes(eg)){
-                    taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')><span class="active">${k}<i class="fa-solid fa-pen-to-square"></i></span></a></li>`
+                if (eg in examDays){
+                    i = ""
+                    for (j=0; j<examDays[eg].length; j++){
+                        console.log(examDays[eg][j])
+                        i += icons[examDays[eg][j]]
+                        console.log(i)
+                    }
+                    taulako_div.innerHTML += `                    
+                        <li><a onclick=egunaKargatu('${eg}')><span class="active">${k}${i}</span></a></li>`
                 }
                 else{
                     taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')><span class="active">${k}</i></span></a></li>`
                 }
             }
-            else{
+            else{ //Gainontzeko egunak
                 k = k.toString()
                 if(k.length == 1){
                     k = '0' + k
                 }
                 eg = urt + '-' + hil + '-' + k.toString()
-                if (examDays.includes(eg)){
-                    taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')>${k}<i class="fa-solid fa-pen-to-square"></a></li>`
+                if (eg in examDays){
+                    i = ""
+                    for (j=0; j<examDays[eg].length; j++){
+                        console.log(examDays[eg][j])
+                        i += icons[examDays[eg][j]]
+                        console.log(i)
+                    }
+                    taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')>${k}<span>${i}</span></a></li>`
                 }
                 else{
                     taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')>${k}</a></li>`
@@ -188,7 +219,7 @@ function egunaKargatu(eguna) {
                     <option disabled="disabled">───────────</option>
                     <option value="Fisika-Kimika">Fiki</option>
                     <option disabled="disabled">───────────</option>
-                    <option value="Biologia-Geologia">Bio-Geo</option>
+                    <option value="Biologia">Bio-Geo</option>
                     <option disabled="disabled">───────────</option>
                     <option value="Gaztelera">Gaztelera</option>
                     <option disabled="disabled">───────────</option>
@@ -227,7 +258,7 @@ function egunaKargatu(eguna) {
                     <option disabled="disabled">───────────</option>
                     <option value="Fisika-Kimika">Fiki</option>
                     <option disabled="disabled">───────────</option>
-                    <option value="Biologia-Geologia">Bio-Geo</option>
+                    <option value="Biologia">Bio-Geo</option>
                     <option disabled="disabled">───────────</option>
                     <option value="Gaztelera">Gaztelera</option>
                     <option disabled="disabled">───────────</option>
@@ -338,9 +369,9 @@ function etxerakoLanaErregistratu(){
 
     var div = document.getElementById("zerrenda")
     div.innerHTML += `
-        <tr id=${id}>
+        <tr >
             <th class="lana-ezker"><b>${ir}</b>: ${lan}</th>
-            <th class="basura"><a onclick="azterketaEzabatu(${id})"><i class="fa-solid fa-trash"></i></a></th>
+            <th class="basura"><a><i class="fa-solid fa-trash"></i></a></th>
         </tr>
      `
 }
@@ -378,10 +409,10 @@ function azterketaErregistratu(){
     var eguna = document.getElementById("eguna").innerHTML
     var div = document.getElementById("zerrenda-azterketak")
     div.innerHTML += `
-        <div id=${id} class="grid-item">
+        <div class="grid-item">
             <h4>${ir}</h4>
             <div class="grid-text"><p>${ed}</p></div>
-            <div class="azterketa-ezabatu"><a onclick="azterketaEzabatu(${id})"><i class="fa-solid fa-trash"></i></a></div>
+            <div class="azterketa-ezabatu"><a onclick="azterketaEzabatu()"><i class="fa-solid fa-trash"></i></a></div>
         </div>`
     fetch('https://strapi-svi3.onrender.com/api/azterketak', {
         method: 'POST',
