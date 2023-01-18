@@ -32,12 +32,12 @@ async function getAllExamDays() {
 
 async function load_calendar(month_number, year_number) {
     getAllExamDays().then(function(a){
-        var icons = {"Matematika": "<i class='fa-solid fa-square-root-variable' style='font-size: 20px; color: blue;'></i>",
+        var icons = {"Matematika": "<i class='fa-solid fa-square-root-variable' style='font-size: 20px; color: black;'></i>",
                      "Fisika-Kimika": "<i class='fa-solid fa-flask' style='font-size: 20px; color: rgb(255, 0, 217);'></i>",
                      "Biologia": "<i class='fa-solid fa-seedling' style='font-size: 20px; color: green;'></i>",
-                     "Gaztelera": "<i class='fa-solid fa-circle'  style='font-size: 20px; color: orange;'></i>",
-                     "Ingelera": "<i class='fa-solid fa-earth-americas' style='font-size: 20px; color: red;'></i>",
-                     "Euskara": "<i class='fa-solid fa-bird'  style='font-size: 20px; color: green;'></i>",
+                     "Gaztelera": "<i class='fa-solid fa-feather'  style='font-size: 20px; color: orange;'></i>",
+                     "Ingelera": "<i class='fa-solid fa-earth-americas' style='font-size: 20px; color: blue;'></i>",
+                     "Euskara": "<i class='fa-solid fa-crow'  style='font-size: 20px; color: red;'></i>",
                      "Geografia-Historia": "<i class='fa-solid fa-landmark'  style='font-size: 20px; color: purple;'></i>",
                      "Plastika": "<i class='fa-solid fa-paintbrush'  style='font-size: 20px; color: black;'></i>",
                      "Gorputz Hezkuntza": "<i class='fa-solid fa-tennis-ball  style='font-size: 20px; color: yellow;'></i>",
