@@ -17,21 +17,31 @@ function isLeapYear (year) {
     return new Date(year, 1, 29).getDate() === 29;
 }
 
+// Leihoa irekitzean kargatuko den funtzioa.
+// * "today" aldagai globaletik urtea eta hilabetea hartuko ditu.
+// * load_calendar funtzioari deituko diogu eta horrek egutegia kargatuko du.
+//      * urtea eta hilabetea pasako dizkiogu funtzio honi horrek egutegiaren goiburua kargatuko baitu.
 window.onload = function() {
-    var month_number = today.split("-")[1] // gaurko eguna kargatuko dugu beti
+    var month_number = today.split("-")[1] 
     var year_number = today.split("-")[0]
-    load_calendar(month_number, year_number)
-     
+    load_calendar(month_number, year_number);
 }
 
+// Datu basetik azterketen egunak ekarriko ditugu egutegian sartzeko. 
+// load_calendar funtzioan deituko diogu funtzio honi.
 async function getAllExamDays() {
     return await fetch('https://strapi-svi3.onrender.com/api/azterketak?pagination[pageSize]=500')
       .then(response => response.json())
       .then(data => {return data});    
 }
 
+// EGUTEGIA KARGATU
+// * Egunak dagokion aste egunetan kokatu
+// * Azterketa egunetan dagokion sinboloa jarri
 async function load_calendar(month_number, year_number) {
+    // Lehen pausua azterketa egun guztiak kargatzea da. Horren ondoren hauek dagozkien egunetan jarriko dira.
     getAllExamDays().then(function(a){
+        // Irakasgai bakoitzari ikono bat dagokio. Irakasgai horretako azterketa dagoen egun bakoitzean dagokion ikonoa agertuko da. 
         var icons = {"Matematika": "<i class='fa-solid fa-square-root-variable' style='font-size: 20px; color: black;'></i>",
                      "Fisika-Kimika": "<i class='fa-solid fa-flask' style='font-size: 20px; color: rgb(255, 0, 217);'></i>",
                      "Biologia": "<i class='fa-solid fa-seedling' style='font-size: 20px; color: green;'></i>",
@@ -43,9 +53,10 @@ async function load_calendar(month_number, year_number) {
                      "Gorputz Hezkuntza": "<i class='fa-solid fa-tennis-ball  style='font-size: 20px; color: yellow;'></i>",
                      "Tutoretza": "<i class='fa-solid fa-person  style='font-size: 20px; color: black;'></i>"
                     }
-        // Hiztegi bat sortuko dugu {"eguna1" : [irakasgaia1, irakasgaia2, ...], "eguna2": [irakasgaia], ...}
+        // Hiztegi bat sortuko dugu azterketak adierazten dituena.
+        // examDays = {"eguna1" : [irakasgaia1, irakasgaia2, ...], "eguna2": [irakasgaia], ...}
         var examDays = {}        
-        azterketak = a.data
+        var azterketak = a.data
         for (i=0; i<azterketak.length; i++){
             d = azterketak[i].attributes.data
             if (d in examDays) {
@@ -56,11 +67,10 @@ async function load_calendar(month_number, year_number) {
             }           
         }
         
-        // Hilabetea eta urtea sartu dagokien posizioan
+        // Hilabetea eta urtea sartu goiburuan
         var hilabetea = document.getElementById("hilabetea")
         var month = months[month_number]  
         hilabetea.innerHTML = `${month}`
-
         var urtea = document.getElementById("urtea")
         urtea.innerHTML = `${year_number}`
         
@@ -91,57 +101,55 @@ async function load_calendar(month_number, year_number) {
         n = q[month_number]
         urt = year_number.toString()
         hil = month_number.toString()
-
+        
+        // Egun bakoitza botoi bat da, eta botoi horrek dagokion egunaren leiho batera eramango gaitu. 
+        // Leiho horretan egun horretan lanak eta azterketak sartu ahalko ditugu.
         while (k <= n){
-            if (k == today.split("-")[2] && month_number == today.split("-")[1]){ //Gaurko eguna azpimarratu egingo da
+            // Gaurko eguna azpimarratuta
+            if (k == today.split("-")[2] && month_number == today.split("-")[1]){ 
                 k = k.toString()
                 if(k.length == 1){
                     k = '0' + k
                 }
                 eg = urt + '-' + hil + '-' + k.toString()
-                if (eg in examDays){
+                if (eg in examDays){ // Egun horretan azterketa badago
                     i = ""
-                    for (j=0; j<examDays[eg].length; j++){
+                    for (j=0; j<examDays[eg].length; j++){ // for hau egingo dugu kargatzen ari garen egunean azterketa bat baino gehiago badaude
                         console.log(examDays[eg][j])
                         i += icons[examDays[eg][j]]
                         console.log(i)
                     }
                     taulako_div.innerHTML += `                    
-                        <li><a onclick=egunaKargatu('${eg}')><span class="active">${k}${i}</span></a></li>`
+                        <li><a onclick="window.location='./eguna.html?eguna=${eg}'"><span class="active">${k}${i}</span></a></li>`
                 }
-                else{
-                    taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')><span class="active">${k}</i></span></a></li>`
+                else{ // Egun horretan azterketarik ez badago.
+                    taulako_div.innerHTML += `<li><a onclick="window.location='./eguna.html?eguna=${eg}'"><span class="active">${k}</i></span></a></li>`
                 }
             }
-            else{ //Gainontzeko egunak
+            // Gainontzeko egunak (gaurkoa ez dena)
+            else{ 
                 k = k.toString()
                 if(k.length == 1){
                     k = '0' + k
                 }
                 eg = urt + '-' + hil + '-' + k.toString()
-                if (eg in examDays){
+                if (eg in examDays){ // Egun horretan azterketa badago
                     i = ""
-                    for (j=0; j<examDays[eg].length; j++){
+                    for (j=0; j<examDays[eg].length; j++){ // for hau egingo dugu kargatzen ari garen egunean azterketa bat baino gehiago badaude
                         console.log(examDays[eg][j])
                         i += icons[examDays[eg][j]]
                         console.log(i)
                     }
-                    taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')>${k}<span>${i}</span></a></li>`
+                    taulako_div.innerHTML += `<li><a onclick="window.location='./eguna.html?eguna=${eg}'">${k}<span>${i}</span></a></li>`
                 }
-                else{
-                    taulako_div.innerHTML += `<li><a onclick=egunaKargatu('${eg}')>${k}</a></li>`
-                }
-                
+                else{ // Egun horretan azterketarik ez badago
+                    taulako_div.innerHTML += `<li><a onclick="window.location='./eguna.html?eguna=${eg}'">${k}</a></li>`
+                }                
             }
             k = parseInt(k)     
             k += 1
         }
-
-
-    })
-
-    
-
+    }) 
 }
 
 let months_to_number = {"Urtarrila": "01",
@@ -157,12 +165,13 @@ let months_to_number = {"Urtarrila": "01",
                         "Azaroa": "11",
                         "Abendua": "12"}  
 
+// Egutegiko gezitxodun botoia aurreko hilabetera pasatzeko. 
 function prevMonth(){
     var urtea = document.getElementById("urtea").innerHTML
     var hilabetea = document.getElementById("hilabetea").innerHTML
     hilabetea = months_to_number[hilabetea]  
 
-    if (hilabetea != "01") {
+    if (hilabetea != "01") { //Urtarrilan bagaude urtez aldatu beharko da.
         hilabetea = (parseInt(hilabetea) - 1).toString()
         if (hilabetea.length == 1){
             hilabetea = "0" + hilabetea
@@ -177,12 +186,13 @@ function prevMonth(){
 
 }
 
+// Egutegiko gezitxodun botoia hurrengo hilabetera pasatzeko. 
 function nextMonth(){
     var urtea = document.getElementById("urtea").innerHTML
     var hilabetea = document.getElementById("hilabetea").innerHTML
     hilabetea = months_to_number[hilabetea]  
 
-    if (hilabetea != "12") {
+    if (hilabetea != "12") {//Abenduan bagaude urtez aldatu beharko da.
         hilabetea = (parseInt(hilabetea) + 1).toString()
         if (hilabetea.length == 1){
             hilabetea = "0" + hilabetea
@@ -194,268 +204,3 @@ function nextMonth(){
         load_calendar("01", urtea)
     }
 }
-
-/*--------------------------------------------------------*/
-/*EGUN KONKRETU BATEKO LANAK ETA AZTERKETAK KARGATUKO DITU*/
-/*--------------------------------------------------------*/
-
-function egunaKargatu(eguna) {
-    var egutegiaDiv = document.getElementById("egutegia-container")
-    egutegiaDiv.innerHTML = `
-
-        <div style="text-align: center; margin-top: 100px;">
-            <h1 id="eguna" style="font-size: 70px;">${eguna}</h1>
-        </div>
-        <div class="idatzi">
-            <form class="formularioa">
-            <li>
-
-            </li>
-            
-            <li>            
-                <select name="Irakasgaia" id="irakasgaia">
-                    <option disabled="disabled">───────────</option>
-                    <option value="Matematika">Matematika</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Fisika-Kimika">Fiki</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Biologia">Bio-Geo</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Gaztelera">Gaztelera</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Ingelera">Ingelera</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Euskara">Euskara</option> 
-                    <option disabled="disabled">───────────</option>               
-                    <option value="Geografia-Historia">Geo-Hist</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Plastika">Plastika</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Gorputz Hezkuntza">GH</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Tutoretza">Tutoretza</option>
-                    <option disabled="disabled">───────────</option>
-                </select>
-            </li>  
-            <li class="text">
-                <input id="lana" type="text" placeholder="Idatzi egun honetarako lana">
-            </li>
-            <li><button type="button" onclick=etxerakoLanaErregistratu()>+</button></li>
-                
-            </form>
-        </div>
-        <div class="idatzi">
-
-            <form class="formularioa">
-            <li>
-
-            </li>
-            
-            <li>            
-                <select name="Irakasgaia" id="irakasgaia-azterketa">
-                    <option disabled="disabled">───────────</option>
-                    <option value="Matematika">Matematika</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Fisika-Kimika">Fiki</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Biologia">Bio-Geo</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Gaztelera">Gaztelera</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Ingelera">Ingelera</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Euskara">Euskara</option> 
-                    <option disabled="disabled">───────────</option>               
-                    <option value="Geografia-Historia">Geo-Hist</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Plastika">Plastika</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Gorputz Hezkuntza">GH</option>
-                    <option disabled="disabled">───────────</option>
-                    <option value="Tutoretza">Tutoretza</option>
-                    <option disabled="disabled">───────────</option>
-                </select>
-            </li>  
-            <li class="text">
-                <input id="edukia" type="text" placeholder="Idatzi egun honetako azterketako edukia zein izango den">
-            </li>
-            <li><button type="button" onclick=azterketaErregistratu()>+</button></li>
-                
-            </form>
-        </div>
-        <div class="center">
-            <div class="ikusi">
-                <h3>EGUN HONETARAKO EGIN BEHARREKO LANAK</h3>
-                <table id="zerrenda">
-                    
-                </table>
-                
-            </div>
-        </div>
-
-        <div class="center">
-            <div class="ikusi" style="background-color: #d5dee0;">
-                <h3>EGUN HONETAKO AZTERKETAK</h3>
-                <div class="grid-container" id="zerrenda-azterketak"></div>
-                
-            </div>
-        </div>
-    `
-    getGaurLanak(eguna)
-    getGaurAzterketak(eguna)
-}
-
-
-/* ---------------------------- */
-/* -----EGUN BATERAKO LANAK---- */
-/* ---------------------------- */
-function getGaurLanak(eguna){
-    fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak?filters[data][$eq]=' + eguna)
-      .then(response => response.json())
-      .then(data =>
-      data.data.forEach(writeGaurLanak))
-}
-
-function writeGaurLanak(element){
-    var div = document.getElementById("zerrenda")
-    var etxerako_lana = element.attributes
-    var ir = etxerako_lana.irakasgaia
-    var lan = etxerako_lana.lana
-    id = element.id
-    div.innerHTML += `
-        <tr id=${id}>
-            <th class="lana-ezker"><p><b>${ir}:</b> ${lan}</p></th>
-            <th class="basura"><a onclick="ezabatuLana(${id})"><i class="fa-solid fa-trash"></i></a></th>
-        </tr>   `
-}
-
-function ezabatuL(id){
-    return fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak/' + id, {
-            method: 'DELETE'
-        }).then(res => res.text()) // or res.json()
-          .then(res => console.log(res))
-}
-
-
-function ezabatuLana(id){
-    ezabatuL(id).then(function(){
-        var gridDiv = document.getElementById(id)
-        gridDiv.remove()
-    })
-}
-
-function etxerakoLanaErregistratu(){
-    var ir = document.getElementById("irakasgaia").value
-    var lan = document.getElementById("lana").value
-    var eguna = document.getElementById("eguna").innerHTML
-    fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            "Content-type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify({
-            "data": {
-                "irakasgaia": ir,
-                "lana": lan, 
-                "data": eguna,
-                "eginda": false
-            }
-             
-        })
-    })
-    .then(response => response.json())
-    .then(response => console.log(JSON.stringify(response)))
-
-    var div = document.getElementById("zerrenda")
-    div.innerHTML += `
-        <tr >
-            <th class="lana-ezker"><b>${ir}</b>: ${lan}</th>
-            <th class="basura"><a><i class="fa-solid fa-trash"></i></a></th>
-        </tr>
-     `
-}
-
-
-/* ---------------------------- */
-/* --EGUN BATERAKO AZTERKETAK-- */
-/* ---------------------------- */
-function getGaurAzterketak(eguna){
-    fetch('https://strapi-svi3.onrender.com/api/azterketak?filters[data][$eq]=' + eguna)
-      .then(response => response.json())
-      .then(data =>
-      data.data.forEach(writeGaurAzterketak))
-}
-
-function writeGaurAzterketak(element){
-    var div = document.getElementById("zerrenda-azterketak")
-    var azterketa = element.attributes
-    var irakasgaia = azterketa.irakasgaia
-    var edukia = azterketa.edukia
-    id = element.id
-    div.innerHTML += `    
-    
-        <div id=${id} class="grid-item">
-            <h4>${irakasgaia}</h4>
-            <div class="grid-text"><p>${edukia}</p></div>
-            <div class="azterketa-ezabatu"><a onclick="azterketaEzabatu(${id})"><i class="fa-solid fa-trash"></i></a></div>
-        </div>
-    `
-}
-
-function azterketaErregistratu(){
-    var ir = document.getElementById("irakasgaia-azterketa").value
-    var ed = document.getElementById("edukia").value
-    var eguna = document.getElementById("eguna").innerHTML
-    var div = document.getElementById("zerrenda-azterketak")
-    div.innerHTML += `
-        <div class="grid-item">
-            <h4>${ir}</h4>
-            <div class="grid-text"><p>${ed}</p></div>
-            <div class="azterketa-ezabatu"><a onclick="azterketaEzabatu()"><i class="fa-solid fa-trash"></i></a></div>
-        </div>`
-    fetch('https://strapi-svi3.onrender.com/api/azterketak', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            "Content-type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify({
-            "data": {
-                "irakasgaia": ir,
-                "edukia": ed, 
-                "data": eguna}
-             
-        })
-    })
-    .then(response => response.json())
-    .then(response => console.log(JSON.stringify(response)))
-
-    
-}
-
-function ezabatu(id){
-    return fetch('https://strapi-svi3.onrender.com/api/azterketak/' + id, {
-            method: 'DELETE'
-        }).then(res => res.text()) // or res.json()
-          .then(res => console.log(res))
-}
-
-
-function azterketaEzabatu(id){
-    ezabatu(id).then(function(){
-        var gridDiv = document.getElementById(id)
-        gridDiv.remove()
-    })
-}
-
-
-
-
-
-
-
-
-  
-
-

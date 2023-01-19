@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Agenda</title>
+    <link rel="icon" type="image/x-icon" href="../../logo.png">
+
+</head>
+<body>
+  <div class="topnav">
+    <a class="active" href="./egutegia.html">EGUTEGIA</a>
+    <a href="./egitekoak.html">EGITEKOAK</a>
+  </div>
+
+  <div style="text-align: center; margin-top: 100px;">
+    <h1 id="eguna" style="font-size: 70px;"></h1>
+</div>
+<div class="idatzi">
+    <form class="formularioa">
+    <li>
+
+    </li>
+    
+    <li>            
+        <select name="Irakasgaia" id="irakasgaia">
+            <option disabled="disabled">───────────</option>
+            <option value="Matematika">Matematika</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Fisika-Kimika">Fiki</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Biologia">Bio-Geo</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Gaztelera">Gaztelera</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Ingelera">Ingelera</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Euskara">Euskara</option> 
+            <option disabled="disabled">───────────</option>               
+            <option value="Geografia-Historia">Geo-Hist</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Plastika">Plastika</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Gorputz Hezkuntza">GH</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Tutoretza">Tutoretza</option>
+            <option disabled="disabled">───────────</option>
+        </select>
+    </li>  
+    <li class="text">
+        <input id="lana" type="text" placeholder="Idatzi egun honetarako lana">
+    </li>
+    <li><button type="button" onclick=etxerakoLanaErregistratu()>+</button></li>
+        
+    </form>
+</div>
+<div class="idatzi">
+
+    <form class="formularioa">
+    <li>
+
+    </li>
+    
+    <li>            
+        <select name="Irakasgaia" id="irakasgaia-azterketa">
+            <option disabled="disabled">───────────</option>
+            <option value="Matematika">Matematika</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Fisika-Kimika">Fiki</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Biologia">Bio-Geo</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Gaztelera">Gaztelera</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Ingelera">Ingelera</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Euskara">Euskara</option> 
+            <option disabled="disabled">───────────</option>               
+            <option value="Geografia-Historia">Geo-Hist</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Plastika">Plastika</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Gorputz Hezkuntza">GH</option>
+            <option disabled="disabled">───────────</option>
+            <option value="Tutoretza">Tutoretza</option>
+            <option disabled="disabled">───────────</option>
+        </select>
+    </li>  
+    <li class="text">
+        <input id="edukia" type="text" placeholder="Idatzi egun honetako azterketako edukia zein izango den">
+    </li>
+    <li><button type="button" onclick=azterketaErregistratu()>+</button></li>
+        
+    </form>
+</div>
+<div class="center">
+    <div class="ikusi">
+        <h3>EGUN HONETARAKO EGIN BEHARREKO LANAK</h3>
+        <table id="zerrenda">
+            
+        </table>
+        
+    </div>
+</div>
+
+<div class="center">
+    <div class="ikusi" style="background-color: #d5dee0;">
+        <h3>EGUN HONETAKO AZTERKETAK</h3>
+        <div class="grid-container" id="zerrenda-azterketak"></div>
+        
+    </div>
+</div>
+
+
+
+<script type="text/javascript" src="../js/eguna.js"></script>
+
+
+</body>
+</html>
+
+
