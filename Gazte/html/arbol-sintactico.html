@@ -20,42 +20,38 @@
                 <input id="frase" type="text" placeholder="Escribe la frase que quieres analizar">
             </li>
             <li><button type="button" onclick=escribirFrase()><i class="fa fa-pencil"></i></button></li>
+            <li class="basura"><button class="btn"><i class="fa fa-refresh" onclick=window.location.reload()></i></button></li>
+
         </form>
     </div>
     <hr>
-    <div class="row">
-        <div class="col-8">
-            <div class="arbol">
-                <table id="tabla" class="tabla">
-                    <tr id="frase-tabla">
-                        <th></th>
-                    
-                    </tr>
-                    <tr id="1"></tr>
-                    <tr id="2"></tr>
-                    <tr id="3"></tr>
-                    <tr id="4"></tr>
-                    <tr id="5"></tr>
-                    <tr id="6"></tr>           
-                  
-                </table>
-            </div>
+    <div class="frase">
+        <form class="formularioa-sintactica">
+            <li class="text">
+                <input id="forma-sintactica" type="text" placeholder="Función sintáctica">
+            </li>
+            <li class="text">
+                <input id="nivel-arbol" type="text" placeholder="Nivel de árbol">
+            </li>
+            <li><button type="button" onclick=anadirInformacionArbol()><i class="fa fa-plus"></i></button></li>
+        </form>
+    </div>
+    <div style="margin-top: 30px;">
+        <div class="arbol">
+            <table id="tabla" class="tabla">
+                <tr id="frase-tabla">
+                    <th></th>
+                
+                </tr>
+                <tr id="1"></tr>
+                <tr id="2"></tr>
+                <tr id="3"></tr>
+                <tr id="4"></tr>
+                <tr id="5"></tr>
+                <tr id="6"></tr>           
+              
+            </table>
         </div>
-        <div class="col-4">
-            <form class="formularioa-sintactica">
-                <li class="text">
-                    <input id="forma-sintactica" type="text" placeholder="Función sintáctica">
-                </li>
-                <li class="text">
-                    <input id="nivel-arbol" type="text" placeholder="Nivel de árbol">
-                </li>
-                <li><button type="button" onclick=anadirInformacionArbol()><i class="fa fa-plus"></i></button></li>
-            </form>
-            <div class="basura">
-                <button class="btn"><i class="fa fa-refresh" onclick=window.location.reload()></i></button>
-            </div>
-        </div>
-
     </div>
     
 

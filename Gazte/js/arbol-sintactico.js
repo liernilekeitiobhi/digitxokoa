@@ -1,6 +1,4 @@
 let fraseEntera = {}
-var frase = document.getElementById("frase").value
-let arr = frase.split(/, | /); 
 let arbol = {1:{},2:{},3:{},4:{},5:{},6:{}}
 
 
@@ -12,12 +10,10 @@ let arbol = {1:{},2:{},3:{},4:{},5:{},6:{}}
 function escribirFrase(){
     var frase = document.getElementById("frase").value
     var arr = frase.split(/, | /); /*koma eta espazioak lista sortzeko*/
-    console.log(arr)
     k=1
     // Hitz bakoitza botoi bihurtu id=c-<hitzaren posizioa> (1etik hasita) eta taula bateko lehen lerroan jarri
     // Horretaz gain fraseEntera hiztegia sortuko da, hitz bakoitza zapalduta dagoen edo ez jakiteko (true,false)
     arr.forEach(element => {
-        console.log(element)
         fraseEntera[k] = false
         var t = document.getElementById("frase-tabla")
         t.innerHTML += `<th><button id=c-${k} type="button" onclick="cambiarBolean(${k})">${element}</button></th>`    
@@ -40,7 +36,6 @@ function escribirFrase(){
         }
         
     }
-    console.log(arbol)
 }
 
 
@@ -62,7 +57,6 @@ function cambiarBolean(k) {
         btn.style.backgroundColor = 'rgb(63, 63, 63)'
         btn.style.color = '#fff'
     }
-    console.log(fraseEntera)
 }
 
 
@@ -103,7 +97,6 @@ function anadirInformacionArbol(){
     for (i=0;i<seleccion.length;i++){
         arbol[na][seleccion[i]]=[true,seleccion,fs]
     }
-    console.log(arbol)
 
     // arbol marraztu
     dibujarArbol()
@@ -111,54 +104,46 @@ function anadirInformacionArbol(){
 }
 
 function dibujarArbol(){
+
+    var frase = document.getElementById("frase").value
+    let arr = frase.split(/, | /);
+    console.log(arbol)
     for (key in arbol){
+        console.log("LERROA: "+key)
         columnas = []
-        for (k in arbol[key]){
-            console.log(arbol[key][k][2])
+        k=1
+        while (k<=arr.length){
+            console.log("ZUTABEA: "+ k)
             if (arbol[key][k][2] != ' '){
-                columnas.push(arbol[key][k][2])                
+                columnas.push([arbol[key][k][1].length,arbol[key][k][2]])
+                k+=arbol[key][k][1].length        
             }
             else {
-                columnas.push(' ')
+                columnas.push([-1,' '])
+                k=k+1
             }
+            console.log(columnas)
+            
+
         }
-        console.log(key)
-        console.log(columnas)
-        colSinRep=[]
-        for (i=0;i<columnas.length;i++){
-            if(columnas[i]==" "){
-                colSinRep.push([-1," "])
-            }
-            else if (colSinRep.length==0){
-                colSinRep.push([1,columnas[i]])
-            }
-            else{
-                if (colSinRep[colSinRep.length-1][1]!=columnas[i]){
-                    colSinRep.push([1,columnas[i]])
-                }
-                else if(colSinRep[colSinRep.length-1][1]==columnas[i]){
-                    colSinRep[colSinRep.length-1][0]+=1
-                }
-                
-            }
-        }
-        console.log(colSinRep)
+        
+        
         fila = document.getElementById(key)
         fila.innerHTML=`<tr id=${key}><td>${key}</td></tr>`
-        for (i=0; i<colSinRep.length;i++){
-            if (colSinRep[i][0]==-1){
+        for (i=0; i<columnas.length;i++){
+            if (columnas[i][0]==-1){
                 fila.innerHTML += `<td></td>`
             }
-            else if(colSinRep[i][0]==1){
-                fila.innerHTML += `<td style="border-top: 3px solid black;" >${colSinRep[i][1]}</td>`
+            else if(columnas[i][0]==1){
+                fila.innerHTML += `<td style="border-top: 3px solid black;" >${columnas[i][1]}</td>`
             }
             else{
-                fila.innerHTML += `<td style="border-top: 3px solid black;" colspan=${colSinRep[i][0]}>${colSinRep[i][1]}</td>`
+                fila.innerHTML += `<td style="border-top: 3px solid black;" colspan=${columnas[i][0]}>${columnas[i][1]}</td>`
             }
                 
         }
     }
-    for (i=1; i<=columnas.length;i++){
+    for (i=1; i<=arr.length;i++){
         deseleccion(i)
     }
 }
