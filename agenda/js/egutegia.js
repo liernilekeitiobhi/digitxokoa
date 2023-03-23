@@ -17,11 +17,36 @@ function isLeapYear (year) {
     return new Date(year, 1, 29).getDate() === 29;
 }
 
+let auth0 = null
+
+
+
+const configureClient = async () => {
+  auth0 = await createAuth0Client({
+    domain: "dev-kk1ohqzhycvksad7.us.auth0.com",
+    client_id: "9t9yPn6lfqcQTym1C9IN2LX1eVo90PtY",
+  })
+}
+
+const processLoginState = async () => {
+  // Check code and state parameters
+  const query = window.location.search
+  if (query.includes("code=") && query.includes("state=")) {
+    // Process the login state
+    await auth0.handleRedirectCallback()
+    // Use replaceState to redirect the user away and remove the querystring parameters
+    window.history.replaceState({}, document.title, window.location.pathname)
+  }
+}
+
 // Leihoa irekitzean kargatuko den funtzioa.
 // * "today" aldagai globaletik urtea eta hilabetea hartuko ditu.
 // * load_calendar funtzioari deituko diogu eta horrek egutegia kargatuko du.
 //      * urtea eta hilabetea pasako dizkiogu funtzio honi horrek egutegiaren goiburua kargatuko baitu.
-window.onload = function() {
+window.onload = async function() {
+    
+    await configureClient()
+    await processLoginState()
     var month_number = today.split("-")[1] 
     var year_number = today.split("-")[0]
     load_calendar(month_number, year_number);
@@ -30,7 +55,15 @@ window.onload = function() {
 // Datu basetik azterketen egunak ekarriko ditugu egutegian sartzeko. 
 // load_calendar funtzioan deituko diogu funtzio honi.
 async function getAllExamDays() {
-    return await fetch('https://strapi-svi3.onrender.com/api/azterketak?pagination[pageSize]=500')
+    const isAuthenticated = await auth0.isAuthenticated()
+    if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
+    return await fetch('https://strapi-svi3.onrender.com/api/azterketak?filters[email][$eq]=' + e + '&pagination[pageSize]=500')
       .then(response => response.json())
       .then(data => {return data});    
 }

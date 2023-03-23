@@ -1,13 +1,14 @@
 body{
-  background-color: orange;
+  background-color: rgb(98, 98, 98);
 }
+
 h1{
   font-family: 'PT Sans', sans-serif;
   font-size: 100px;
 }
 
 .titulua{
-  margin-top: 100px;
+  margin-top: 30px;
   padding: 50px;
   text-align: center;
 }
@@ -26,4 +27,32 @@ h1{
 
 .card-body:hover{
   cursor: pointer;
+}
+
+.botoiak{
+  margin-top: 80px;
+  text-align: center;
+}
+
+ul{
+  display: inline-flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+ul li{
+  margin-left: 20px;
+}
+
+button{
+  height: 7em;
+  width: 10em;
+  cursor: pointer;
+  border-style: none;
+  border-radius: 20px;
+}
+
+button:hover{
+  background-color: brown;
+  color: white;
 }

@@ -1,7 +1,31 @@
 // Leiho honetan erabiltzaileak egun horretako lanak eta azterketak erregistratzeko aukera izango du.
 // Horretaz gain, egun horretarako jada programatuak dauden lanak eta azterketak ere ikusiko dira. 
 
-window.onload = function() {
+let auth0 = null
+
+
+
+const configureClient = async () => {
+  auth0 = await createAuth0Client({
+    domain: "dev-kk1ohqzhycvksad7.us.auth0.com",
+    client_id: "9t9yPn6lfqcQTym1C9IN2LX1eVo90PtY",
+  })
+}
+
+const processLoginState = async () => {
+  // Check code and state parameters
+  const query = window.location.search
+  if (query.includes("code=") && query.includes("state=")) {
+    // Process the login state
+    await auth0.handleRedirectCallback()
+    // Use replaceState to redirect the user away and remove the querystring parameters
+    window.history.replaceState({}, document.title, window.location.pathname)
+  }
+}
+
+window.onload = async function() {
+    await configureClient()
+    await processLoginState()
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const eg = urlParams.get('eguna')
@@ -21,8 +45,16 @@ window.onload = function() {
 
 // ----KARGATU----//
 // Datu basetik etxerako lanak ekarri
-function getGaurLanak(eguna){
-    fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak?filters[data][$eq]=' + eguna)
+async function getGaurLanak(eguna){
+    const isAuthenticated = await auth0.isAuthenticated()
+    if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
+    fetch('https://strapi-svi3.onrender.com/api/etxerako-lanak?filters[email][$eq]=' + e + '&filters[data][$eq]=' + eguna)
       .then(response => response.json())
       .then(data =>
       data.data.forEach(writeGaurLanak))
@@ -63,7 +95,15 @@ function ezabatuL(id){
 
 //----GORDE----//
 // Etxerako lana datu basean gorde
-function etxerakoLanaErregistratu(){
+async function etxerakoLanaErregistratu(){
+    const isAuthenticated = await auth0.isAuthenticated()
+    if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
     var ir = document.getElementById("irakasgaia").value
     var lan = document.getElementById("lana").value
     var eguna = document.getElementById("eguna").innerHTML
@@ -78,7 +118,8 @@ function etxerakoLanaErregistratu(){
                 "irakasgaia": ir,
                 "lana": lan, 
                 "data": eguna,
-                "eginda": false
+                "eginda": false,
+                "email": e
             }             
         })
     })
@@ -103,8 +144,16 @@ function etxerakoLanaErregistratu(){
 
 // ----KARGATU----//
 // Datu basetik azterketak ekarri
-function getGaurAzterketak(eguna){
-    fetch('https://strapi-svi3.onrender.com/api/azterketak?filters[data][$eq]=' + eguna)
+async function getGaurAzterketak(eguna){
+    const isAuthenticated = await auth0.isAuthenticated()
+    if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
+    fetch('https://strapi-svi3.onrender.com/api/azterketak?filters[email][$eq]=' + e + '&filters[data][$eq]=' + eguna)
       .then(response => response.json())
       .then(data =>
       data.data.forEach(writeGaurAzterketak))
@@ -147,7 +196,15 @@ function ezabatu(id){
 
 //----GORDE----//
 // Azterketa datu basean gorde
-function azterketaErregistratu(){
+async function azterketaErregistratu(){
+    const isAuthenticated = await auth0.isAuthenticated()
+    if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
     var ir = document.getElementById("irakasgaia-azterketa").value
     var ed = document.getElementById("edukia").value
     var eguna = document.getElementById("eguna").innerHTML
@@ -161,7 +218,8 @@ function azterketaErregistratu(){
             "data": {
                 "irakasgaia": ir,
                 "edukia": ed, 
-                "data": eguna}
+                "data": eguna,
+                "email": e}
              
         })
     })

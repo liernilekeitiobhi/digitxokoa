@@ -7,12 +7,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/index-style.css">
     <title>Digitxokoa</title>
     <link rel="icon" type="image/x-icon" href="logo.png">
 
 </head>
 <body>
+  <!--<div class="hidden" id="gated-content">
+    <p>
+      You're seeing this content because you're currently
+      <strong>logged in</strong>.
+    </p>
+    <label>
+      Access token:
+      <pre id="ipt-access-token"></pre>
+    </label>
+    <label>
+      User profile:
+      <pre id="ipt-user-profile"></pre>
+    </label>
+  </div>-->
+    <div class="botoiak">
+      <ul>
+        <li><button id="btn-login" type="button" onClick="login()">Sartu nire erabiltzailearekin</button></li>
+        <li><button id="btn-logout" type="button" onClick="logout()">Irten nire erabiltzailetik</button></li>
+      </ul>      
+    </div>
     <div class="titulua">
         <h1>DIGITXOKOA</h1>
     </div>
@@ -193,6 +213,8 @@
         </div>
 
     </div>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.2/auth0-spa-js.production.js"></script> 
+    <script type="text/javascript" src="./js/konexioa.js"></script>
     
 </body>
 </html>
