@@ -1,9 +1,39 @@
-window.onload = function(){
+let auth0 = null
+
+const configureClient = async () => {
+  auth0 = await createAuth0Client({
+    domain: "dev-kk1ohqzhycvksad7.us.auth0.com",
+    client_id: "9t9yPn6lfqcQTym1C9IN2LX1eVo90PtY",
+  })
+}
+
+const processLoginState = async () => {
+  // Check code and state parameters
+  const query = window.location.search
+  if (query.includes("code=") && query.includes("state=")) {
+    // Process the login state
+    await auth0.handleRedirectCallback()
+    // Use replaceState to redirect the user away and remove the querystring parameters
+    window.history.replaceState({}, document.title, window.location.pathname)
+  }
+}
+
+window.onload = async function(){
+    await configureClient()
+    await processLoginState()
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const zenb_at = urlParams.get('id')
     console.log(zenb_at)
-    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?filters[zenbaki_atomikoa][$eq]=' + zenb_at)
+    const isAuthenticated = await auth0.isAuthenticated()
+    if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
+    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?filters[email][$eq]=' + e + '&filters[zenbaki_atomikoa][$eq]=' + zenb_at)
       .then(response => response.json())
       .then(data => {
             if(data.data.length != 0){
@@ -111,7 +141,16 @@ function izaera_gehitu(value){
     }   
 }
 
-function elementua_gorde(){
+async function elementua_gorde(){
+    const isAuthenticated = await auth0.isAuthenticated()
+    console.log(isAuthenticated)
+	if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
     var masa_at = document.getElementById("masa_at").value
     var zenb_at = document.getElementById("zenb_at").value
     var izena = document.getElementById("izena").value
@@ -131,7 +170,7 @@ function elementua_gorde(){
         izaera="hutsa"
     }
 
-    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?filters[zenbaki_atomikoa][$eq]=' + zenb_at)
+    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?filters[email][$eq]=' + e + '&filters[zenbaki_atomikoa][$eq]=' + zenb_at)
     .then(response => response.json())
     .then(data => {
           if(data.data.length != 0){
@@ -148,7 +187,8 @@ function elementua_gorde(){
                         "zenbaki_atomikoa": zenb_at, 
                         "izena": izena,
                         "sinboloa": sinboloa,
-                        "mota": izaera
+                        "mota": izaera,
+                        "email": e
                     }            
                     })
                 })
@@ -175,7 +215,8 @@ function elementua_gorde(){
                         "zenbaki_atomikoa": zenb_at, 
                         "izena": izena,
                         "sinboloa": sinboloa,
-                        "mota": izaera
+                        "mota": izaera,
+                        "email": e
                         }            
                     })
                 })

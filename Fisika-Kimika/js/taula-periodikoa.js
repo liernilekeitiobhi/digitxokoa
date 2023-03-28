@@ -1,5 +1,35 @@
-window.onload=function(){
-    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?pagination[pageSize]=500')
+let auth0 = null
+
+const configureClient = async () => {
+  auth0 = await createAuth0Client({
+    domain: "dev-kk1ohqzhycvksad7.us.auth0.com",
+    client_id: "9t9yPn6lfqcQTym1C9IN2LX1eVo90PtY",
+  })
+}
+
+const processLoginState = async () => {
+  // Check code and state parameters
+  const query = window.location.search
+  if (query.includes("code=") && query.includes("state=")) {
+    // Process the login state
+    await auth0.handleRedirectCallback()
+    // Use replaceState to redirect the user away and remove the querystring parameters
+    window.history.replaceState({}, document.title, window.location.pathname)
+  }
+}
+
+window.onload = async function(){
+    await configureClient()
+    await processLoginState()
+    const isAuthenticated = await auth0.isAuthenticated()
+    if (isAuthenticated) {
+		user = await auth0.getUser()
+        e = user.email
+	}
+    else{
+        alert("Sartu zure erabiltzailea!")
+    }
+    fetch('https://strapi-svi3.onrender.com/api/elementu-kimikoak?filters[email][$eq]=' + e + '&pagination[pageSize]=500')
         .then(response => response.json())
         .then(data =>
         data.data.forEach(writeElementuak))
