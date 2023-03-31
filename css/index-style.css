@@ -56,3 +56,7 @@ button:hover{
   background-color: brown;
   color: white;
 }
+
+#edukia {
+  visibility: hidden;
+}

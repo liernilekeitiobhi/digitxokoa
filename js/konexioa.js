@@ -35,6 +35,8 @@ const updateUI = async () => {
     const u = await auth0.getUser()
     console.log("barruan")
     console.log(u.email)
+    var edukia = document.getElementById("edukia")
+    edukia.style.visibility = "visible"
     /*document.getElementById("gated-content").classList.remove("hidden")
     document.getElementById(
       "ipt-access-token"
