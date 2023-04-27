@@ -1,0 +1,279 @@
+
+
+.lerro{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: auto;
+    align-items: flex-start;
+    /*height: 900px;*/
+}
+
+.column {
+    float: left;
+    width: 40%;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.column canvas {
+    margin-left: 0px;
+}
+
+.column-r {
+    float: left;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.column-r form{
+    width: 100%;
+}
+
+/* Clear floats after the columns */
+.lerro:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .lerro{
+        display: flex;
+        flex-direction: column;
+    }
+    .column {
+        width: 100%;
+    }
+    }
+
+.form-style{
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.form-style li{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 0;
+    list-style: none;
+}
+
+.form-style label{
+    padding-right: 30px;
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+}
+
+.form-style input,
+.form-style select{
+    height: 60px;
+    font-size: 30px;
+}
+
+.btn-div{
+    text-align: center;
+}
+  
+.btn-div button{
+    height: 80px;
+    width: 90%;
+    
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    color: white;
+}
+
+.btn-div:hover button{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+#ekuazioaBtn{
+    background-color: rgb(75, 75, 75);
+}
+
+#ekuazioaBtn:hover{
+    background-color: rgb(125, 22, 22);
+}
+
+#soluzioaBtn{
+    background-color: rgb(75, 75, 75);
+}
+
+#soluzioaBtn:hover{
+    background-color: rgb(22, 87, 125);
+}
+
+.btn-div ul{
+    display: inline-flex;
+}
+
+.btn-div li{
+    list-style: none;
+}
+
+#ekuazioak ul{
+    display: flex;
+    align-items: center;
+}
+
+#ekuazioak li{
+    padding-left: 10px;
+}
+
+#ekuazioak input{
+    text-align: center;
+}
+
+#gehitu{
+    height: 60px;
+    width: 100px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(225, 176, 15);      
+}
+
+#gehitu:hover{
+    background-color: rgb(158, 63, 12);
+    cursor: pointer;
+    color: white;
+    border-style: none;
+}
+
+/* Botoi txurie ta beltza */
+
+#b11, #b12, #b21, #b22 {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;    
+    border-style: none;
+    background-color: rgb(217, 217, 217);
+}
+
+#b11:hover, #b12:hover, #b21:hover, #b22:hover {
+    background-color: rgb(0, 0, 0);
+    cursor: pointer;
+    color: white;
+    border-style: none;
+}
+
+#t11, #t12, #t21, #t22 {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;    
+    background-color: rgb(255, 255, 255);
+    border: 4px solid rgb(217, 217, 217); 
+}
+
+#t11:hover, #t12:hover, #t21:hover, #t22:hover {
+    background-color: rgb(255, 255, 255);
+    border: 4px solid black;     
+    cursor: pointer;
+    color: white;
+}
+
+/* Tarteen botoiak */
+
+#tarteak1 {
+    width: 100%;
+}
+
+#tarteak1 li{
+    display: inline-flex;
+}
+
+#tarteak1 button{
+    height: 60px;
+    width: 540px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(177, 91, 85);
+    font-size: 20px;
+}
+
+#tarteak1 button:hover{
+    cursor: pointer;  
+    border-style: none;
+    background-color: rgb(92, 207, 98); 
+}
+
+#tarteak2 {
+    width: 100%;
+}
+
+#tarteak2 li{
+    display: inline-flex;
+}
+
+#tarteak2 button{
+    height: 60px;
+    width: 540px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(177, 91, 85);
+    font-size: 20px;
+}
+
+#tarteak2 button:hover{
+    cursor: pointer;  
+    border-style: none;
+    background-color: rgb(92, 207, 98); 
+}
+
+/* dokumentuko gauzak*/
+
+.titulua {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+}
+
+.zakarrontzia button{
+    height: 80px;
+    width: 300px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(186, 49, 49);
+    color: white;
+    font-size: 20px;
+}
+
+.zakarrontzia:hover button{
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    border-style: none;
+
+}
+
+
+#soluzioa {
+    width: 100%;
+}
+
+#soluzioa li{
+    display: inline-flex;
+}
+
+#soluzioa button{
+    height: 60px;
+    width: 540px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(177, 91, 85);
+    font-size: 20px;
+}
+
+#soluzioa button:hover{
+    cursor: pointer;  
+    border-style: none;
+    background-color: rgb(92, 207, 98); 
+}

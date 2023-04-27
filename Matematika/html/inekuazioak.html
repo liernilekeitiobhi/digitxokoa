@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Inekuazioak ebatziz</title>
+    <link rel="stylesheet" href="../css/inekuazioak-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="lerro">
+        <div class="column-r">
+            <form>
+                <div class="btn-div">
+                    <ul>
+                        <li>
+                            <button id="ekuazioaBtn" type="button" onclick=ekuazioaGehitu()>EKUAZIOA GEHITU</button>
+                        </li>
+                        <li>
+                            <button id="soluzioaBtn" type="button" onclick=soluzioaGehitu()>SOLUZIOA GEHITU</button>
+                        </li>
+                    </ul>
+                </div>
+                <ul id="ekuazioak" class="form-style">
+                </ul>            
+            </form>
+        </div>
+        <div class="column">
+            <canvas id="myCanvas" width="600px" height="600px">Your browser does not support the HTML5 canvas tag.</canvas><br>
+            <div><ul id="soluzioa"></ul></div>    
+        </div>
+        
+    </div>
+    <div class="titulua">
+        <div class="zakarrontzia">
+            <button type="button" onclick=window.location.reload()><i class="fa fa-trash"></i> GARBITU</button>
+
+        </div>
+    </div>
+    
+    
+    
+    <script type="text/javascript" src="../js/inekuazioak.js"></script>
+</body>
+</html>
