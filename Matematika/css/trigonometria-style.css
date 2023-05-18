@@ -1,0 +1,273 @@
+body{
+    background-color: rgb(222, 222, 222);
+  }
+  
+  h1{
+    font-family: 'PT Sans', sans-serif;
+    font-size: 100px;
+  }
+  
+  .titulua{
+    margin-top: 30px;
+    padding: 50px;
+    text-align: center;
+  }
+  
+  .cont{
+    width: 90%;
+    text-align: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .card img:hover{
+    cursor: pointer;
+  }
+  
+  .card-body:hover{
+    cursor: pointer;
+  }
+  
+  .botoiak{
+    margin-top: 80px;
+    text-align: center;
+  }
+  
+  ul{
+    display: inline-flex;
+    flex-direction: row;
+    list-style: none;
+  }
+  
+  ul li{
+    margin-left: 20px;
+  }
+  
+  button{
+    height: 7em;
+    width: 10em;
+    cursor: pointer;
+    border-style: none;
+    border-radius: 20px;
+  }
+  
+  button:hover{
+    background-color: brown;
+    color: white;
+  }
+  
+  #edukia {
+    visibility: hidden;
+  }
+
+
+
+.lerro{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: auto;
+    align-items: flex-start;
+    /*height: 900px;*/
+}
+
+.column {
+    float: left;
+    width: 60%;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.column canvas {
+    margin-left: 0px;
+}
+
+.column-r {
+    float: left;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.column-r form{
+    width: 100%;
+}
+
+/* Clear floats after the columns */
+.lerro:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .lerro{
+        display: flex;
+        flex-direction: column;
+    }
+    .column {
+        width: 100%;
+    }
+    }
+
+.form-style{
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.form-style li{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 0;
+    list-style: none;
+}
+
+.form-style label{
+    padding-right: 30px;
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+}
+
+.form-style input,
+.form-style select{
+    height: 60px;
+    font-size: 30px;
+}
+
+.btn-div{
+    text-align: center;
+}
+  
+.btn-div button{
+    height: 80px;
+    width: 90%;
+    
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    color: white;
+}
+
+.btn-div:hover button{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+#ekuazioaBtn{
+    background-color: rgb(75, 75, 75);
+}
+
+#ekuazioaBtn:hover{
+    background-color: rgb(125, 22, 22);
+}
+
+#soluzioaBtn{
+    background-color: rgb(75, 75, 75);
+}
+
+#soluzioaBtn:hover{
+    background-color: rgb(22, 87, 125);
+}
+
+.btn-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-div ul{
+    display: inline-flex;
+}
+
+.btn-div li{
+    list-style: none;
+}
+
+#alde-angelu ul{
+    display: flex;
+    align-items: center;
+}
+
+#alde-angelu li{
+    padding-left: 10px;
+    font-size: 30px;
+}
+
+#alde-angelu input{
+    text-align: center;
+    height: 55px;
+    width: 200px;
+    font-size: 30px;
+}
+
+#gehitu{
+    height: 60px;
+    width: 100px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(225, 176, 15);      
+}
+
+#gehitu:hover{
+    background-color: rgb(158, 63, 12);
+    cursor: pointer;
+    color: white;
+    border-style: none;
+}
+
+
+
+/* dokumentuko gauzak*/
+
+.titulua {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 10px;
+}
+
+.zakarrontzia button{
+    height: 80px;
+    width: 300px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(186, 49, 49);
+    color: white;
+    font-size: 20px;
+}
+
+.zakarrontzia:hover button{
+    background-color: black;
+    cursor: pointer;
+    color: white;
+    border-style: none;
+
+}
+
+
+#soluzioa {
+    width: 100%;
+}
+
+#soluzioa li{
+    display: inline-flex;
+}
+
+#soluzioa button{
+    height: 60px;
+    width: 540px;
+    border-radius: 5%;    
+    border-style: none;
+    background-color: rgb(177, 91, 85);
+    font-size: 20px;
+}
+
+#soluzioa button:hover{
+    cursor: pointer;  
+    border-style: none;
+    background-color: rgb(92, 207, 98); 
+}
