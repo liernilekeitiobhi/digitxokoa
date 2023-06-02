@@ -144,14 +144,13 @@ function addPoints(id){
 function draw(){
     checkbox = [document.getElementById("toggle1").checked,
         document.getElementById("toggle2").checked,
-        document.getElementById("toggle3").checked,
-        document.getElementById("toggle4").checked             
+        document.getElementById("toggle3").checked          
                 ]
 
     var selected 
     cont = 0
     //true egoeran zein dagoen ikusiko dugu. Aldi berean, true egoeran zenbait dauden begiratu.
-    for (i=0; i<=4; i++){
+    for (i=0; i<=3; i++){
         if (checkbox[i] == true){
             selected = i
             cont += 1
@@ -160,7 +159,10 @@ function draw(){
 
     //true egoeran funtzio mota bakarra dagoela bermatu
     if (cont==1){
-        if (selected == 1){ //zuzen bertikala
+        if (selected == 0){ //zuzen bertikala BUKATUUUU!!!!!
+            console.log("bertikala")
+        }
+        if (selected == 1){ //zuzen horizontala
             var xArray = [];
             var yArray = [];
             for (const property in points) {
@@ -252,8 +254,7 @@ function draw(){
             }
                 
         }
-    
-            
+        
     
         
     }
@@ -290,6 +291,13 @@ function kopiatu(){
     })
     
 }
+
+
+
+
+
+
+
 
 
 
