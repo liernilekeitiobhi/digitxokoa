@@ -107,9 +107,7 @@ function addPoints(id){
         btn.style.backgroundColor = '#6a8494';
         document.getElementById("x" + id).value = "" //Idazteko tokia hustu
         document.getElementById("y" + id).value = "" //Idazteko tokia hustu
-
-    }
-    
+    }    
     plot()
     
 }
@@ -150,12 +148,10 @@ function draw(){
         
         //else{
             //Funtzioa marrazteko plot funtzioak erabiltzen duen notaziora pasako ditugu koordenatuak
-            f = c + '+sqrt('+a+'*x+'+b+')'
-            console.log(f)
+            f = c + '+sqrt('+a+'*x+'+b+')';
             //funtzioa parameters aldagaian sartuko dugu eta marraztu
-            parameters.data.push({fn: f, color: 'black'});
-            
-            plot()
+            parameters.data.push({fn: f, color: 'black'});            
+            plot();
         
         //}        
         
