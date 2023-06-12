@@ -114,7 +114,8 @@ function addPoints(id){
 
 /*
  * Ditugun puntuak hartuta, kalkulatuko du ea puntu horiek dituen errodun funtzioa existitzen den. 
- * Existitzen bada honen ekuazioa zein den kalkulatuko du.     
+ * Horretarako, lehen hiru puntuei dagokien ekuazioa zein den konprobatuko dugu
+ * Ondoren ea gainontzeko puntuei ekuazio hori dagokien begiratuko dugu.     
 */
 function draw(){ 
     if (parameters.data[0].points < 3) {
@@ -129,7 +130,7 @@ function draw(){
                 yArray.push(parseFloat(points[property][1]))
             }
         }
-        //Edozein puntuk balio digunez, zerrendan lehenengo dauden biak hartuko ditugu.
+        //Edozein puntuk balio digunez, zerrendan lehenengo dauden hiruak hartuko ditugu.
         x1 = xArray[0]
         y1 = yArray[0]
         x2 = xArray[1]
@@ -137,7 +138,7 @@ function draw(){
         x3 = xArray[2]
         y3 = yArray[2]
 
-        /* Berez bi puntu nahikoa dira zein erro funtzio den zehazteko 
+        /* Berez hiru puntu nahikoa dira zein erro funtzio den zehazteko 
          * y = c+sqrt(ax+b) motako ekuazioan a eta b zein diren ondorioztatzeko formulak:
         */
         var c = ((y1*y1-y2*y2)*(x2-x3)-(x1-x2)*(y2*y2-y3*y3))/(2*((y3-y2)*(x1-x2)-(y2-y1)*(x2-x3)))
@@ -145,15 +146,27 @@ function draw(){
         var b = (y1-c)*(y1-c)-a*x1
 
         //Gainontzeko puntuak funtzio horretakoak diren konprobatu. Ez badira, ez da marraztuko.
-        
-        //else{
+        var existentzia = true
+        for (i=0; i<xArray.length;i++){
+            console.log(c+Math.sqrt(a*xArray[i]+b))
+            console.log(yArray[i])
+            if (yArray[i]!=c+Math.sqrt(a*xArray[i]+b)){
+                existentzia = false
+                break
+            }
+        }
+        if (!existentzia){
+            alert('Puntu horiekin ezin dut errodun ekuazio bat marraztu!')
+            return false
+        }        
+        else{
             //Funtzioa marrazteko plot funtzioak erabiltzen duen notaziora pasako ditugu koordenatuak
             f = c + '+sqrt('+a+'*x+'+b+')';
             //funtzioa parameters aldagaian sartuko dugu eta marraztu
             parameters.data.push({fn: f, color: 'black'});            
             plot();
         
-        //}        
+        }        
         
     }
     
