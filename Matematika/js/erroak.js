@@ -166,10 +166,8 @@ function draw(){
             parameters.data.push({fn: f, color: 'black'});            
             plot();
         
-        }        
-        
+        }  
     }
-    
 }
 
 

@@ -16,7 +16,6 @@ let layout = {
 
 // Hasieran ardatzak hutsik jarriko ditugu
 function plot(){
-
     
     var data = []          
       
@@ -101,6 +100,7 @@ function addPoints(id){
         //BI KOORDENATUTAKO BAT IDAZTEN EZ BADA EZ DIGU PUNTUA GEHITZEN UTZIKO
         else{ 
             alert("Koordenatuak gehitu behar dira!")
+            return false
         }
         
     }
@@ -139,42 +139,74 @@ function addPoints(id){
 /       * selected=0 => zuzen bertikala
 /       * selected=1 => zuzen horizontala
 /       * selected=2 => zuzena
-/       * selected=3 => parabola
 */
 function draw(){
+
+    //points objektuko puntuekin bi lista sortuko ditugu
+    //sartu diren x koordenatu guztiak array batera eta y koordenatuak beste batera
+    //hauek erabiliko dira marrazteko
+    var xArray = [];
+    var yArray = [];
+    for (const property in points) {
+        if (points[property] != null){
+            xArray.push(parseFloat(points[property][0]))
+            yArray.push(parseFloat(points[property][1]))
+        }
+    }
+
+    // Ikusi behar da erabiltzaileak zein zuzen mota marraztea aukeratu duen
     checkbox = [document.getElementById("toggle1").checked,
         document.getElementById("toggle2").checked,
         document.getElementById("toggle3").checked          
-                ]
-
-    var selected 
+                ]    
     cont = 0
     //true egoeran zein dagoen ikusiko dugu. Aldi berean, true egoeran zenbait dauden begiratu.
     for (i=0; i<=3; i++){
         if (checkbox[i] == true){
-            selected = i
+            var selected = i
             cont += 1
         }
     }
 
-    //true egoeran funtzio mota bakarra dagoela bermatu
-    if (cont==1){
-        if (selected == 0){ //zuzen bertikala BUKATUUUU!!!!!
-            console.log("bertikala")
-        }
-        if (selected == 1){ //zuzen horizontala
-            var xArray = [];
-            var yArray = [];
-            for (const property in points) {
-                if (points[property] != null){
-                    xArray.push(parseFloat(points[property][0]))
-                    yArray.push(parseFloat(points[property][1]))
+        
+    if (cont==1){ //true egoeran funtzio mota bakarra dagoela bermatu, bestela eskatu erabiltzaileari bat eta bakarra aukeratzeko
+        
+        // Bi lista horiek erabiliz, selected aldagaiaren arabera dagokion zuzena marraztuko dugu.
+        if (selected == 0){ //zuzen bertikala
+            var marraztu_daiteke=true
+            if (yArray.length > 1){//Konprobatu behar dugu benetan x koordenatu guztiak berdinak direla puntu bat baino gehiago sartu bada
+                for (i=0; i<xArray.length-1; i++){ 
+                    if (xArray[i] != xArray[i+1]){
+                        //Ezin bada zuzena marraztu berriro ere puntu originalak marraztuko ditugu.
+                        alert("Punturen bat ez dago ondo!")
+                        var pointsArray = []
+                        for (const property in points) {
+                            if (points[property] != null){
+                                pointsArray.push(parseFloat(points[property][0]))
+                                pointsArray.push(parseFloat(points[property][1]))
+                            }
+                        }
+                        var xy = new Float32Array(pointsArray);
+                        data = [{ xy: xy,  type: 'pointcloud' }];
+                        Plotly.newPlot(grafikoa, data, layout);
+                        marraztu_daiteke = false //If honetan sartu bada ez dugu nahi funtzioa marrazterik
+                        break
+                    }
+    
                 }
             }
+            if (marraztu_daiteke==true){
+                var data = [{x: [xArray[0],xArray[0]], y: [-10,10], mode:"lines"}];
+                Plotly.newPlot(grafikoa, data, layout);
+            }
+            
+        }
+        if (selected == 1){ //zuzen horizontala
             var marraztu_daiteke=true
             if (yArray.length > 1){//Konprobatu behar dugu benetan y koordenatu guztiak berdinak direla puntu bat baino gehiago sartu bada
                 for (i=0; i<yArray.length-1; i++){ 
                     if (yArray[i] != yArray[i+1]){
+                        //Ezin bada zuzena marraztu berriro ere puntu originalak marraztuko ditugu.
                         alert("Punturen bat ez dago ondo!")
                         var pointsArray = []
                         for (const property in points) {
@@ -198,16 +230,8 @@ function draw(){
                 Plotly.newPlot(grafikoa, data, layout);
             }
         }
-        else if (selected == 2){ //zuzena
-            //sartu diren x koordenatu guztiak array batera eta y koordenatuak beste batera
-            var xArray = [];
-            var yArray = [];
-            for (const property in points) {
-                if (points[property] != null){
-                    xArray.push(parseFloat(points[property][0]))
-                    yArray.push(parseFloat(points[property][1]))
-                }
-            }
+        else if (selected == 2){ //zuzen zeiharra
+            
             //malda beti berdina dela bermatuko dugu. Ez balitz ezin da zuzen hori marraztu.
             var zatiketa = parseFloat((yArray[0]-yArray[1]) / (xArray[0]-xArray[1]) )
             var marraztu_daiteke = true
@@ -230,6 +254,8 @@ function draw(){
                     break
                 }
             }
+
+            // Malda berdina badago puntu guztien artean zuzena marraztuko dugu
             if (marraztu_daiteke==true){
                 
                 if(zatiketa==0){
@@ -244,7 +270,7 @@ function draw(){
                     yArrayPoints = []
                     for (var x = -10; x <= 10; x += 1) {
                         xArrayPoints.push(x);
-                        yArrayPoints.push(malda*x-malda*xArray[0] + yArray[0]); //puntu malda ekuazioarekin 7 koordenatua aterako dugu
+                        yArrayPoints.push(malda*x-malda*xArray[0] + yArray[0]); //puntu malda ekuazioarekin y koordenatua aterako dugu
                     }
                     
                     //sortu ditugun puntu guzti horiek marraztuko ditugu

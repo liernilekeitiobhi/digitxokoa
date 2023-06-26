@@ -36,8 +36,6 @@ function addPoints(id){
         //BERMATU EZ ZAIOLA "gehitu" BOTOIARI EMAN KOORDENATUTAKO BAT SARTU GABE
         if (x.length != 0 && y.length != 0){ 
             points[id] = [x , y] //Objetuan puntua sartu tupla moduan
-            //Objetutik dauzkagun puntu ez huts guztiak hartuko ditugu eta array bat sortu hauekin. [x1,y1,x2,y2,...]
-            var pointsArray = []
             parameters.data = [{
                 points: [],
                 fnType: 'points',
@@ -50,8 +48,6 @@ function addPoints(id){
                 if (points[property]!=null){
                     x = eval(points[property][0])
                     y = eval(points[property][1])
-                    pointsArray.push(parseFloat(points[property][0]))
-                    pointsArray.push(parseFloat(points[property][1]))
                     parameters.data[0].points.push([x,y])
                     parameters.data.push({fn: '(x -' + x + ')^2 + (y - ' + y + ')^2 - 0.001', fnType:'implicit', color:'red'},
                                          {fn: '(x -' + x + ')^2 + (y - ' + y + ')^2 - 0.003', fnType:'implicit', color:'red'})
@@ -68,6 +64,7 @@ function addPoints(id){
         //BI KOORDENATUTAKO BAT IDAZTEN EZ BADA EZ DIGU PUNTUA GEHITZEN UTZIKO
         else{ 
             alert("Koordenatuak gehitu behar dira!")
+            return false
         }
         
     }
@@ -78,8 +75,6 @@ function addPoints(id){
         points[id]=null //points objetuan id hau hutsik utziko dugu berriro.
 
         //Berriro marraztuko ditugu puntu guztiak, kendu dugun hau marraztu gabe.
-        //Horretarako array berri bat sortuko dugu points objetu berria erabiliz
-        var pointsArray = []
         parameters.data = [{
             points: [],
             fnType: 'points',
@@ -89,21 +84,14 @@ function addPoints(id){
           }]
         for (const property in points) {
             if (points[property] != null){
-                
                 x = eval(points[property][0])
                 y = eval(points[property][1])
-                console.log([x,y])
-                pointsArray.push(parseFloat(points[property][0]))
-                pointsArray.push(parseFloat(points[property][1]))
                 parameters.data[0].points.push([x,y])
                 parameters.data.push({fn: '(x -' + x + ')^2 + (y - ' + y + ')^2 - 0.001', fnType:'implicit', color:'red'},
                                          {fn: '(x -' + x + ')^2 + (y - ' + y + ')^2 - 0.003', fnType:'implicit', color:'red'})
                 
             }
         }
-        /*if (parameters.data.length > 1) {
-            parameters.data = parameters.data.splice(-2, -1);
-        }*/
                
         
         //Botoia berriro ere grisa bihurtuko dugu eta "gehitu" idatziko diogu. Tartea libre geldituko da beste puntu bat id horretan gehitzeko
@@ -151,12 +139,11 @@ function draw(){
         *puntu gehigarri bat erabiliz funtzioa ebaluatuko dugu puntu horretan
 
         *Honek 3 ezezagunetako 3 ekuazio sortuko dizkigu ->A matrizea
-                                                        ->V ekuazio sistemako eskuin zutabea
+                                                         ->V ekuazio sistemako eskuin zutabea
         */
         A = [[2*xerpina, 1,0],[xerpina*xerpina,xerpina,1],[x*x,x,1]]
         V = [0,yerpina,y]
         emaitza = solve(A,V) //parabolaren koordenatuak izango dira
-        console.log(emaitza)
 
         //Gainontzeko puntuak parabola horretakoak diren konprobatu. Ez badira, ez da marraztuko.
         existentzia = true
@@ -165,10 +152,7 @@ function draw(){
                 x = eval(points[i][0])
                 y = eval(points[i][1])
                 ev = eval(emaitza[0])*x*x+eval(emaitza[1])*x+eval(emaitza[2])
-                if (ev != y){ 
-                    console.log(i + '.ITERAZIOA')
-                    console.log(ev)  
-                    console.log(y)              
+                if (ev != y){            
                     existentzia = false
                     break
                 }
@@ -177,9 +161,11 @@ function draw(){
         //parabola existitzen bada marraztu
         if (existentzia == false){
             alert('Ez da existitzen puntu horiek dituen parabola!')
+            return false
         }
         else if(parameters.data[0].points.length < 3){
             alert('Sartu gutxienez erpina eta beste bi puntu!')
+            return false
         }
         else{
             //Funtzioa marrazteko plot funtzioak erabiltzen duen notaziora pasako ditugu koordenatuak
@@ -196,6 +182,7 @@ function draw(){
     }
     else{
         alert('Erpinik gabe ezin dut parabola bat marraztu!')
+        return false
     }
     
 }
