@@ -1,5 +1,8 @@
 let fraseEntera = {}
 let arbol = {1:{},2:{},3:{},4:{},5:{},6:{}}
+let k = 1 //zutabe kopurua
+let frase = ""
+let arr = []
 
 
 /*----------------------------------------------------------------------------------------------
@@ -8,9 +11,8 @@ let arbol = {1:{},2:{},3:{},4:{},5:{},6:{}}
 -----------------------------------------------------------------------------------------------*/
 
 function escribirFrase(){
-    var frase = document.getElementById("frase").value
-    var arr = frase.split(/, | /); /*koma eta espazioak lista sortzeko*/
-    k=1
+    frase = document.getElementById("frase").value
+    arr = frase.split(/, | /); /*koma eta espazioak lista sortzeko*/
     // Hitz bakoitza botoi bihurtu id=c-<hitzaren posizioa> (1etik hasita) eta taula bateko lehen lerroan jarri
     // Horretaz gain fraseEntera hiztegia sortuko da, hitz bakoitza zapalduta dagoen edo ez jakiteko (true,false)
     arr.forEach(element => {
@@ -37,6 +39,29 @@ function escribirFrase(){
         
     }
 }
+/*---------------------------------------------------------------------------------------------*/
+/*Ezkutuko subjektua gehitzeko taulari zutabe berriak gehituko zaizkio
+/*Lehen lerroan gehitu den ezkutuko subjektua idatziko da botoi bihurtuta
+/*Gainontzeko lerroak hutsik
+/*---------------------------------------------------------------------------------------------*/
+
+function ezkutuSubjektuGehitu(){
+    var ezkSub = document.getElementById("ezkutuSub").value
+    var t = document.getElementById("frase-tabla")
+    //JAKIN BEHARRA DAUKEU ZENBAT ZUTABE DAUZKEN TAULAK (k)
+    t.innerHTML += `<th><button id=c-${k} type="button" onclick="cambiarBolean(${k})">${ezkSub}</button></th>`
+    fraseEntera[k] = false
+    arr = arr.push(ezkSub)
+    for(j=1; j<=6; j++){     
+        fila = document.getElementById(j)
+        fila.innerHTML += `<td></td>`
+        arbol[j][k]=[false,[],' ']
+        
+    }
+
+    k += 1    
+        
+}
 
 
 /*----------------------------------------------------------------------------------------------*/
@@ -45,7 +70,7 @@ true bezala agertu beharko dira fraseEntera hiztegian*/
 /*----------------------------------------------------------------------------------------------*/
 
 function cambiarBolean(k) {    
-    btn = document.getElementById('c-'+k)
+    btn = document.getElementById('c-' + k)
     if (fraseEntera[k] == true) { //Zapalduta badago eta erabiltzaileak deselekzionatu egin nahi badu
         fraseEntera[k] = false
         btn.style.backgroundColor = 'rgb(237, 237, 237)'
@@ -84,8 +109,10 @@ function deseleccion(k) {
 /*----------------------------------------------------------------------------------------------*/
 
 function anadirInformacionArbol(){
+    
     fs = document.getElementById('forma-sintactica').value
     na = document.getElementById('nivel-arbol').value
+    
     seleccion = []
     // fraseEnteran zapalduta zein dauden gorde dugunez, hauek seleccion izeneko array batean gordeko ditugu
     for (var key in fraseEntera) {
@@ -104,31 +131,28 @@ function anadirInformacionArbol(){
 }
 
 function dibujarArbol(){
-
-    var frase = document.getElementById("frase").value
-    let arr = frase.split(/, | /);
+    
     console.log(arbol)
     for (key in arbol){
-        console.log("LERROA: "+key)
+        console.log("LERROA: " + key)
         columnas = []
-        k=1
-        while (k<=arr.length){
-            console.log("ZUTABEA: "+ k)
-            if (arbol[key][k][2] != ' '){
-                columnas.push([arbol[key][k][1].length,arbol[key][k][2]])
-                k+=arbol[key][k][1].length        
+        g=1
+        while (g<=arr.length){
+            console.log("ZUTABEA: "+ g)
+            if (arbol[key][g][2] != ' '){
+                columnas.push([arbol[key][g][1].length,arbol[key][g][2]])
+                g+=arbol[key][g][1].length        
             }
             else {
                 columnas.push([-1,' '])
-                k=k+1
+                g=g+1
             }
-            console.log(columnas)
-            
-
+            console.log(columnas)        
         }
         
         
         fila = document.getElementById(key)
+        console.log(key)
         fila.innerHTML=`<tr id=${key}><td>${key}</td></tr>`
         for (i=0; i<columnas.length;i++){
             if (columnas[i][0]==-1){

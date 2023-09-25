@@ -10,7 +10,7 @@
 
 .formularioa {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 90%;
 }
@@ -175,3 +175,7 @@
     font-size: 30px;
     border-color: rgb(173, 57, 57);
 }
+
+.hasiera{
+    display: flex;
+  }

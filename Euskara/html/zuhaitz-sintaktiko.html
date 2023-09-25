@@ -16,15 +16,24 @@
     </div>
     <div class="frase">
         <form class="formularioa">
-            <li class="text">
-                <input id="frase" type="text" placeholder="Idatzi aztertu nahi duzun esaldia">
-            </li>
-            <li><button type="button" onclick=escribirFrase()><i class="fa fa-pencil"></i></button></li>
-            <li class="basura"><button class="btn"><i class="fa fa-refresh" onclick=window.location.reload()></i></button></li>
-
+            <ul class="hasiera">
+                <li class="text">
+                    <input id="frase" type="text" placeholder="Idatzi aztertu nahi duzun esaldia">
+                </li>
+                <li><button type="button" onclick=escribirFrase()><i class="fa fa-pencil"></i></button></li>
+                <li class="basura"><button class="btn"><i class="fa fa-refresh" onclick=window.location.reload()></i></button></li>    
+            </ul>
         </form>
     </div>
     <hr>
+        <form class="formularioa" style="display: block; padding-left: 60px;">
+            <ul class="hasiera">
+                <li class="text">
+                    <input id="ezkutuSub" type="text" placeholder="Ezkutuko subjektua gehitu" style="width: 300px;">
+                </li>
+                <li><button type="button" onclick=ezkutuSubjektuGehitu()><i class="fa fa-plus"></i></button></li></ul>
+        </form>
+    
     <div class="frase">
         <form class="formularioa-sintactica">
             <li class="text">

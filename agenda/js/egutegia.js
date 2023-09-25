@@ -88,17 +88,20 @@ async function load_calendar(month_number, year_number) {
                     }
         // Hiztegi bat sortuko dugu azterketak adierazten dituena.
         // examDays = {"eguna1" : [irakasgaia1, irakasgaia2, ...], "eguna2": [irakasgaia], ...}
-        var examDays = {}        
+        var examDays = {}   
         var azterketak = a.data
-        for (i=0; i<azterketak.length; i++){
-            d = azterketak[i].attributes.data
-            if (d in examDays) {
-                examDays[d].push(azterketak[i].attributes.irakasgaia)          
+        if (azterketak!= null){
+            for (i=0; i<azterketak.length; i++){
+                d = azterketak[i].attributes.data
+                if (d in examDays) {
+                    examDays[d].push(azterketak[i].attributes.irakasgaia)          
+                }
+                else{
+                    examDays[d] = [azterketak[i].attributes.irakasgaia]     
+                }           
             }
-            else{
-                examDays[d] = [azterketak[i].attributes.irakasgaia]     
-            }           
         }
+        
         
         // Hilabetea eta urtea sartu goiburuan
         var hilabetea = document.getElementById("hilabetea")

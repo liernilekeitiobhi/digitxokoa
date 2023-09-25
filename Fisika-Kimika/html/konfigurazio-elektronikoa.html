@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Konfigurazio elektronikoa</title>
+    <link rel="stylesheet" href="../css/konfigurazio-elektronikoa-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="titulua">
+        <h1>KONFIGURAZIO ELEKTRONIKOA</h1>
+    </div>
+    <div class="taula-container">
+        <table class="taula">
+            <tr>      
+              <td><button class="taula-botoia" id="1s" onclick="egoeraAldatu(id)">1s</button></td>      
+              <td> </td>      
+              <td> </td>
+              <td> </td>      
+            </tr>      
+            <tr>      
+                <td><button class="taula-botoia" id="2s" onclick="egoeraAldatu(id)">2s</button></td>      
+                <td><button class="taula-botoia" id="2p" onclick="egoeraAldatu(id)">2p</button></td>      
+                <td> </td>
+                <td> </td>      
+            </tr>
+            <tr>      
+                <td><button class="taula-botoia" id="3s" onclick="egoeraAldatu(id)">3s</button></td>      
+                <td><button class="taula-botoia" id="3p" onclick="egoeraAldatu(id)">3p</button></td>      
+                <td><button class="taula-botoia" id="3d" onclick="egoeraAldatu(id)">3d</button></td>
+                <td> </td>      
+            </tr>
+            <tr>      
+                <td><button class="taula-botoia" id="4s" onclick="egoeraAldatu(id)">4s</button></td>      
+                <td><button class="taula-botoia" id="4p" onclick="egoeraAldatu(id)">4p</button></td>      
+                <td><button class="taula-botoia" id="4d" onclick="egoeraAldatu(id)">4d</button></td>
+                <td><button class="taula-botoia" id="4f" onclick="egoeraAldatu(id)">4f</button></td>      
+            </tr>
+            <tr>      
+                <td><button class="taula-botoia" id="5s" onclick="egoeraAldatu(id)">5s</button></td>      
+                <td><button class="taula-botoia" id="5p" onclick="egoeraAldatu(id)">5p</button></td>      
+                <td><button class="taula-botoia" id="5d" onclick="egoeraAldatu(id)">5d</button></td>
+                <td><button class="taula-botoia" id="5f" onclick="egoeraAldatu(id)">5f</button></td>      
+            </tr>      
+          </table>
+
+    </div>
+    <div class="centered">
+        <div>
+            <form class="azken-geruzako-datuak">
+                <label>Azken orbitaleko elektroi kopurua:      </label>
+                <input id="azken-geruza" onchange="azkenGeruza()" type="text" id="azken-geruza"><br>
+                <!--<button class="taula-botoia" onchange="azkenGeruza()">+</button>-->
+            </form>
+        </div>
+    </div>
+    <div class="centered">
+        <div class="row">
+            <div id="konf-elek" class="column">
+                
+            </div>
+            <div class="column">
+                <button class="kopiatu-botoia" onclick=kopiatu()>Kopiatu</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="../js/konfigurazio-elektronikoa.js"></script>
+</body>
+</html>

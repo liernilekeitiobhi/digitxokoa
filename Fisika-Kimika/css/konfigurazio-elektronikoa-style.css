@@ -1,0 +1,78 @@
+.titulua {
+    text-align: center;
+}
+
+.taula-container{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.taula {
+    margin: auto;
+    
+}
+
+.taula-botoia{
+    width: 80px;
+    height: 80px;
+    background-color: rgb(207, 80, 80);
+    border: transparent;
+    font-size: 40px;
+}
+
+.taula-botoia:hover{
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border: 6px solid #000000
+}
+
+.centered{
+    text-align: center;
+    margin-top: 90px;
+}
+
+.row{
+    display: inline-flex;
+    align-items: center;
+}
+
+.column{
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+.kopiatu-botoia{
+    width: 80px;
+    height: 80px;
+    background-color: rgb(80, 207, 192);
+    border: transparent;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.kopiatu-botoia:hover{
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+
+.azken-geruzako-datuak{
+    display: inline-flex;
+    align-items: center;
+}
+
+.azken-geruzako-datuak input{
+    height: 80px;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.azken-geruzako-datuak label{
+    margin-right: 10px;
+    font-size: 20px;
+}

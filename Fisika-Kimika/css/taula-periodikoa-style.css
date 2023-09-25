@@ -487,7 +487,7 @@
       font-size: 10px;
     }
     .masa{
-      font-size: 7px;
+      font-size: 9px;
     }
     .at_num, .at_num1{
        font-size: 10px;
@@ -637,4 +637,20 @@
   cursor: pointer;
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
+}
+
+.ez-metalak{
+  background-color: #ffc78e;
+}
+
+.metalak{
+  background-color: #fb93a4;
+}
+
+.erdimetalak{
+  background-color: rgb(141, 255, 244);
+}
+
+.gas-geldoak{
+  background-color: #8bffa2;
 }

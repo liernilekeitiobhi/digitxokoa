@@ -34,7 +34,7 @@ h1{
 }
 
 ul{
-    display: inline-flex;
+    /*display: inline-flex;*/
     flex-direction: row;
     list-style: none;
 }
