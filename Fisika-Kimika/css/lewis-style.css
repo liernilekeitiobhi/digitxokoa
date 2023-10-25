@@ -1,0 +1,85 @@
+.titulua {
+    text-align: center;
+}
+
+.row{
+    display: inline-flex;
+    align-items: center;
+    text-align: center;
+}
+
+.column-left{
+    width: 15%;
+}
+.column-right{
+    width: 85%;
+    float: right;
+        
+}
+
+.column-left button{
+    width: 200px;
+    height: 100px;
+    background-color: rgb(218, 193, 241);
+    border: none;
+    border-radius: 5%;
+}
+
+.column-left button:hover{
+    width: 200px;
+    height: 100px;
+    background-color: rgb(113, 113, 113);
+    cursor: pointer;
+}
+
+.taula-container{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.taula {
+    margin: auto;
+    
+}
+
+.taula-botoia{
+    width: 80px;
+    height: 80px;
+    background-color: rgb(207, 80, 80);
+    border: transparent;
+    font-size: 40px;
+}
+
+.taula-botoia:hover{
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border: 6px solid #000000
+}
+.taula input{
+    height: 250px;
+    margin-right: 10px;
+    text-align: center;
+    font-size: 30px;
+    width: 250px;
+    border-radius: 50%;
+}
+
+.taula button{
+    height: 80px;
+    width: 80px;
+    background-color: rgb(241, 241, 241);
+    border-radius: 50%;
+    border: none;
+}
+
+.taula button:hover{
+    height: 80px;
+    width: 80px;
+    background-color: rgb(80, 80, 80);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+

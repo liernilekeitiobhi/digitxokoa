@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Konfigurazio elektronikoa</title>
+    <link rel="stylesheet" href="../css/lewis-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="titulua">
+        <h1>LEWISEN EGITURA</h1>
+    </div>
+    <div class="row">
+        <div class="column-left">
+            <button onclick=ezkutatuErakutsi()>Erabiltzen ari ez garen elektroiak erakutsi/ezkutatu</button>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <button onclick=location.reload() style="background-color: brown;">Berriro hasi</button>
+        </div>
+        <div class="column-right">
+            <div class="taula-container">
+                <table class="taula">
+                    <tr>
+                        <td id="1atomoa">
+                            <table class="taula">
+                                <tr>
+                                    <td> </td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="11" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="12" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="13" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="112" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="111" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="110" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><input id="1" type="text"></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="14" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="15" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="16" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="19" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="18" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="17" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td id="2atomoa">
+                            <table class="taula">
+                                <tr>
+                                    <td> </td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="21" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="22" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="23" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="212" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="211" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="210" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><input id="2" type="text"></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="24" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="25" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="26" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="29" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="28" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="27" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td id="3atomoa">
+                            <table class="taula">
+                                <tr>
+                                    <td> </td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="31" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="32" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="33" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="312" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="311" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="310" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><input id="3" type="text"></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="34" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="35" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="36" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="39" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="38" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="37" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="4atomoa">
+                            <table class="taula">
+                                <tr>
+                                    <td> </td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="41" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="42" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="43" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="412" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="411" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="410" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><input id="4" type="text"></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="44" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="45" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="46" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="49" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="48" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="47" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td id="5atomoa">
+                            <table class="taula">
+                                <tr>
+                                    <td> </td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="51" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="52" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="53" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="512" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="511" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="510" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><input id="5" type="text"></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="54" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="55" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="56" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="59" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="58" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="57" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td id="6atomoa">
+                            <table class="taula">
+                                <tr>
+                                    <td> </td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="61" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="62" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="63" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td> </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="612" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="611" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="610" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td><input id="6" type="text"></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="64" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="65" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button id="66" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <table class="taula">
+                                            <tr>
+                                                <td><button id="69" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="68" onclick=ebaluatu(id)></button></td>
+                                                <td><button id="67" onclick=ebaluatu(id)></button></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!--<tr>
+                        <td>7</td>
+                        <td>8</td>
+                        <td>9</td>
+                    </tr>
+                    -->
+                </table>   
+        
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <script type="text/javascript" src="../js/lewis.js"></script>
+</body>
+</html>
