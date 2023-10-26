@@ -66,18 +66,40 @@
     border-radius: 50%;
 }
 
-.taula button{
+.borobil{
     height: 80px;
     width: 80px;
-    background-color: rgb(241, 241, 241);
+    background-color: rgb(255, 255, 255);
     border-radius: 50%;
     border: none;
+    color: rgb(241, 241, 241);
+    font-size: 70px;
 }
 
-.taula button:hover{
+.borobil:hover{
     height: 80px;
     width: 80px;
-    background-color: rgb(80, 80, 80);
+    color: rgb(80, 80, 80);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.gurutze{
+    height: 80px;
+    width: 80px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    border: none;
+    color: rgb(241, 241, 241);
+    font-size: 70px;
+    
+}
+
+.gurutze:hover{
+    height: 80px;
+    width: 80px;
+    color: rgb(80, 80, 80);
     border-radius: 50%;
     border: none;
     cursor: pointer;

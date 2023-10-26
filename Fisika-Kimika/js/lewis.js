@@ -63,80 +63,162 @@ function marraztu(){
     for (const elektroi in elektroiakBertikalak) {
         e = elektroiakBertikalak[elektroi]
         b = document.getElementById(elektroi)
-        console.log(`${elektroi}: ${elektroiakBertikalak[elektroi]}`);
-        if(e[0]!="t"){
-            if (e[0]=="g" && e[1]=="b"){
-                b.style.borderRadius="50%"
-                b.style.width="80px"
-                b.style.height="80px"
-                b.style.backgroundColor="rgb(241, 241, 241)"
-                b.style.marginLeft="0"
-                b.style.marginRight="0"
-                b.style.display="block"
-                console.log("bai")
+        if (elektroi.substring(0,1)=="2"||elektroi.substring(0,1)=="4"||elektroi.substring(0,1)=="6"){            
+            if(e[0]!="t"){
+                if (e[0]=="g" && e[1]=="b"){
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                    b.style.display="block"
+                    b.style.color="rgb(241, 241, 241)"
+                    b.innerHTML='<i class="fa fa-circle"></i>'
+                }
+                if (e[0]=="b" && e[1]=="b") {
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.color="black"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                }
+                else if (e[0]=="b" && e[1]=="m") {
+                    b.style.borderRadius="0%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0px"
+                    b.style.marginRight="0px"
+                    b.innerHTML='|'
+                }    
             }
-            if (e[0]=="b" && e[1]=="b") {
-                b.style.borderRadius="50%"
-                b.style.width="80px"
-                b.style.height="80px"
-                b.style.backgroundColor="black"
-                b.style.marginLeft="0"
-                b.style.marginRight="0"
-                console.log("bai")
+            else{
+                b.style.backgroundColor="white"
+                b.innerHTML=''
             }
-            else if (e[0]=="b" && e[1]=="m") {
-                b.style.borderRadius="0%"
-                b.style.width="10px"
-                b.style.height="80px"
-                b.style.backgroundColor="black"
-                b.style.marginLeft="35px"
-                b.style.marginRight="35px"
-                console.log("bai")
-            }
-
         }
         else{
-            b.style.backgroundColor="white"
+            if(e[0]!="t"){
+                if (e[0]=="g" && e[1]=="b"){
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                    b.style.display="block"
+                    b.style.color="rgb(241, 241, 241)"
+                    b.innerHTML='<i class="fa fa-remove"></i>'
+                }
+                if (e[0]=="b" && e[1]=="b") {
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.color="black"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                }
+                else if (e[0]=="b" && e[1]=="m") {
+                    b.style.borderRadius="0%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0px"
+                    b.style.marginRight="0px"
+                    b.innerHTML='|'
+                }    
+            }
+            else{
+                b.style.backgroundColor="white"
+                b.innerHTML=''
+            }
+            
         }
     }
     for (const elektroi in elektroiakHorizontalak) {
         e = elektroiakHorizontalak[elektroi]
         b = document.getElementById(elektroi)
-        console.log(`${elektroi}: ${elektroiakHorizontalak[elektroi]}`);
-        if(e[0]!="t"){
-            if (e[0]=="g" && e[1]=="b"){
-                b.style.borderRadius="50%"
-                b.style.width="80px"
-                b.style.height="80px"
-                b.style.backgroundColor="rgb(241, 241, 241)"
-                b.style.marginTop="0"
-                b.style.marginBottom="0"
-                b.style.display="block"
-                console.log("bai")
+        if (elektroi.substring(0,1)=="2"||elektroi.substring(0,1)=="4"||elektroi.substring(0,1)=="6"){            
+            if(e[0]!="t"){
+                if (e[0]=="g" && e[1]=="b"){
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                    b.style.display="block"
+                    b.style.color="rgb(241, 241, 241)"
+                    b.innerHTML='<i class="fa fa-circle"></i>'
+                }
+                if (e[0]=="b" && e[1]=="b") {
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.color="black"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                }
+                else if (e[0]=="b" && e[1]=="m") {
+                    b.style.borderRadius="0%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0px"
+                    b.style.marginRight="0px"
+                    b.innerHTML='—'
+                }    
             }
-            if (e[0]=="b" && e[1]=="b") {
-                b.style.borderRadius="50%"
-                b.style.width="80px"
-                b.style.height="80px"
-                b.style.backgroundColor="black"
-                b.style.marginTop="0"
-                b.style.marginBottom="0"
-                console.log("bai")
-            }
-            else if (e[0]=="b" && e[1]=="m") {
-                b.style.borderRadius="0%"
-                b.style.width="80px"
-                b.style.height="10px"
-                b.style.marginTop="35px"
-                b.style.marginBottom="35px"
-                b.style.backgroundColor="black"
-                console.log("bai")
+            else{
+                b.style.backgroundColor="white"
+                b.innerHTML=''
             }
         }
         else{
-            b.style.backgroundColor="white"
+            if(e[0]!="t"){
+                if (e[0]=="g" && e[1]=="b"){
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                    b.style.display="block"
+                    b.style.color="rgb(241, 241, 241)"
+                    b.innerHTML='<i class="fa fa-remove"></i>'
+                }
+                if (e[0]=="b" && e[1]=="b") {
+                    b.style.borderRadius="50%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.color="black"
+                    b.style.marginLeft="0"
+                    b.style.marginRight="0"
+                }
+                else if (e[0]=="b" && e[1]=="m") {
+                    b.style.borderRadius="0%"
+                    b.style.width="80px"
+                    b.style.height="80px"
+                    b.style.backgroundColor="white"
+                    b.style.marginLeft="0px"
+                    b.style.marginRight="0px"
+                    b.innerHTML='—'
+                }    
+            }
+            else{
+                b.style.backgroundColor="white"
+                b.innerHTML=''
+            }
+            
         }
     }
+        
     
 }
     
