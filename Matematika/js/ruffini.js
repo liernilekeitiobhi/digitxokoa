@@ -1,3 +1,5 @@
+let i=2
+
 function add(){
     row1 = document.getElementById("lerroa1")
     row2 = document.getElementById("lerroa2")
