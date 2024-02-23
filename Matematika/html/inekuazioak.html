@@ -5,6 +5,7 @@
     <title>Inekuazioak ebatziz</title>
     <link rel="stylesheet" href="../css/inekuazioak-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
 
 </head>
 <body>
@@ -25,15 +26,19 @@
                 </ul>            
             </form>
         </div>
-        <div class="column">
+        <div class="column" id="zuzenen-irudia">
             <canvas id="myCanvas" width="600px" height="600px">Your browser does not support the HTML5 canvas tag.</canvas><br>
             <div><ul id="soluzioa"></ul></div>    
         </div>
         
     </div>
-    <div class="titulua">
+    <div class="titulua" style="display: inline-flex;margin-left: 15pc;">
         <div class="zakarrontzia">
             <button type="button" onclick=window.location.reload()><i class="fa fa-trash"></i> GARBITU</button>
+
+        </div>
+        <div class="zakarrontzia">
+            <button type="button" onclick=kopiatu()><i class="fa fa-copy"></i> KOPIATU</button>
 
         </div>
     </div>

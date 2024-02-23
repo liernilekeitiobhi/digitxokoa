@@ -1,0 +1,57 @@
+button {
+    width: 200px;
+    height: 60px;
+    background-color: rgb(31, 27, 21);
+    border: none;
+    color: rgb(169, 169, 198);
+    cursor: pointer;
+    position: relative;
+}
+
+
+button::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(255, 119, 0, 0.321);
+    
+}
+
+button:hover::before{
+    height: 100%; 
+    clip-path:circle(18%);
+    animation: rot 1s linear both infinite;    
+} 
+
+
+@keyframes rot{
+    from {
+      clip-path: polygon(50% 50%, 0% 0%, 0% 0%);
+    }
+    25% {
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%);
+    }
+    25.000001% {
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 0%);
+    }
+    50%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%);
+    }
+    50.000001%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 100% 100%);
+    }
+    75%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+    75.000001%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%);
+    }
+    to{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+    }
+  }
+
+/*https://codepen.io/liuxiaole-the-sasster/pen/Zdrmxg*/
