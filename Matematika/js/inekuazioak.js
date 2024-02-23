@@ -10,7 +10,8 @@ let puntuak = {1:{1:null,2:null},2:{1:null,2:null}}
 let ekuazioKopurua = 0
 
 // Ekuazioa gehituko du ezker menura eta eskuinean marra hutsa marraztu
-function ekuazioaGehitu() {    
+function ekuazioaGehitu() { 
+    console.log('a')   
     div = document.getElementById("ekuazioak")
     ekuazioKopurua += 1
     div.innerHTML  += `
@@ -431,6 +432,16 @@ function kopiatu(){
     })
     
 }
+
+a = document.getElementById('ekuazioaBtn')
+
+$(a).mouseenter(async function() {
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    await delay(800);
+    $(this).click();
+}); 
+
+
 
 
 
