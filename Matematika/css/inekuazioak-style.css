@@ -148,7 +148,7 @@
     border-style: none;
 }
 
-#gehitu1{
+.gbtn{
     height: 60px;
     width: 100px;
     border-radius: 5%;    
@@ -156,7 +156,7 @@
     background-color: rgb(225, 176, 15);      
 }
 
-#gehitu1:hover{
+.gbtn:hover{
     background-color: rgb(158, 63, 12);
     cursor: pointer;
     color: white;

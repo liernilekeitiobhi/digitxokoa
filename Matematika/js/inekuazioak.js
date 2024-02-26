@@ -23,7 +23,7 @@ function ekuazioaGehitu() {
                         <li><input id="${ekuazioKopurua}1" type="text"></li>
                         <li><button id="b${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},1,"b")></button></li>
                         <li><button id="t${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},1,"t")></button></li>
-                        <li><button id="gehitu${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=datuakGehitu(${ekuazioKopurua},1)>+</button></li>
+                        <li><button class="gbtn" id="gehitu${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=datuakGehitu(${ekuazioKopurua},1)>+</button></li>
                     </ul>
                 </td>
             </tr>
@@ -33,7 +33,7 @@ function ekuazioaGehitu() {
                     <li><input id="${ekuazioKopurua}2" type="text"></li>
                     <li><button id="b${ekuazioKopurua}2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},2,"b")></button></li>
                     <li><button id="t${ekuazioKopurua}2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},2,"t")></button></li>
-                    <li><button id="gehitu1${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=datuakGehitu(${ekuazioKopurua},2)>+</button></li>
+                    <li><button class="gbtn" id="gehitu1${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=datuakGehitu(${ekuazioKopurua},2)>+</button></li>
                 </ul>
                 </td>
             </tr>
