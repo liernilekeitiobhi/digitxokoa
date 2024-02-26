@@ -16,10 +16,10 @@
                 <div class="btn-div">
                     <ul>
                         <li>
-                            <button id="ekuazioaBtn" type="button" onclick=ekuazioaGehitu()>EKUAZIOA GEHITU</button>
+                            <button id="ekuazioaBtn" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=ekuazioaGehitu()>EKUAZIOA GEHITU</button>
                         </li>
                         <li>
-                            <button id="soluzioaBtn" type="button" onclick=soluzioaGehitu()>SOLUZIOA GEHITU</button>
+                            <button id="soluzioaBtn" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=soluzioaGehitu()>SOLUZIOA GEHITU</button>
                         </li>
                     </ul>
                 </div>
@@ -35,11 +35,11 @@
     </div>
     <div class="titulua" style="display: inline-flex;margin-left: 15pc;">
         <div class="zakarrontzia">
-            <button type="button" onclick=window.location.reload()><i class="fa fa-trash"></i> GARBITU</button>
+            <button type="button" id="garbitu"  onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=window.location.reload()><i class="fa fa-trash"></i> GARBITU</button>
 
         </div>
         <div class="zakarrontzia">
-            <button type="button" onclick=kopiatu()><i class="fa fa-copy"></i> KOPIATU</button>
+            <button type="button" id="kopiatu" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=kopiatu()><i class="fa fa-copy"></i> KOPIATU</button>
 
         </div>
     </div>

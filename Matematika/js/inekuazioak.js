@@ -21,9 +21,9 @@ function ekuazioaGehitu() {
                 <td>
                     <ul>
                         <li><input id="${ekuazioKopurua}1" type="text"></li>
-                        <li><button id="b${ekuazioKopurua}1" type="button" onclick=txuriBeltz(${ekuazioKopurua},1,"b")></button></li>
-                        <li><button id="t${ekuazioKopurua}1" type="button" onclick=txuriBeltz(${ekuazioKopurua},1,"t")></button></li>
-                        <li><button id="gehitu" type="button" onclick=datuakGehitu(${ekuazioKopurua},1)>+</button></li>
+                        <li><button id="b${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},1,"b")></button></li>
+                        <li><button id="t${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},1,"t")></button></li>
+                        <li><button id="gehitu${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=datuakGehitu(${ekuazioKopurua},1)>+</button></li>
                     </ul>
                 </td>
             </tr>
@@ -31,16 +31,16 @@ function ekuazioaGehitu() {
                 <td>
                     <ul>
                     <li><input id="${ekuazioKopurua}2" type="text"></li>
-                    <li><button id="b${ekuazioKopurua}2" type="button" onclick=txuriBeltz(${ekuazioKopurua},2,"b")></button></li>
-                    <li><button id="t${ekuazioKopurua}2" type="button" onclick=txuriBeltz(${ekuazioKopurua},2,"t")></button></li>
-                    <li><button id="gehitu" type="button" onclick=datuakGehitu(${ekuazioKopurua},2)>+</button></li>
+                    <li><button id="b${ekuazioKopurua}2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},2,"b")></button></li>
+                    <li><button id="t${ekuazioKopurua}2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=txuriBeltz(${ekuazioKopurua},2,"t")></button></li>
+                    <li><button id="gehitu1${ekuazioKopurua}1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=datuakGehitu(${ekuazioKopurua},2)>+</button></li>
                 </ul>
                 </td>
             </tr>
             <tr>
                 <td style="border-bottom: solid;">
                     <ul id=tarteak${ekuazioKopurua}>
-                        <li><button id="${ekuazioKopurua}-1" type="button" onclick=tarteEgoeraAldatu(${ekuazioKopurua},1)>1.tartea</button></li>
+                        <li><button id="${ekuazioKopurua}-1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(${ekuazioKopurua},1)>1.tartea</button></li>
                     </ul>
                 </td>
             </tr>
@@ -119,7 +119,7 @@ function tarteaEguneratu(ekuazio) {
             if (pKop == 0){
                 tarteDiv.innerHTML = `
                 <ul id=tarteak1>
-                    <li><button style="width:540px;" id="1-1" type="button" onclick=tarteEgoeraAldatu(1,1)>1.tartea</button></li>
+                    <li><button style="width:540px;" id="1-1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(1,1)>1.tartea</button></li>
                 </ul>`
                 tarteak["1"] = [-10,10,0]
                 
@@ -127,8 +127,8 @@ function tarteaEguneratu(ekuazio) {
             if (pKop == 1){
                 tarteDiv.innerHTML = `
                 <ul id=tarteak1>
-                    <li><button style="width:270px;" id="1-1" type="button" onclick=tarteEgoeraAldatu(1,1)>1.tartea</button></li>
-                    <li><button style="width:270px;" id="1-2" type="button" onclick=tarteEgoeraAldatu(1,2)>2.tartea</button></li>
+                    <li><button style="width:270px;" id="1-1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(1,1)>1.tartea</button></li>
+                    <li><button style="width:270px;" id="1-2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)"  onclick=tarteEgoeraAldatu(1,2)>2.tartea</button></li>
                 </ul>`
                 tarteak["1"] = [[-10,p[0],0],[p[0],10,0]]
                 
@@ -136,9 +136,9 @@ function tarteaEguneratu(ekuazio) {
             if (pKop == 2){
                 tarteDiv.innerHTML = `
                 <ul id=tarteak1>
-                    <li><button style="width:180px;" id="1-1" type="button" onclick=tarteEgoeraAldatu(1,1)>1.tartea</button></li>
-                    <li><button style="width:180px;" id="1-2" type="button" onclick=tarteEgoeraAldatu(1,2)>2.tartea</button></li>
-                    <li><button style="width:180px;" id="1-3" type="button" onclick=tarteEgoeraAldatu(1,3)>3.tartea</button></li>
+                    <li><button style="width:180px;" id="1-1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(1,1)>1.tartea</button></li>
+                    <li><button style="width:180px;" id="1-2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(1,2)>2.tartea</button></li>
+                    <li><button style="width:180px;" id="1-3" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(1,3)>3.tartea</button></li>
                 </ul>`
                 tarteak["1"] = [[-10,p[0],0],[p[0],p[1],0],[p[1],10,0]]
             }
@@ -163,24 +163,24 @@ function tarteaEguneratu(ekuazio) {
             if (pKop == 0){
                 tarteDiv.innerHTML = `
                 <ul id=tarteak2>
-                    <li><button style="width:540px;" id="2-1" type="button" onclick=tarteEgoeraAldatu(2,1)>1.tartea</button></li>
+                    <li><button style="width:540px;" id="2-1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)"  onclick=tarteEgoeraAldatu(2,1)>1.tartea</button></li>
                 </ul>`
                 tarteak["2"] = [-10,10,0]
             } 
             if (pKop == 1){
                 tarteDiv.innerHTML = `
                 <ul id=tarteak2>
-                    <li><button style="width:270px;" id="2-1" type="button" onclick=tarteEgoeraAldatu(2,1)>1.tartea</button></li>
-                    <li><button style="width:270px;" id="2-2" type="button" onclick=tarteEgoeraAldatu(2,2)>2.tartea</button></li>
+                    <li><button style="width:270px;" id="2-1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(2,1)>1.tartea</button></li>
+                    <li><button style="width:270px;" id="2-2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(2,2)>2.tartea</button></li>
                 </ul>`
                 tarteak["2"] = [[-10,p[0],0],[p[0],10,0]]
             }    
             if (pKop == 2){
                 tarteDiv.innerHTML = `
                 <ul id=tarteak2>
-                    <li><button style="width:180px;" id="2-1" type="button" onclick=tarteEgoeraAldatu(2,1)>1.tartea</button></li>
-                    <li><button style="width:180px;" id="2-2" type="button" onclick=tarteEgoeraAldatu(2,2)>2.tartea</button></li>
-                    <li><button style="width:180px;" id="2-3" type="button" onclick=tarteEgoeraAldatu(2,3)>3.tartea</button></li>
+                    <li><button style="width:180px;" id="2-1" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(2,1)>1.tartea</button></li>
+                    <li><button style="width:180px;" id="2-2" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(2,2)>2.tartea</button></li>
+                    <li><button style="width:180px;" id="2-3" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteEgoeraAldatu(2,3)>3.tartea</button></li>
                 </ul>`
                 tarteak["2"] = [[-10,p[0],0],[p[0],p[1],0],[p[1],10,0]]
             }
@@ -383,7 +383,7 @@ function tarteakSortu(){
 
     div.innerHTML = ``
     for (i=0; i<tarteakSoluzioa.length; i++){
-        div.innerHTML += `<li><button style="width:${w}px;" id="${i+1}" type="button" onclick=tarteakSoluzioaEguneratu(${i+1})>${i+1}.tartea</button></li>
+        div.innerHTML += `<li><button style="width:${w}px;" id="${i+1}" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)" onclick=tarteakSoluzioaEguneratu(${i+1})>${i+1}.tartea</button></li>
         `
     }
     console.log(tarteakSoluzioa)
@@ -429,17 +429,25 @@ function kopiatu(){
 				alert("Funtzioaren grafika kopiatu da!");
 			});
 		});
-    })
-    
+    })    
 }
 
-a = document.getElementById('ekuazioaBtn')
 
-$(a).mouseenter(async function() {
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-    await delay(800);
-    $(this).click();
-}); 
+
+var startTime, endTime;
+
+
+function handlerIn() {
+  startTime = new Date();
+}
+
+function klik(id) {
+  endTime = new Date();
+  var timeDiff = endTime - startTime; 
+  a = document.getElementById(id)
+  if (timeDiff>800){$(a).click()}
+}
+
 
 
 
