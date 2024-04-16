@@ -43,7 +43,7 @@ function addPoints(id){
                 return false
             }            
         }
-        else if (id=='yAsint'){
+        /*else if (id=='yAsint'){
             y = document.getElementById(id).value
             if(y.length!=0){
                 points[id]=y
@@ -55,7 +55,7 @@ function addPoints(id){
                 alert('Asintota horizontala non den esan behar da!')
                 return false
             }                
-        }
+        }*/
         else{
             x = document.getElementById("x" + id).value
             y = document.getElementById("y" + id).value     
@@ -165,7 +165,7 @@ function addPoints(id){
  * Hori jakinda a bilatuko dugu.    
 */
 function draw(){ 
-    if (points['xAsint'] != null && points['yAsint'] != null){
+    if (points['xAsint'] != null /*&& points['yAsint'] != null*/){
         var xArray = [];
         var yArray = [];
         for (const property in points) {
