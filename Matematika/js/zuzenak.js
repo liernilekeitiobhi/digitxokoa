@@ -149,8 +149,8 @@ function draw(){
     var yArray = [];
     for (const property in points) {
         if (points[property] != null){
-            xArray.push(parseFloat(eval(points[property][0])))
-            yArray.push(parseFloat(eval(points[property][1])))
+            xArray.push(parseFloat(points[property][0]))
+            yArray.push(parseFloat(points[property][1]))
         }
     }
 
