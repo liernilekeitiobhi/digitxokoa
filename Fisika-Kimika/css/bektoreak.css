@@ -115,3 +115,103 @@ body {
     border-bottom: 12px solid rgb(82, 41, 41);
     transform: translate(-50%, -50%);
 }
+
+/*----------------- Button styles -------------------------- */
+
+form ul { 
+    list-style-type: none;
+    display: flex;
+    align-items: center; 
+
+}
+
+form ul li { 
+    display: inline-block;
+    margin: 10px;
+}
+
+.botoiak input{
+    height: 60px;
+    font-size: 50px;
+    width: 100px;
+    text-align: center;
+}
+
+.botoiak button{
+    padding: 30px 40px 30px 40px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #6a8494;
+    cursor: pointer;
+    border: 0px;
+}
+
+.botoiak button:hover{
+    padding: 30px 40px 30px 40px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #ab576c;
+}
+
+
+
+button {
+    width: 200px;
+    height: 100px;
+    background-color: rgb(31, 27, 21);
+    border: none;
+    color: rgb(169, 169, 198);
+    cursor: pointer;
+    position: relative;
+}
+
+
+button::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: rgba(255, 119, 0, 0.321);
+    
+}
+
+button:hover::before{
+    height: 100%; 
+    clip-path:circle(18%);
+    animation: rot 1s linear both infinite;    
+} 
+
+
+@keyframes rot{
+    from {
+      clip-path: polygon(50% 50%, 0% 0%, 0% 0%);
+    }
+    25% {
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%);
+    }
+    25.000001% {
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 0%);
+    }
+    50%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%);
+    }
+    50.000001%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 100% 100%);
+    }
+    75%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+    75.000001%{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%);
+    }
+    to{
+      clip-path: polygon(50% 50%, 0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+    }
+  }
+
+/*https://codepen.io/liuxiaole-the-sasster/pen/Zdrmxg*/
+
+
+

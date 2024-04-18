@@ -1,4 +1,4 @@
-const gridContainer = document.getElementById('grid');
+const gridContainer = document.getElementById('grafikoa');
     const numRows = 10; // Number of rows
     const numCols = 10; // Number of columns
     const circles = [];
@@ -11,11 +11,17 @@ const gridContainer = document.getElementById('grid');
             circle.id=row.toString()+col.toString()
             circle.dataset.row = row;
             circle.dataset.col = col;
+            circle.addEventListener("mouseenter", (e) => {
+                handlerIn()
+            });
+            circle.addEventListener("mouseleave", (e) => {
+                klik(circle.id)
+            });
             gridContainer.appendChild(circle);
             circles.push(circle);
         }
     }
-
+    /*onmouseenter="handlerIn()" onmouseleave="klik(id)"*/
     // Event listener for circles
     let selectedCircle = null;
     let vectors = [];

@@ -139,24 +139,23 @@ function draw(){
         y3 = yArray[2]
 
         /* Berez hiru puntu nahikoa dira zein erro funtzio den zehazteko 
-         * y = a^x+b motako ekuazioan a zein den ondorioztatzeko formula:
-         * a = Math.pow(y, 1/x) ; x!=0 bada
+         * y = log_a (x) motako ekuazioan a zein den ondorioztatzeko formula:
+         * a = Math.pow(x, 1/y) ; y!=0 bada
         */
-        if (x1!=0){
-            var a = Math.pow(y1, 1/x1) 
+        if (y1!=0){
+            var a = Math.pow(x1, 1/y1) 
         }
         else{
-            var a = Math.pow(y2, 1/x2)
+            var a = Math.pow(x2, 1/y2)
         }
         
 
         //Gainontzeko puntuak funtzio horretakoak diren konprobatu. Ez badira, ez da marraztuko.
         var existentzia = true
         for (i=0; i<xArray.length;i++){
-            console.log(a  + '^x')
-            if(xArray[i]!=0){
-                if (a!=Math.pow(yArray[i], 1/xArray[i])){
-                    console.log([yArray[i], xArray[i]])
+            if(yArray[i]!=0){
+                if (a!=Math.pow(xArray[i], 1/yArray[i])){
+                    console.log([xArray[i], yArray[i]])
                     existentzia = false
                     break
                 }
@@ -169,7 +168,7 @@ function draw(){
         }        
         else{
             //Funtzioa marrazteko plot funtzioak erabiltzen duen notaziora pasako ditugu koordenatuak
-            f = a  + '^x';
+            f = 'log'+a+'(x)';
             //funtzioa parameters aldagaian sartuko dugu eta marraztu
             parameters.data.push({fn: f, color: 'black', graphType: 'polyline'});            
             plot();

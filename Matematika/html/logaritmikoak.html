@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="../css/marraztu-style.css">
+    <title>Logaritmoak marrazten</title>
+    <link rel="icon" type="image/x-icon" href="../../logo.png">
+
+</head>
+<body>
+    
+    <div class="row">      
+
+        <div class="column center" style="background-color:#bbb;">
+          <h2 style="text-align: center;">Sartu funtzio horren puntu batzuen koordenatuak:</h2>
+          <form class="puntuak">
+            
+            <ul>
+                <li><label>1.puntua:</label></li>
+                <li><input type="text" id=x1></li>            
+                <li><input type="text" id=y1></li>             
+                <li><button id="1" type="button" onclick="addPoints('1')" onmouseenter="handlerIn()" onmouseleave="klik(id)">Gehitu</button></li> 
+            </ul>
+
+            <ul>
+                <li><label>2.puntua:</label></li>
+                <li><input type="text" id=x2></li>            
+                <li><input type="text" id=y2></li>            
+                <li><button id="2" type="button" onclick="addPoints('2')" onmouseenter="handlerIn()" onmouseleave="klik(id)">Gehitu</button></li> 
+            </ul>
+
+            <ul>
+                <li><label>3.puntua:</label></li>
+                <li><input type="text" id=x3></li>            
+                <li><input type="text" id=y3></li>            
+                <li><button id="3" type="button" onclick="addPoints('3')" onmouseenter="handlerIn()" onmouseleave="klik(id)">Gehitu</button></li> 
+            </ul>
+
+            <ul>
+                <li><label>4.puntua:</label></li>
+                <li><input type="text" id=x4></li>            
+                <li><input type="text" id=y4></li>            
+                <li><button id="4" type="button" onclick="addPoints('4')" onmouseenter="handlerIn()" onmouseleave="klik(id)">Gehitu</button></li> 
+            </ul>
+
+            <ul>
+                <li><label>5.puntua:</label></li>
+                <li><input type="text" id=x5></li>            
+                <li><input type="text" id=y5></li>            
+                <li><button id="5" type="button" onclick="addPoints('5')" onmouseenter="handlerIn()" onmouseleave="klik(id)">Gehitu</button></li> 
+            </ul>
+
+            <ul>
+                <li><label>6.puntua:</label></li>
+                <li><input type="text" id=x6></li>            
+                <li><input type="text" id=y6></li>            
+                <li><button id="6" type="button" onclick="addPoints('6')" onmouseenter="handlerIn()" onmouseleave="klik(id)">Gehitu</button></li> 
+            </ul>
+
+            <ul>
+                <li><label>7.puntua:</label></li>
+                <li><input type="text" id=x7></li>            
+                <li><input type="text" id=y7></li>            
+                <li><button id="7" type="button" onclick="addPoints('7')" onmouseenter="handlerIn()" onmouseleave="klik(id)">Gehitu</button></li> 
+            </ul>
+
+            <ul style="justify-content: space-around; padding-left: 0px;">
+                <li><button id="marraztu" type="button" onclick=draw() onmouseenter="handlerIn()" onmouseleave="klik(id)"><i class="fa fa-pencil" style="font-size: 40px;"></i> Marraztu</button></li> 
+                <li><button id="kopiatuu" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)"  onclick=kopiatu()><i class="fa fa-copy" style="font-size: 40px;"></i> Kopiatu</button></li>
+            </ul>
+            
+        </form>
+        </div>
+
+        <div id="grafikoa" class="column right" style="background-color:rgb(255, 255, 255);">
+            <section id="plot">
+                <div id="myFunction"></div>
+            </section>
+        </div>
+    </div>
+
+<script type="text/javascript" src="../js/logaritmoak.js"></script>
+<script type="text/javascript" src="../js/begirada-klik.js"></script>
+<script type="text/javascript" src="../js/kopiatu.js"></script>
+    
+</body>
+
+</html>
+

@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
 <script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <link rel="stylesheet" href="../css/bektoreak.css">
@@ -22,7 +23,7 @@
 <body>
 <div class="row">
     <div class="column left">
-        <form id="funtzio-mota">
+        <form id="funtzio-mota" class="botoiak">
             <div>
                 <input id="toggle1" type="checkbox">
                 <label for="toggle1">Zuzena</label>                
@@ -32,15 +33,24 @@
                 <input id="toggle2" type="checkbox">
                 <label for="toggle2">Bektorea</label>
             </div> 
+
+            <ul style="justify-content: space-around; padding-left: 0px;">
+                <li><button id="desegin" type="button" onclick=desegin() onmouseenter="handlerIn()" onmouseleave="klik(id)"><i class="fa fa-refresh" style="font-size: 40px;"></i> Desegin</button></li> 
+                <li><button id="kopiatuu" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)"  onclick=kopiatu()><i class="fa fa-copy" style="font-size: 40px;"></i> Kopiatu</button></li>
+            </ul>
         </form> 
+
+        
     </div>
     <div class="column center">
-        <div class="grid-container" id="grid">
+        <div class="grid-container" id="grafikoa">
             <!-- This div will be populated dynamically -->
         </div>
     </div>
 </div>
 
 <script type="text/javascript" src="../js/bektoreak.js"></script>
+<script type="text/javascript" src="../js/begirada-klik.js"></script>
+<script type="text/javascript" src="../js/kopiatu.js"></script>
 </body>
 </html>
