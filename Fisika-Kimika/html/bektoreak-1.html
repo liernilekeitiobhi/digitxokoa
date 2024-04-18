@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bektoreak marrazten</title>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+.left {
+    background-color:#ffffff;
+}
+
+.center {
+    background-color:#ffffff;
+}
+
+#funtzio-mota {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#funtzio-mota div {
+    margin: 10px 0;
+    position: relative;
+}
+
+#funtzio-mota input {
+    position: absolute;
+    left: -9999px;
+}
+
+#funtzio-mota label {
+    display: block;
+    height: 70px;
+    width: 150px;
+    position: relative;
+    padding: 25px 30px 15px 62px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #6a8494;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+}
+
+#funtzio-mota label::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 32px;
+    bottom: 32px;
+    left: 10px;
+    width: 32px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    transition: background-color .2s;
+}
+
+#funtzio-mota label:hover, input:focus + label {
+    box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+}
+
+#funtzio-mota input:checked + label {
+    background-color: #ab576c;
+}
+
+#funtzio-mota input:checked + label::before {
+    background-color: #fff;
+}
+
+/*------------------------ Grid Styles----------------------- */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(10, 50px); /* 10x10 grid */
+    grid-template-rows: repeat(10, 50px); /* 10x10 grid */
+    grid-gap: 5vh; /* Gap between circles */
+    max-width: 80vw;
+    margin: auto;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    background-color: rgb(223, 223, 223);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.vector {
+    position: absolute;
+    background-color: rgb(82, 41, 41);
+    pointer-events: none;
+}
+
+.line {
+    position: absolute;
+    background-color: rgb(82, 41, 41);
+    pointer-events: none;
+    width: 2px;
+}
+
+/*------------------ Arrowhead Styles---------------------- */
+.arrowhead {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 12px solid rgb(82, 41, 41);
+    transform: translate(-50%, -50%);
+}
+</style>
+</head>
+<body>
+<div class="row">
+    <div class="column left">
+        <form id="funtzio-mota">
+            <div>
+                <input id="toggle1" type="checkbox">
+                <label for="toggle1">Zuzena</label>                
+            </div>
+            
+            <div>
+                <input id="toggle2" type="checkbox">
+                <label for="toggle2">Bektorea</label>
+            </div> 
+            <!-- New button for undoing the last vector -->
+            <div>
+                <button id="undoButton">Deshacer último vector</button>
+            </div>
+        </form> 
+    </div>
+    <div class="column center">
+        <div class="grid-container" id="grid">
+            <!-- This div will be populated dynamically -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const gridContainer = document.getElementById('grid');
+    const numRows = 10; // Number of rows
+    const numCols = 10; // Number of columns
+    const circles = [];
+    let vectors = [];
+
+    // Dynamically generate circles and add them to the grid
+    for (let row = 1; row <= numRows; row++) {
+        for (let col = 1; col <= numCols; col++) {
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+            circle.id = row.toString() + col.toString();
+            circle.dataset.row = row;
+            circle.dataset.col = col;
+            gridContainer.appendChild(circle);
+            circles.push(circle);
+        }
+    }
+
+    // Event listener for circles
+    let selectedCircle = null;
+
+    circles.forEach(circle => {
+        circle.addEventListener('click', () => {
+            if (!selectedCircle) {
+                selectedCircle = circle;
+            } else {
+                if (document.getElementById("toggle1").checked) {
+                    drawLine(selectedCircle, circle);
+                }
+                if (document.getElementById("toggle2").checked) {
+                    drawVector(selectedCircle, circle);
+                }
+
+                selectedCircle = null;
+            }
+        });
+    });
+
+    // Function to draw vector
+    function drawVector(startCircle, endCircle) {
+        const startX = startCircle.offsetLeft + startCircle.offsetWidth / 2;
+        const startY = startCircle.offsetTop + startCircle.offsetHeight / 2;
+        const endX = endCircle.offsetLeft + endCircle.offsetWidth / 2;
+        const endY = endCircle.offsetTop + endCircle.offsetHeight / 2;
+
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        const angle = Math.atan2(deltaY, deltaX);
+
+        // Create vector element
+        const vector = document.createElement('div');
+        vector.classList.add('vector');
+        vector.style.width = length + 'px';
+        vector.style.height = '2px'; // Adjust thickness of the vector
+        vector.style.left = startX + 'px';
+        vector.style.top = startY + 'px';
+        vector.style.transformOrigin = 'left center';
+        vector.style.transform = `rotate(${angle}rad)`;
+        gridContainer.appendChild(vector); // Append to grid container
+
+        // Create arrowhead
+        const arrowhead = document.createElement('div');
+        arrowhead.classList.add('arrowhead');
+        arrowhead.style.left = endX + 'px'; // Position arrowhead at the end of the line
+        arrowhead.style.top = endY + 'px';
+        arrowhead.style.transform = `translate(-50%, -50%) rotate(${angle + Math.PI / 2}rad)`; // Rotate arrowhead in the correct direction
+        gridContainer.appendChild(arrowhead); // Append arrowhead to grid container
+
+        vectors.push({ type: 'vector', vector, arrowhead });
+    }
+
+    // Function to draw line
+    function drawLine(startCircle, endCircle) {
+        const startX = startCircle.offsetLeft + startCircle.offsetWidth / 2;
+        const startY = startCircle.offsetTop + startCircle.offsetHeight / 2;
+        const endX = endCircle.offsetLeft + endCircle.offsetWidth / 2;
+        const endY = endCircle.offsetTop + endCircle.offsetHeight / 2;
+
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+        const length = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+        const angle = Math.atan2(deltaY, deltaX);
+
+        // Create line element
+        const line = document.createElement('div');
+        line.classList.add('line');
+        line.style.width = length + 'px';
+        line.style.height = '2px'; // Adjust thickness of the line
+        line.style.left = startX + 'px';
+        line.style.top = startY + 'px';
+        line.style.transformOrigin = 'left center';
+        line.style.transform = `rotate(${angle}rad)`;
+        gridContainer.appendChild(line); // Append to grid container
+
+        vectors.push({ type: 'line', line });
+    }
+
+    // Function to undo the last drawn vector or line
+    const undoButton = document.getElementById('undoButton');
+    undoButton.addEventListener('click', undoLastVector);
+
+    function undoLastVector() {
+        const lastVector = vectors.pop();
+        if (lastVector) {
+            if (lastVector.type === 'vector') {
+                // Remove the vector elements
+                lastVector.vector.remove();
+                lastVector.arrowhead.remove();
+            } else if (lastVector.type === 'line') {
+                // Remove the line element
+                lastVector.line.remove();
+            }
+        }
+    }
+</script>
+</body>
+</html>

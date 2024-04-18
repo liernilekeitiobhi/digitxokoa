@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<link rel="stylesheet" href="../css/bektoreak.css">
+<title>Bektoreak marrazten</title>
+<link rel="icon" type="image/x-icon" href="../../logo.png">
+
+
+</head>
+<body>
+<div class="row">
+    <div class="column left">
+        <form id="funtzio-mota">
+            <div>
+                <input id="toggle1" type="checkbox">
+                <label for="toggle1">Zuzena</label>                
+            </div>
+            
+            <div>
+                <input id="toggle2" type="checkbox">
+                <label for="toggle2">Bektorea</label>
+            </div> 
+        </form> 
+    </div>
+    <div class="column center">
+        <div class="grid-container" id="grid">
+            <!-- This div will be populated dynamically -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/bektoreak.js"></script>
+</body>
+</html>
