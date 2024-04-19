@@ -81,8 +81,8 @@ function addPoints(id){
             var pointsArray = []
             for (const property in points) {
                 if (points[property]!=null){
-                    pointsArray.push(parseFloat(points[property][0]))
-                    pointsArray.push(parseFloat(points[property][1]))
+                    pointsArray.push(eval(points[property][0]))
+                    pointsArray.push(eval(points[property][1]))
                 }
             }
             
@@ -115,8 +115,8 @@ function addPoints(id){
         var pointsArray = []
         for (const property in points) {
             if (points[property] != null){
-                pointsArray.push(parseFloat(points[property][0]))
-                pointsArray.push(parseFloat(points[property][1]))
+                pointsArray.push(eval(points[property][0]))
+                pointsArray.push(eval(points[property][1]))
             }
         }
         var xy = new Float32Array(pointsArray);
@@ -149,8 +149,8 @@ function draw(){
     var yArray = [];
     for (const property in points) {
         if (points[property] != null){
-            xArray.push(parseFloat(points[property][0]))
-            yArray.push(parseFloat(points[property][1]))
+            xArray.push(eval(points[property][0]))
+            yArray.push(eval(points[property][1]))
         }
     }
 
@@ -182,8 +182,8 @@ function draw(){
                         var pointsArray = []
                         for (const property in points) {
                             if (points[property] != null){
-                                pointsArray.push(parseFloat(points[property][0]))
-                                pointsArray.push(parseFloat(points[property][1]))
+                                pointsArray.push(eval(points[property][0]))
+                                pointsArray.push(eval(points[property][1]))
                             }
                         }
                         var xy = new Float32Array(pointsArray);
@@ -211,8 +211,8 @@ function draw(){
                         var pointsArray = []
                         for (const property in points) {
                             if (points[property] != null){
-                                pointsArray.push(parseFloat(points[property][0]))
-                                pointsArray.push(parseFloat(points[property][1]))
+                                pointsArray.push(eval(points[property][0]))
+                                pointsArray.push(eval(points[property][1]))
                             }
                         }
                         var xy = new Float32Array(pointsArray);
@@ -233,18 +233,18 @@ function draw(){
         else if (selected == 2){ //zuzen zeiharra
             
             //malda beti berdina dela bermatuko dugu. Ez balitz ezin da zuzen hori marraztu.
-            var zatiketa = parseFloat((yArray[0]-yArray[1]) / (xArray[0]-xArray[1]) )
+            var zatiketa = eval((yArray[0]-yArray[1]) / (xArray[0]-xArray[1]) )
             var marraztu_daiteke = true
     
             for (i=1; i<xArray.length-1; i++){ // banan banan joango gara konprobatzen malda mantentzen dela
-                if (parseFloat((yArray[i]-yArray[i+1]) / (xArray[i]-xArray[i+1])) != zatiketa){
+                if (eval((yArray[i]-yArray[i+1]) / (xArray[i]-xArray[i+1])) != zatiketa){
                     alert("Ezin da zuzen hori marraztu")
                     //Ezin bada zuzena marraztu berriro ere puntu originalak marraztuko ditugu.
                     var pointsArray = []
                     for (const property in points) {
                         if (points[property] != null){
-                            pointsArray.push(parseFloat(points[property][0]))
-                            pointsArray.push(parseFloat(points[property][1]))
+                            pointsArray.push(eval(points[property][0]))
+                            pointsArray.push(eval(points[property][1]))
                         }
                     }
                     var xy = new Float32Array(pointsArray);
