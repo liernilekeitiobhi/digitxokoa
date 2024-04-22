@@ -1,10 +1,10 @@
-let gridContainer = document.getElementById('grafikoa');
+const gridContainer = document.getElementById('grafikoa');
     const numRows = 10; // Number of rows
     const numCols = 10; // Number of columns
     const circles = [];
 
     // Dynamically generate circles and add them to the grid
-    for (var row = 1; row <= numRows; row++) {
+    for (let row = 1; row <= numRows; row++) {
         for (let col = 1; col <= numCols; col++) {
             const circle = document.createElement('div');
             circle.classList.add('circle');
@@ -27,44 +27,24 @@ let gridContainer = document.getElementById('grafikoa');
     let vectors = [];
 
     circles.forEach(circle => {
-        circle.addEventListener('click', () => {            
+        circle.addEventListener('click', () => {
+            
             if (!selectedCircle) {
                 selectedCircle = circle;
                 selectedCircle.style.backgroundColor = "red"
             } else {
+                
                 if (document.getElementById("toggle1").checked){
-                    console.log(selectedCircle.id)
-                    console.log(circle.id)
-                    vectors.push(["l", selectedCircle.id, circle.id]) //l because is a line
-                    
+                    drawLine(selectedCircle, circle);
                 }
                 if (document.getElementById("toggle2").checked){
-                    console.log(selectedCircle.id)
-                    console.log(circle.id)
-                    vectors.push(["v", selectedCircle.id, circle.id]) //v because is a vector
-                }      
-                selectedCircle.style.backgroundColor = " rgb(223, 223, 223)"
+                    drawVector(selectedCircle, circle);                    
+                }
+                selectedCircle.style.backgroundColor = "rgb(223, 223, 223)"
                 selectedCircle = null;
-                clearGrid()
-                draw()
             }
         });
     });
-
-    // Function to draw all the vectors and lines of the array "vectors"
-    function draw() {
-        vectors.forEach(vector => {
-            const type = vector[0];
-            const startCircle = document.getElementById(vector[1]);
-            const endCircle = document.getElementById(vector[2]);
-            
-            if (type === "v") {
-                drawVector(startCircle, endCircle);
-            } else if (type === "l") {
-                drawLine(startCircle, endCircle);
-            }
-        });
-    }
 
     // Function to draw vector
     function drawVector(startCircle, endCircle) {
@@ -99,6 +79,7 @@ let gridContainer = document.getElementById('grafikoa');
         arrowhead.style.transform = `translate(-50%, -50%) rotate(${an}rad)`; // Rotate arrowhead in the correct direction
         gridContainer.appendChild(arrowhead); // Append arrowhead to grid container
 
+        vectors.push(vector);
     }
     function drawLine(startCircle, endCircle) {
         const startX = startCircle.offsetLeft + startCircle.offsetWidth / 2;
@@ -123,23 +104,5 @@ let gridContainer = document.getElementById('grafikoa');
         vector.style.transform = `rotate(${angle}rad)`;
         gridContainer.appendChild(vector); // Append to grid container
 
-    }
-
-    // Function to undo the last action
-    function undo() {
-        // Remove the last element from the vectors array
-        vectors.pop();
-        // Clear the grid of all vectors and lines
-        clearGrid();
-        // Redraw all remaining vectors and lines
-        draw();        
-    }
-
-    //Function to clear all the lines and vectors out of the grid, but mantain the circles
-    function clearGrid() {
-        const vectors = gridContainer.querySelectorAll('.vector');
-        const arrowheads = gridContainer.querySelectorAll('.arrowhead');
-    
-        vectors.forEach(vector => vector.remove());
-        arrowheads.forEach(arrowhead => arrowhead.remove());
+        vectors.push(vector);
     }
