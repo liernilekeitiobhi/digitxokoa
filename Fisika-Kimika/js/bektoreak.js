@@ -108,7 +108,7 @@ function drawVector(startCircle, endCircle, inputValue) {
     input.style.position = 'absolute';
     input.style.left = (startX + endX) / 2 + 'px';
     input.style.top = (startY + endY) / 2 + 'px';
-    input.style.width = "30px"
+    input.style.width = "40px"
     gridContainer.appendChild(input); // Append input box to grid container
 }
 
