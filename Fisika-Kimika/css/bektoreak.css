@@ -218,4 +218,25 @@ button:hover::before{
 /*https://codepen.io/liuxiaole-the-sasster/pen/Zdrmxg*/
 
 
-
+/* CSS for the refresh button */
+.refresh-button-container {
+    text-align: center;
+    margin-top: 30px; /* Adjust as needed */
+  }
+  
+  .refresh-button {
+    padding: 30px 40px 30px 40px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #6a8494;
+    cursor: pointer;
+    border: 0px;
+    margin-top: 200px;
+  }
+  
+  .refresh-button:hover {
+    padding: 30px 40px 30px 40px;
+    border-radius: 100px;
+    color: #fff;
+    background-color: #ab576c;
+  }

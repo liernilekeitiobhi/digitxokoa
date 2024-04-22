@@ -1,57 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<link rel="stylesheet" href="../css/bektoreak.css">
-<title>Bektoreak marrazten</title>
-<link rel="icon" type="image/x-icon" href="../../logo.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <link rel="stylesheet" href="../css/bektoreak.css">
+  <title>Bektoreak marrazten</title>
+  <link rel="icon" type="image/x-icon" href="../../logo.png">
+  <style>
+    /* Additional CSS for the refresh button */
+    .refresh-button-container {
+      text-align: center;
+      margin-top: 20px; /* Adjust as needed */
+    }
 
+    .refresh-button {
+      padding: 30px 40px 30px 40px;
+      border-radius: 100px;
+      color: #fff;
+      background-color: #6a8494;
+      cursor: pointer;
+      border: 0px;
+    }
 
+    .refresh-button:hover {
+      padding: 30px 40px 30px 40px;
+      border-radius: 100px;
+      color: #fff;
+      background-color: #ab576c;
+    }
+  </style>
 </head>
 <body>
-<div class="row">
+  <div class="row">
     <div class="column left">
-        <form id="funtzio-mota" class="botoiak">           
-
-            <div>
-                <input type="radio" name="toggle" id="toggle1" class="toggle">
-                <label for="toggle1">Zuzena</label>                      
-            </div>
-            
-            <div>
-                <input type="radio" name="toggle" id="toggle2" class="toggle">
-                <label for="toggle2">Bektorea</label>
-            </div> 
-
-            <ul style="justify-content: space-around; padding-left: 0px;">
-                <li><button id="desegin" type="button" onclick=undo() onmouseenter="handlerIn()" onmouseleave="klik(id)"><i class="fa fa-refresh" style="font-size: 40px;"></i> Desegin</button></li> 
-                <li><button id="kopiatuu" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)"  onclick=kopiatu()><i class="fa fa-copy" style="font-size: 40px;"></i> Kopiatu</button></li>
-            </ul>
-        </form> 
-
-        
+      <form id="funtzio-mota" class="botoiak">           
+        <div>
+          <input type="radio" name="toggle" id="toggle1" class="toggle">
+          <label for="toggle1">Zuzena</label>                      
+        </div>
+        <div>
+          <input type="radio" name="toggle" id="toggle2" class="toggle">
+          <label for="toggle2">Bektorea</label>
+        </div> 
+        <ul style="justify-content: space-around; padding-left: 0px;">
+          <li><button id="desegin" type="button" onclick=undo() onmouseenter="handlerIn()" onmouseleave="klik(id)"><i class="fa fa-undogit " style="font-size: 40px;"></i> Desegin</button></li> 
+          <li><button id="kopiatuu" type="button" onmouseenter="handlerIn()" onmouseleave="klik(id)"  onclick=kopiatu()><i class="fa fa-copy" style="font-size: 40px;"></i> Kopiatu</button></li>
+        </ul>
+      </form> 
+      <div class="refresh-button-container">
+        <button class="refresh-button" id="refresh" onclick="refreshPage()" onmouseenter="handlerIn()" onmouseleave="klik(id)">
+          <i class="fa fa-refresh" style="font-size: 40px;"></i> Berriro hasi
+        </button>
+      </div>
     </div>
     <div class="column center">
-        <div class="grid-container" id="grafikoa">
-            <!-- This div will be populated dynamically -->
-        </div>
+      <div class="grid-container" id="grafikoa">
+        <!-- This div will be populated dynamically -->
+      </div>      
     </div>
-</div>
+  </div>
 
-<script type="text/javascript" src="../js/bektoreak.js"></script>
-<script type="text/javascript" src="../js/begirada-klik.js"></script>
-<script type="text/javascript" src="../js/kopiatu.js"></script>
+  <script type="text/javascript" src="../js/bektoreak.js"></script>
+  <script type="text/javascript" src="../js/begirada-klik.js"></script>
+  <script type="text/javascript" src="../js/kopiatu.js"></script>
+  <script>
+    function refreshPage() {
+      location.reload();
+    }
+  </script>
 </body>
 </html>
