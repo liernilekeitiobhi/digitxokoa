@@ -228,9 +228,10 @@ body{
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     font-size: 10px;
+    padding-top: 0px;
 }
 
-.zakarrontzia button{
+.zakarrontzia li button{
     height: 80px;
     width: 300px;
     border-radius: 5%;    
@@ -240,12 +241,14 @@ body{
     font-size: 20px;
 }
 
-.zakarrontzia:hover button{
+#kopiatuu:hover{
     background-color: black;
     cursor: pointer;
-    color: white;
-    border-style: none;
+}
 
+#reload:hover{
+    background-color: black;
+    cursor: pointer;
 }
 
 

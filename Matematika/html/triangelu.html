@@ -5,6 +5,10 @@
     <title>Trigonometria</title>
     <link rel="stylesheet" href="../css/trigonometria-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://mauriciopoppe.github.io/function-plot/js/function-plot.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </head>
 <body>
@@ -13,20 +17,23 @@
             <form id="datuak-sartu"></form>
         </div>
         <div class="column">
-            <canvas id="myCanvas" width="1000px" height="600px">Your browser does not support the HTML5 canvas tag.</canvas><br>
-               
+            <canvas id="grafikoa" width="1000px" height="600px">Your browser does not support the HTML5 canvas tag.</canvas><br>   
         </div>
         
     </div>
     <div class="titulua">
         <div class="zakarrontzia">
-            <button type="button" onclick=window.location.reload()><i class="fa fa-trash"></i> GARBITU</button>
-
+            <ul>
+                <li><button id="reload" type="button" onclick=window.location.reload()><i class="fa fa-trash"></i> GARBITU</button></li>
+                <li><button id="kopiatuu" type="button" onclick=kopiatu()><i class="fa fa-copy"></i> KOPIATU</button></li>
+            </ul>
         </div>
     </div>
     
     
     
     <script type="text/javascript" src="../js/triangelu.js"></script>
+    <script type="text/javascript" src="../js/begirada-klik.js"></script>
+    <script type="text/javascript" src="../js/kopiatu.js"></script>
 </body>
 </html>
