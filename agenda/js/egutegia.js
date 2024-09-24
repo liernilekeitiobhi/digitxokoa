@@ -86,7 +86,7 @@ async function load_calendar(month_number, year_number) {
                      "Gorputz Hezkuntza": "<i class='fa-solid fa-tennis-ball'  style='font-size: 20px; color: yellow;'></i>",
                      "Tutoretza": "<i class='fa-solid fa-person'  style='font-size: 20px; color: black;'></i>",
                      "Anatomia": "<i class='fa-solid fa-heart ' style='font-size: 20px; color: red;'</i>",
-                     "IKT": "<i class='fa-solid fa-laptop'  style='font-size: 20px; color: orange;'</i>"
+                     "IKT": "<i class='fa-solid fa-laptop'  style='font-size: 20px; color: pink;'</i>"
                     }
         // Hiztegi bat sortuko dugu azterketak adierazten dituena.
         // examDays = {"eguna1" : [irakasgaia1, irakasgaia2, ...], "eguna2": [irakasgaia], ...}
