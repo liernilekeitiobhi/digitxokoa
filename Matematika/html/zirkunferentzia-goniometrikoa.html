@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/mkt-zkh.css">
+    <title>MKT-ZKH</title>
+    <link rel="icon" type="image/x-icon" href="../../logo.png">
+
+</head>
+<body>
+    
+        <div class="div_contenedor">
+            <div class="div_centrado">
+                <div id="ggb-element"></div>
+            </div>
+        </div>
+      
+
+    
+</body>
+<script>
+    var params = {"appName": "graphing", "filename":"z-goniometrikoa.ggb", "width": 800, "height": 600, "showToolBar": true, "showAlgebraInput": true, "showMenuBar": true };
+    var applet = new GGBApplet(params, true);
+    window.addEventListener("load", function() {
+        applet.inject('ggb-element');
+    });
+</script>
+
+</html>
