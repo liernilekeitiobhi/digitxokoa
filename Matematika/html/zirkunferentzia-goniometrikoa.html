@@ -18,6 +18,7 @@
     
         <div class="div_contenedor">
             <div class="div_centrado">
+                <h1>ZIRKUNFERENTZIA GONIOMETRIKOA</h1>
                 <div id="ggb-element"></div>
             </div>
         </div>
@@ -26,7 +27,7 @@
     
 </body>
 <script>
-    var params = {"data-param-appname":"classic", "filename":"z-goniometrikoa.ggb", "width": 1000, "height": 800, "showToolBar": false, "showAlgebraInput": false, "showMenuBar": false };
+    var params = {"data-param-appname":"classic", "filename":"z-goniometrikoa.ggb", "width": 1000, "height": 800, "showToolBar": false, "data-param-showalgebrainput":false, "showAlgebraInput": false, "showMenuBar": false };
     var applet = new GGBApplet(params, true);
     window.addEventListener("load", function() {
         applet.inject('ggb-element');
