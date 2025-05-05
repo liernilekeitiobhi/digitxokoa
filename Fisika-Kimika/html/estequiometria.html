@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Químico para Eye Tracker</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathlive"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            overflow-x: auto;
+        }
+        
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-right: 20px;
+            width: 120px;
+            position: sticky;
+            left: 0;
+            background-color: #f5f5f5;
+            z-index: 10;
+            padding: 10px;
+        }
+        
+        .control-btn {
+            padding: 15px 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+        
+        .control-btn.reset {
+            background-color: #f44336;
+        }
+        
+        .control-btn.copy {
+            background-color: #2196F3;
+        }
+        
+        .control-btn.arrow {
+            background-color: #9c27b0;
+        }
+        
+        .circles-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            margin-top: 100px;
+        }
+        
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 1000px;
+            gap: 10px; /* Reducir espacio entre elementos */
+        }
+        
+        .input-container {
+            width: 100%;
+        }
+    
+        math-field {
+            font-size: 2.5em;
+            min-height: 60px;
+            width: 80%;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        math-field::part(virtual-keyboard-toggle) {
+            display: none;
+        }
+
+        math-field::part(menu-toggle) {
+            display: none;
+        }
+        
+        .reaction-input-container {
+            width: 100%;
+        }
+        
+        .reaction-tools {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .reaction-tool-btn {
+            padding: 10px 15px;
+            font-size: 1em;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .reaction-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .circle {
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            position: relative;
+            box-sizing: border-box;
+        }
+        
+        .circle.selected {
+            border: 5px solid #ff0000;
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255,0,0,0.5);
+        }
+        
+        .circle-text {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            pointer-events: none;
+        }
+        
+        .circle-text-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            text-align: center;
+            font-weight: bold;
+            outline: none;
+            font-size: 1.3em;
+            display: none;
+        }
+        
+        .circle.editing .circle-text {
+            display: none;
+        }
+        
+        .circle.editing .circle-text-input {
+            display: block;
+        }
+        
+        .grids-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: nowrap;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            min-height: 800px;
+            margin-top: 0; /* Eliminar margen superior */
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            grid-template-rows: repeat(10, 80px);
+            gap: 8px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .square {
+            width: 80px;
+            height: 80px;
+            border: 2px solid #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            background-color: white;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .square:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.02);
+        }
+        
+        .circle-in-grid {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .sub {
+            vertical-align: sub;
+            font-size: 0.6em;
+            color: #555;
+        }
+        
+        .selection-mode {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-panel">
+        <button class="control-btn reset" id="reset-btn">NUEVO</button>
+        <button class="control-btn" id="undo-btn">DESHACER</button>
+        <button class="control-btn copy" id="copy-btn">COPIAR</button>
+        <button class="control-btn arrow" id="arrow-btn">FLECHA (→)</button>
+        
+        <div class="circles-vertical" id="circles-container">
+            <!-- Los círculos se generarán con JavaScript -->
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="reaction-container">
+            <div class="reaction-input-container">
+                <div class="input-container"><math-field id="reaction-input"></math-field></div>
+            </div>
+        </div>
+        
+        <div class="grids-container" id="grids-container">
+            <!-- Las cuadrículas se generarán con JavaScript -->
+        </div>
+    </div>
+    
+    <div class="selection-mode" id="selection-mode">Modo selección: Haz clic en un cuadrado para colocar el átomo</div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const circlesContainer = document.getElementById('circles-container');
+            const gridsContainer = document.getElementById('grids-container');
+            const undoBtn = document.getElementById('undo-btn');
+            const copyBtn = document.getElementById('copy-btn');
+            const resetBtn = document.getElementById('reset-btn');
+            const arrowBtn = document.getElementById('arrow-btn');
+            const reactionInput = document.getElementById('reaction-input');
+            const selectionModeIndicator = document.getElementById('selection-mode');
+            
+            let selectedCircle = null;
+            let actionHistory = [];
+            let circleTexts = ['H', 'O', 'C', 'N', 'Cl', 'Na'];
+            
+            // Configuración de los círculos (color, tamaño)
+            const circlesConfig = [
+                { color: 'black', size: 70, textColor: 'white' },
+                { color: 'white', size: 80, textColor: 'black', border: '2px solid #ccc' },
+                { color: 'blue', size: 75, textColor: 'white' },
+                { color: 'green', size: 78, textColor: 'white' },
+                { color: 'red', size: 72, textColor: 'white' },
+                { color: 'yellow', size: 82, textColor: 'black' }
+            ];
+            
+            // Crear los círculos con textos editables
+            circlesConfig.forEach((circle, index) => {
+                const circleElement = document.createElement('div');
+                circleElement.className = 'circle';
+                circleElement.style.width = `${circle.size}px`;
+                circleElement.style.height = `${circle.size}px`;
+                circleElement.style.backgroundColor = circle.color;
+                if (circle.border) circleElement.style.border = circle.border;
+                circleElement.dataset.index = index;
+                
+                // Texto visible del círculo
+                const textElement = document.createElement('div');
+                textElement.className = 'circle-text';
+                textElement.style.color = circle.textColor;
+                textElement.textContent = circleTexts[index];
+                
+                // Input de texto para edición
+                const textInput = document.createElement('input');
+                textInput.className = 'circle-text-input';
+                textInput.style.color = circle.textColor;
+                textInput.type = 'text';
+                textInput.maxLength = 3;
+                textInput.value = circleTexts[index];
+                textInput.dataset.index = index;
+                
+                circleElement.appendChild(textElement);
+                circleElement.appendChild(textInput);
+                
+                // Doble clic para editar
+                circleElement.addEventListener('dblclick', function(e) {
+                    if (e.target === circleElement || e.target === textElement) {
+                        this.classList.add('editing');
+                        textInput.select();
+                    }
+                });
+                
+                // Guardar al salir del input
+                textInput.addEventListener('blur', function() {
+                    circleElement.classList.remove('editing');
+                    const newText = this.value.trim();
+                    circleTexts[this.dataset.index] = newText;
+                    textElement.textContent = newText || '?';
+                });
+                
+                // Enter para guardar
+                textInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        this.blur();
+                    }
+                });
+                
+                // Un clic para seleccionar
+                circleElement.addEventListener('click', function(e) {
+                    if (e.target === textInput) return;
+                    
+                    // Deseleccionar el círculo anterior si lo hay
+                    if (selectedCircle) {
+                        selectedCircle.classList.remove('selected');
+                    }
+                    
+                    // Seleccionar el nuevo círculo
+                    selectedCircle = this;
+                    this.classList.add('selected');
+                    
+                    // Mostrar indicador de modo selección
+                    selectionModeIndicator.style.display = 'block';
+                });
+                
+                circlesContainer.appendChild(circleElement);
+            });
+            
+            // Crear 4 cuadrículas (10x4) en una sola fila
+            for (let g = 0; g < 4; g++) {
+                const grid = document.createElement('div');
+                grid.className = 'grid';
+                grid.dataset.gridIndex = g;
+                
+                // Crear las celdas de la cuadrícula (10 filas x 4 columnas)
+                for (let i = 0; i < 40; i++) {
+                    const square = document.createElement('div');
+                    square.className = 'square';
+                    square.dataset.gridIndex = g;
+                    square.dataset.cellIndex = i;
+                    
+                    square.addEventListener('click', function() {
+                        // Si hay un círculo seleccionado, lo colocamos
+                        if (selectedCircle) {
+                            saveCurrentState();
+                            
+                            // Limpiar el cuadrado antes de agregar el círculo
+                            this.innerHTML = '';
+                            
+                            // Obtener datos del círculo seleccionado
+                            const circleIndex = selectedCircle.dataset.index;
+                            const circleData = circlesConfig[circleIndex];
+                            const circleText = circleTexts[circleIndex] || '?';
+                            
+                            // Crear el círculo en la cuadrícula
+                            const circleInGrid = document.createElement('div');
+                            circleInGrid.className = 'circle-in-grid';
+                            circleInGrid.style.width = `${circleData.size}px`;
+                            circleInGrid.style.height = `${circleData.size}px`;
+                            circleInGrid.style.backgroundColor = circleData.color;
+                            if (circleData.border) circleInGrid.style.border = circleData.border;
+                            
+                            // Crear texto del círculo
+                            const textElement = document.createElement('div');
+                            textElement.className = 'circle-text';
+                            textElement.style.color = circleData.textColor;
+                            textElement.textContent = circleText;
+                            
+                            circleInGrid.appendChild(textElement);
+                            this.appendChild(circleInGrid);
+                            
+                            // Ocultar indicador de modo selección
+                            selectionModeIndicator.style.display = 'none';
+                        } 
+                        // Si no hay círculo seleccionado, vaciamos el cuadrado
+                        else {
+                            saveCurrentState();
+                            this.innerHTML = '';
+                        }
+                    });
+                    
+                    grid.appendChild(square);
+                }
+                
+                gridsContainer.appendChild(grid);
+            }
+            
+            // Configurar MathLive para subíndices automáticos
+            reactionInput.addEventListener('input', function() {
+                // Obtener el valor actual
+                let value = reactionInput.value;
+                
+                // Reemplazar números después de letras con subíndices
+                value = value.replace(/([A-Za-z])(\d+)/g, '$1_$2');
+                
+                // Si el valor cambió, actualizarlo
+                if (value !== reactionInput.value) {
+                    reactionInput.value = value;
+                }
+            });
+            
+            // Función para insertar flecha
+            function insertArrow() {
+                const currentValue = reactionInput.value;
+                reactionInput.value = currentValue + ' \\rightarrow ';
+                reactionInput.focus();
+            }
+            
+            // Función para guardar el estado actual
+            function saveCurrentState() {
+                const grids = document.querySelectorAll('.grid');
+                const state = [];
+                
+                grids.forEach(grid => {
+                    const gridIndex = grid.dataset.gridIndex;
+                    const squares = grid.querySelectorAll('.square');
+                    const gridState = [];
+                    
+                    squares.forEach(square => {
+                        gridState.push(square.innerHTML);
+                    });
+                    
+                    state.push({gridIndex, gridState});
+                });
+                
+                actionHistory.push(state);
+            }
+            
+            // Función para deshacer la última acción
+            function undoLastAction() {
+                if (actionHistory.length > 1) {
+                    actionHistory.pop(); // Eliminar el estado actual
+                    const previousState = actionHistory[actionHistory.length - 1];
+                    
+                    previousState.forEach(gridState => {
+                        const grid = document.querySelector(`.grid[data-grid-index="${gridState.gridIndex}"]`);
+                        const squares = grid.querySelectorAll('.square');
+                        
+                        squares.forEach((square, index) => {
+                            square.innerHTML = gridState.gridState[index];
+                        });
+                    });
+                }
+            }
+            
+            // Función para copiar el dibujo como imagen
+            function copyDrawing() {
+                const element = document.querySelector('.main-content');
+                
+                html2canvas(element, {
+                    scale: 2,
+                    logging: false,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#f5f5f5'
+                }).then(canvas => {
+                    canvas.toBlob(function(blob) {
+                        navigator.clipboard.write([
+                            new ClipboardItem({ 'image/png': blob })
+                        ]).then(function() {
+                            alert("¡Dibujo copiado al portapeles!");
+                        }, function(error) {
+                            alert("Error al copiar: " + error);
+                        });
+                    });
+                });
+            }
+            
+            // Función para resetear todo
+            function resetAll() {
+                if (confirm("¿Estás seguro de que quieres empezar de nuevo? Se perderán todos los cambios.")) {
+                    location.reload();
+                }
+            } 
+            
+            // Event listeners para los botones principales
+            undoBtn.addEventListener('click', undoLastAction);
+            copyBtn.addEventListener('click', copyDrawing);
+            resetBtn.addEventListener('click', resetAll);
+            arrowBtn.addEventListener('click', insertArrow);
+            
+            // Guardar el estado inicial
+            saveCurrentState();
+        });
+    </script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>
