@@ -175,3 +175,16 @@
     font-size: 30px;
     border-color: rgb(173, 57, 57);
 }
+
+.word-btn {
+    background-color: rgb(237, 237, 237);
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.word-btn.selected {
+    background-color: rgb(63, 63, 63);
+    color: white;
+}
