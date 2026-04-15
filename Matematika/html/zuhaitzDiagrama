@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Zuhaitz diagrama - Probabilitatea</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef2f0 0%, #dfe8df 100%);
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .app-container {
+            background: rgba(255, 255, 245, 0.9);
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            padding: 1.5rem 1.8rem 1.8rem 1.8rem;
+            width: 100%;
+            max-width: 98vw;
+            overflow-x: auto;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin: 0 0 0.2rem 0;
+            font-weight: 500;
+            color: #2c5a2a;
+        }
+
+        .sub {
+            color: #4a6b45;
+            border-left: 3px solid #5e9b5b;
+            padding-left: 12px;
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+        }
+
+        .tree-wrapper {
+            background: #fefaf0;
+            border-radius: 1.8rem;
+            padding: 30px 20px;
+            box-shadow: inset 0 0 0 1px #fff8, 0 8px 18px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+            overflow-y: visible;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .tree-root {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0px;
+            min-width: min-content;
+            width: fit-content;
+            position: relative;
+        }
+
+        .branch-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0px;
+            position: relative;
+        }
+
+        .children-group {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-left: 0px;
+            position: relative;
+        }
+
+        .child-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0px;
+            position: relative;
+        }
+
+        .node-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+            width: 170px;
+            min-width: 170px;
+            border: 2px solid #ddecd5;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            background-color: white;
+        }
+
+        .node-content {
+            padding: 12px 10px;
+            text-align: center;
+        }
+
+        .node-label-input {
+            width: 100%;
+            padding: 7px 8px;
+            border-radius: 40px;
+            border: 1px solid #cfe2c5;
+            background: #ffffff;
+            font-size: 0.8rem;
+            text-align: center;
+            font-weight: 500;
+            color: #1f3b1a;
+            outline: none;
+        }
+        .node-label-input:focus {
+            border-color: #6f9e68;
+            box-shadow: 0 0 0 2px rgba(95, 146, 85, 0.2);
+        }
+        .node-label-input::placeholder {
+            color: #d0e0c8;
+            font-size: 0.7rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .fork-btn, .delete-btn {
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            width: 32px;
+            height: 32px;
+            border-radius: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: 0.08s linear;
+        }
+        .fork-btn {
+            background: #5a9c4b;
+        }
+        .fork-btn:hover {
+            background: #408035;
+        }
+        .delete-btn {
+            background: #c95a4a;
+        }
+        .delete-btn:hover {
+            background: #b33f2e;
+        }
+        .fork-btn:active, .delete-btn:active {
+            transform: scale(0.94);
+        }
+
+        .arrow-label-float {
+            position: absolute;
+            z-index: 20;
+            background: rgba(255, 255, 245, 0.95);
+            
+            border-radius: 20px;
+            
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
+        }
+
+        .arrow-text-input {
+            width: 35px;
+            padding: 2px 4px;
+            border-radius: 20px;
+            border: 1px solid #caddc2;
+            background: #fffff5;
+            font-size: 0.7rem;
+            text-align: center;
+            font-weight: 500;
+            outline: none;
+        }
+        .arrow-text-input:focus {
+            border-color: #6f9e68;
+            width: 70px;
+        }
+        .arrow-text-input::placeholder {
+            color: #d4e4cb;
+            font-size: 0.48rem;
+        }
+
+        .arrow-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .arrow-canvas svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .bottom-bar {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 18px;
+        }
+
+        .reset-btn, .copy-btn {
+            color: white;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            font-size: 0.85rem;
+            transition: 0.1s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .reset-btn {
+            background: #5f7c5a;
+        }
+        .reset-btn:hover {
+            background: #3f623a;
+        }
+        .copy-btn {
+            background: #2c6e9e;
+        }
+        .copy-btn:hover {
+            background: #1e557d;
+        }
+
+        .info-note {
+            font-size: 0.7rem;
+            text-align: center;
+            margin-top: 16px;
+            color: #5a7854;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c5a2a;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <h1>Zuhaitz diagrama</h1>
+    <div class="sub">➕ <strong>+</strong> Adarra gehitu | <strong>−</strong> Nodoa ezabatu</div>
+
+    <div class="tree-wrapper" id="treeWrapper">
+        <div class="tree-root" id="treeRoot"></div>
+        <div class="arrow-canvas" id="arrowCanvas"></div>
+    </div>
+    
+    <div class="bottom-bar">
+        <button class="reset-btn" id="resetTreeBtn">⟳ Hasi berriro</button>
+        <button class="copy-btn" id="copyTreeBtn">📋 Zuhaitza kopiatu</button>
+    </div>
+   
+<div id="toast" class="toast">✓ Kopiatu da!</div>
+
+<script>
+    // TREE MODEL
+    let nextId = 1;
+
+    class TreeNode {
+        constructor(id, nodeLabel, arrowLabelFromParent = "") {
+            this.id = id;
+            this.nodeLabel = nodeLabel;
+            this.arrowLabelFromParent = arrowLabelFromParent;
+            this.children = [];
+            this.parent = null;
+        }
+    }
+
+    let rootNode = null;
+
+    function genId() { return nextId++; }
+
+    function initEmptyTree() {
+        nextId = 1;
+        rootNode = new TreeNode(genId(), "", "");
+        rootNode.parent = null;
+    }
+
+    function findNodeById(node, id) {
+        if (!node) return null;
+        if (node.id === id) return node;
+        for (let child of node.children) {
+            const found = findNodeById(child, id);
+            if (found) return found;
+        }
+        return null;
+    }
+    
+    function deleteNodeById(nodeId) {
+        if (rootNode.id === nodeId) return false;
+        
+        function findAndRemove(parent, id) {
+            for (let i = 0; i < parent.children.length; i++) {
+                if (parent.children[i].id === id) {
+                    parent.children.splice(i, 1);
+                    return true;
+                }
+                if (findAndRemove(parent.children[i], id)) return true;
+            }
+            return false;
+        }
+        return findAndRemove(rootNode, nodeId);
+    }
+    
+    function addChildToNode(nodeId, numChildren = 1) {
+        const node = findNodeById(rootNode, nodeId);
+        if (!node) return;
+        for (let i = 0; i < numChildren; i++) {
+            const newChild = new TreeNode(genId(), "", "");
+            newChild.parent = node;
+            node.children.push(newChild);
+        }
+    }
+
+    // Generate text representation of the tree for clipboard
+    function generateTreeText(node, prefix = "", isLast = true, arrowPrefix = "") {
+        if (!node) return "";
+        
+        let result = "";
+        // For root, no arrow label
+        if (prefix === "") {
+            const nodeLabel = node.nodeLabel || "(unnamed)";
+            result = `🌿 ${nodeLabel}\n`;
+        } else {
+            const connector = isLast ? "└── " : "├── ";
+            const arrowText = arrowPrefix ? `[${arrowPrefix}] ` : "";
+            const nodeLabel = node.nodeLabel || "(unnamed)";
+            result = `${prefix}${connector}${arrowText}${nodeLabel}\n`;
+        }
+        
+        const childPrefix = prefix + (isLast ? "    " : "│   ");
+        
+        for (let i = 0; i < node.children.length; i++) {
+            const child = node.children[i];
+            const isLastChild = (i === node.children.length - 1);
+            const arrowLabel = child.arrowLabelFromParent || "→";
+            result += generateTreeText(child, childPrefix, isLastChild, arrowLabel);
+        }
+        return result;
+    }
+    
+    // Generate JSON representation
+    function treeToJSON(node) {
+        if (!node) return null;
+        return {
+            nodeLabel: node.nodeLabel,
+            arrowLabel: node.arrowLabelFromParent,
+            children: node.children.map(child => treeToJSON(child))
+        };
+    }
+    
+    function copyDiagramToClipboard() {
+        const textRepresentation = generateTreeText(rootNode);
+        const jsonRepresentation = treeToJSON(rootNode);
+        
+        const copyContent = 
+`=== TREE DIAGRAM EXPORT ===
+Generated: ${new Date().toLocaleString()}
+
+--- Text Tree ---
+${textRepresentation}
+
+--- JSON Data ---
+${JSON.stringify(jsonRepresentation, null, 2)}`;
+        
+        navigator.clipboard.writeText(copyContent).then(() => {
+            showToast("✓ Kopiatu da!");
+        }).catch(err => {
+            console.error("Copy failed:", err);
+            showToast("✗ Errorea kopiatzean", true);
+            // Fallback
+            const textarea = document.createElement('textarea');
+            textarea.value = copyContent;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            showToast("✓ Copied (fallback)");
+        });
+    }
+    
+    function showToast(message, isError = false) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.style.backgroundColor = isError ? '#c95a4a' : '#2c5a2a';
+        toast.style.opacity = '1';
+        setTimeout(() => {
+            toast.style.opacity = '0';
+        }, 2000);
+    }
+
+    // Build DOM tree
+    function buildBranchElement(node) {
+        const branchDiv = document.createElement('div');
+        branchDiv.className = 'branch-container';
+        branchDiv.setAttribute('data-node-id', node.id);
+        
+        const nodeCard = document.createElement('div');
+        nodeCard.className = 'node-card';
+        
+        const nodeContent = document.createElement('div');
+        nodeContent.className = 'node-content';
+        
+        const nodeInput = document.createElement('input');
+        nodeInput.type = 'text';
+        nodeInput.className = 'node-label-input';
+        nodeInput.placeholder = '';
+        nodeInput.value = node.nodeLabel || '';
+        nodeInput.setAttribute('data-id', node.id);
+        nodeInput.setAttribute('data-type', 'nodeLabel');
+        
+        const buttonGroup = document.createElement('div');
+        buttonGroup.className = 'button-group';
+        
+        const plusBtn = document.createElement('button');
+        plusBtn.className = 'fork-btn';
+        plusBtn.textContent = '+';
+        plusBtn.setAttribute('data-id', node.id);
+        plusBtn.setAttribute('data-action', 'addForks');
+        
+        const minusBtn = document.createElement('button');
+        minusBtn.className = 'delete-btn';
+        minusBtn.textContent = '−';
+        minusBtn.setAttribute('data-id', node.id);
+        minusBtn.setAttribute('data-action', 'deleteNode');
+        if (node.id === rootNode.id) {
+            minusBtn.disabled = true;
+            minusBtn.style.opacity = '0.4';
+            minusBtn.style.cursor = 'not-allowed';
+            minusBtn.title = 'Cannot delete root node';
+        }
+        
+        buttonGroup.appendChild(plusBtn);
+        buttonGroup.appendChild(minusBtn);
+        
+        nodeContent.appendChild(nodeInput);
+        nodeContent.appendChild(buttonGroup);
+        nodeCard.appendChild(nodeContent);
+        
+        const childrenArea = document.createElement('div');
+        childrenArea.className = 'children-group';
+        
+        if (node.children.length > 0) {
+            node.children.forEach((child) => {
+                const childRow = document.createElement('div');
+                childRow.className = 'child-row';
+                childRow.setAttribute('data-parent-id', node.id);
+                childRow.setAttribute('data-child-id', child.id);
+                
+                const arrowSpacer = document.createElement('div');
+                arrowSpacer.style.width = '80px';
+                arrowSpacer.style.height = '70px';
+                arrowSpacer.style.flexShrink = '0';
+                arrowSpacer.style.position = 'relative';
+                
+                const childSubtree = buildBranchElement(child);
+                
+                childRow.appendChild(arrowSpacer);
+                childRow.appendChild(childSubtree);
+                childrenArea.appendChild(childRow);
+            });
+        }
+        
+        branchDiv.appendChild(nodeCard);
+        branchDiv.appendChild(childrenArea);
+        return branchDiv;
+    }
+    
+    function renderFullTree() {
+        const rootContainer = document.getElementById('treeRoot');
+        if (!rootContainer) return;
+        rootContainer.innerHTML = "";
+        if (!rootNode) return;
+        
+        const rootBranch = buildBranchElement(rootNode);
+        rootContainer.appendChild(rootBranch);
+        
+        attachEvents();
+        drawArrows();
+    }
+    
+    function drawArrows() {
+        const canvas = document.getElementById('arrowCanvas');
+        if (!canvas) return;
+        canvas.innerHTML = '';
+        
+        const wrapper = document.getElementById('treeWrapper');
+        const wrapperRect = wrapper.getBoundingClientRect();
+        
+        const childRows = document.querySelectorAll('.child-row');
+        
+        childRows.forEach((row, idx) => {
+            const parentId = parseInt(row.getAttribute('data-parent-id'));
+            const childId = parseInt(row.getAttribute('data-child-id'));
+            
+            const parentCard = findNodeCardByNodeId(parentId);
+            const childCard = row.querySelector('.node-card');
+            
+            if (!parentCard || !childCard) return;
+            
+            const parentRect = parentCard.getBoundingClientRect();
+            const childRect = childCard.getBoundingClientRect();
+            
+            const startX = parentRect.right - wrapperRect.left;
+            const startY = (parentRect.top + parentRect.bottom) / 2 - wrapperRect.top;
+            
+            const endX = childRect.left - wrapperRect.left;
+            const endY = (childRect.top + childRect.bottom) / 2 - wrapperRect.top;
+            
+            const siblings = Array.from(row.parentElement?.children || []);
+            const childIndex = siblings.indexOf(row);
+            const isEven = (childIndex % 2 === 0);
+            const targetY = isEven ? endY - 15 : endY + 15;
+            
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.style.position = 'absolute';
+            svg.style.top = '0';
+            svg.style.left = '0';
+            svg.style.width = '100%';
+            svg.style.height = '100%';
+            svg.style.pointerEvents = 'none';
+            
+            const markerId = `arrow-${Date.now()}-${idx}-${childId}`;
+            
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
+            marker.setAttribute('id', markerId);
+            marker.setAttribute('markerWidth', '8');
+            marker.setAttribute('markerHeight', '8');
+            marker.setAttribute('refX', '7');
+            marker.setAttribute('refY', '4');
+            marker.setAttribute('orient', 'auto');
+            const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+            polygon.setAttribute('points', '0 0, 8 4, 0 8');
+            polygon.setAttribute('fill', '#4a7a42');
+            marker.appendChild(polygon);
+            defs.appendChild(marker);
+            svg.appendChild(defs);
+            
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', startX);
+            line.setAttribute('y1', startY);
+            line.setAttribute('x2', endX);
+            line.setAttribute('y2', targetY);
+            line.setAttribute('stroke', '#4a7a42');
+            line.setAttribute('stroke-width', '2.5');
+            line.setAttribute('marker-end', `url(#${markerId})`);
+            svg.appendChild(line);
+            
+            canvas.appendChild(svg);
+            
+            const midX = (startX + endX) / 2;
+            const midY = (startY + targetY) / 2;
+            
+            const childNode = findNodeById(rootNode, childId);
+            const arrowLabel = childNode ? childNode.arrowLabelFromParent : '';
+            
+            const labelDiv = document.createElement('div');
+            labelDiv.className = 'arrow-label-float';
+            labelDiv.style.left = `${midX}px`;
+            labelDiv.style.top = `${midY}px`;
+            labelDiv.style.position = 'absolute';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'arrow-text-input';
+            input.placeholder = '';
+            input.value = arrowLabel;
+            input.setAttribute('data-child-id', childId);
+            input.setAttribute('data-type', 'arrowLabel');
+            
+            labelDiv.appendChild(input);
+            canvas.appendChild(labelDiv);
+            
+            input.removeEventListener('change', handleArrowLabelChange);
+            input.addEventListener('change', handleArrowLabelChange);
+        });
+    }
+    
+    function handleArrowLabelChange(e) {
+        const childId = parseInt(e.target.getAttribute('data-child-id'));
+        const targetNode = findNodeById(rootNode, childId);
+        if (targetNode) {
+            targetNode.arrowLabelFromParent = e.target.value;
+        }
+        drawArrows();
+    }
+    
+    function findNodeCardByNodeId(nodeId) {
+        const allCards = document.querySelectorAll('.node-card');
+        for (let card of allCards) {
+            const input = card.querySelector('.node-label-input');
+            if (input && parseInt(input.getAttribute('data-id')) === nodeId) {
+                return card;
+            }
+        }
+        return null;
+    }
+    
+    function attachEvents() {
+        document.querySelectorAll('.node-label-input').forEach(input => {
+            input.removeEventListener('change', handleNodeLabelChange);
+            input.addEventListener('change', handleNodeLabelChange);
+        });
+        
+        document.querySelectorAll('.fork-btn').forEach(btn => {
+            btn.removeEventListener('click', handleAddForks);
+            btn.addEventListener('click', handleAddForks);
+        });
+        
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            if (btn.disabled) return;
+            btn.removeEventListener('click', handleDeleteNode);
+            btn.addEventListener('click', handleDeleteNode);
+        });
+        
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('scroll', handleScroll);
+    }
+    
+    function handleResize() { setTimeout(() => drawArrows(), 10); }
+    function handleScroll() { setTimeout(() => drawArrows(), 10); }
+    
+    function handleNodeLabelChange(e) {
+        const nodeId = parseInt(e.target.getAttribute('data-id'));
+        const newValue = e.target.value;
+        const node = findNodeById(rootNode, nodeId);
+        if (node) node.nodeLabel = newValue;
+        drawArrows();
+    }
+    
+    function handleAddForks(e) {
+        e.stopPropagation();
+        const nodeId = parseInt(e.currentTarget.getAttribute('data-id'));
+        
+        let userInput = prompt(`➕ Zenbait adar?`, "");
+        if (userInput === null) return;
+        
+        let num = parseInt(userInput, 10);
+        if (isNaN(num) || num < 0) num = 0;
+        if (num > 25) {
+            if (!confirm("25 baino gehiago gehitzea ez da komeni. Jarraitu?")) return;
+        }
+        
+        addChildToNode(nodeId, num);
+        renderFullTree();
+    }
+    
+    function handleDeleteNode(e) {
+        e.stopPropagation();
+        const nodeId = parseInt(e.currentTarget.getAttribute('data-id'));
+        
+        if (nodeId === rootNode.id) {
+            alert("Ezin da lehenengoa ezabatu!");
+            return;
+        }
+        
+        const nodeToDelete = findNodeById(rootNode, nodeId);
+        if (!nodeToDelete) return;
+        
+        const confirmMsg = nodeToDelete.nodeLabel 
+            ? `"${nodeToDelete.nodeLabel}" nodoa eta bere adarrak ezabatu?` 
+            : `Nodo hau eta bere adarrak ezabatu?`;
+        
+        if (confirm(confirmMsg)) {
+            deleteNodeById(nodeId);
+            renderFullTree();
+        }
+    }
+    
+    function resetTree() {
+        if (confirm("Berriro hasi?")) {
+            initEmptyTree();
+            renderFullTree();
+            showToast("✓ Berriro hasi zara");
+        }
+    }
+    
+    // Initialize
+    initEmptyTree();
+    renderFullTree();
+    
+    const resetBtn = document.getElementById('resetTreeBtn');
+    if (resetBtn) resetBtn.addEventListener('click', resetTree);
+    
+    const copyBtn = document.getElementById('copyTreeBtn');
+    if (copyBtn) copyBtn.addEventListener('click', copyDiagramToClipboard);
+    
+    const wrapper = document.getElementById('treeWrapper');
+    if (wrapper) {
+        wrapper.addEventListener('scroll', () => setTimeout(() => drawArrows(), 5));
+    }
+</script>
+</body>
+</html>
